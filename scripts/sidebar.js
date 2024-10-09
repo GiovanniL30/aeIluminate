@@ -17,6 +17,34 @@ const renderLinks = (active) => {
     .join("");
 
   navLinks.innerHTML = linksHTML;
+
+  if (active == "/accounts") {
+    const div = document.createElement("div");
+    div.classList.add("header-second-row");
+    div.innerHTML = ` 
+    <div class="search">
+         <input type="text" placeholder="Search" />
+          <img src="./assets/search.png" alt="search" />
+    </div>
+    <div class="admin-activities">
+          <button>Add User +</button>
+              <div class="sort">
+                  <p>Sort by</p>
+                  <img src="./assets/chevron-down.png" alt="down" />
+              </div>
+              <div class="settings">
+                  <img src="./assets/settings.png" alt="settings" />
+              </div>
+     </div>`;
+
+    document.querySelector(".container header").appendChild(div);
+  } else {
+    const accounts = document.querySelector(".container header");
+
+    if (accounts.childElementCount > 1) {
+      accounts.removeChild(accounts.childNodes[3]);
+    }
+  }
 };
 
 const renderContent = async (route) => {
@@ -25,7 +53,6 @@ const renderContent = async (route) => {
     const response = await fetch(content);
     if (!response.ok) throw new Error("Failed to load content");
     const htmlContent = await response.text();
-    console.log(htmlContent);
     contents.innerHTML = htmlContent;
   } catch (error) {
     contents.innerHTML = "<p>Content could not be loaded.</p>";

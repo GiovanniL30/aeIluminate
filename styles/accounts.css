@@ -1,0 +1,51 @@
+.users-count {
+  display: flex;
+  gap: 20px;
+}
+
+.users-count > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--drop);
+  border-radius: 20px;
+  padding: 15px 50px 15px 15px;
+}
+
+.users-count > div p {
+  color: var(--dropText);
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.users-count > div h1 {
+  font-weight: 500;
+}
+
+table {
+  width: 100%;
+  min-width: 1200px;
+  max-width: 2000px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 1px solid var(--grey);
+}
+
+th {
+  color: var(--dropText);
+}
+
+.table-header {
+  background-color: var(--drop);
+}
+
+tr {
+  text-align: center;
+  height: 55px;
+  border-bottom: 1px solid var(--grey);
+}
+
+.fullname {
+  font-weight: bold;
+}

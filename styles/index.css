@@ -1,11 +1,13 @@
 @import url(sidebar.css);
 @import url(header.css);
+@import url(accounts.css);
 
 :root {
   --grey: rgb(222, 222, 222);
   --drop: rgb(245, 246, 250);
   --primary: rgb(72, 128, 255);
   --text: rgb(64, 64, 64);
+  --dropText: rgb(143, 155, 179);
 }
 
 * {

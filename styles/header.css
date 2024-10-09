@@ -2,7 +2,7 @@ header {
   display: flex;
   flex-direction: column;
   min-width: 750px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 /* 

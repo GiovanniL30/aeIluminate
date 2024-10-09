@@ -17,8 +17,22 @@ const renderLinks = (active) => {
     .join("");
 
   navLinks.innerHTML = linksHTML;
+};
 
-  if (active == "/accounts") {
+const renderContent = async (route) => {
+  const { content } = routes[route];
+
+  if (content) {
+    const dataHTML = await content();
+    contents.innerHTML = dataHTML;
+  }
+
+  const accounts = document.querySelector(".container header");
+  if (accounts.childElementCount > 1) {
+    accounts.removeChild(accounts.childNodes[3]);
+  }
+
+  if (route == "/accounts") {
     const div = document.createElement("div");
     div.classList.add("header-second-row");
     div.innerHTML = ` 
@@ -38,24 +52,6 @@ const renderLinks = (active) => {
      </div>`;
 
     document.querySelector(".container header").appendChild(div);
-  } else {
-    const accounts = document.querySelector(".container header");
-
-    if (accounts.childElementCount > 1) {
-      accounts.removeChild(accounts.childNodes[3]);
-    }
-  }
-};
-
-const renderContent = async (route) => {
-  const { content } = routes[route];
-  try {
-    const response = await fetch(content);
-    if (!response.ok) throw new Error("Failed to load content");
-    const htmlContent = await response.text();
-    contents.innerHTML = htmlContent;
-  } catch (error) {
-    contents.innerHTML = "<p>Content could not be loaded.</p>";
   }
 };
 

@@ -1,3 +1,4 @@
-import { renderContent } from "./sidebar.js";
+import { renderInitialPage, registerNavLinks } from "./sidebar.js";
 
-renderContent("/");
+renderInitialPage();
+registerNavLinks();

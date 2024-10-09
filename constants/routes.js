@@ -1,12 +1,12 @@
 export const routes = {
   "/": {
     label: "Dashboard",
-    content: "Dashboard goes here",
+    content: "./pages/dashboard.html",
     icon: "N/A",
   },
   "/accounts": {
     label: "Accounts",
-    content: "Accounts goes here",
+    content: "./pages/accounts.html",
     icon: "N/A",
   },
 };

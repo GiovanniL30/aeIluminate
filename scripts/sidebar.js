@@ -1,9 +1,9 @@
 import { routes } from "../constants/routes.js";
 
 const navLinks = document.querySelector("ul.nav-links");
-const container = document.querySelector("div.container");
+const contents = document.querySelector("div.contents");
 
-export const renderLinks = (active) => {
+const renderLinks = (active) => {
   const linksHTML = Object.keys(routes)
     .map((route) => {
       const { label, icon } = routes[route];
@@ -19,28 +19,33 @@ export const renderLinks = (active) => {
   navLinks.innerHTML = linksHTML;
 };
 
-export const renderContent = (route) => {
-  container.innerHTML = routes[route].content;
+const renderContent = async (route) => {
+  const { content } = routes[route];
+  try {
+    const response = await fetch(content);
+    if (!response.ok) throw new Error("Failed to load content");
+    const htmlContent = await response.text();
+    contents.innerHTML = htmlContent;
+  } catch (error) {
+    contents.innerHTML = "<p>Content could not be loaded.</p>";
+  }
 };
 
-const navigate = (e) => {
+const navigate = async (e) => {
   e.preventDefault();
   const route = e.target.getAttribute("href");
-  renderContent(route);
+  await renderContent(route);
   renderLinks(route);
 };
 
-const registerNavLinks = () => {
+export const registerNavLinks = () => {
   navLinks.addEventListener("click", (e) => {
     navigate(e);
   });
 };
 
-const renderInitialPage = () => {
+export const renderInitialPage = async () => {
   const initialRoute = "/";
-  renderContent(initialRoute);
+  await renderContent(initialRoute);
   renderLinks(initialRoute);
 };
-
-renderInitialPage();
-registerNavLinks();

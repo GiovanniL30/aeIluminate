@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 09, 2024 at 10:49 AM
+-- Generation Time: Oct 09, 2024 at 04:10 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -51,6 +51,7 @@ DROP TABLE IF EXISTS `alumni`;
 CREATE TABLE IF NOT EXISTS `alumni` (
   `userID` int NOT NULL,
   `year_graduated` year DEFAULT NULL,
+  `program` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `isEmployed` tinyint(1) DEFAULT NULL,
   KEY `userID` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -59,9 +60,9 @@ CREATE TABLE IF NOT EXISTS `alumni` (
 -- Dumping data for table `alumni`
 --
 
-INSERT INTO `alumni` (`userID`, `year_graduated`, `isEmployed`) VALUES
-(2, '2020', 1),
-(3, '2021', 0);
+INSERT INTO `alumni` (`userID`, `year_graduated`, `program`, `isEmployed`) VALUES
+(2, '2020', 'IT', 1),
+(3, '2021', 'IT', 0);
 
 -- --------------------------------------------------------
 
@@ -118,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `middleName` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lastName` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isOnline` tinyint(1) DEFAULT NULL,
   `profilePicture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `username` (`username`),
@@ -128,12 +130,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `role`, `username`, `password`, `firstName`, `middleName`, `lastName`, `email`, `profilePicture`) VALUES
-(1, 'Super Admin', 'admin', 'admin', 'John', 'A', 'Doe', 'superadmin@example.com', ''),
-(2, 'Alumni', 'alumni1', 'hashedpassword2', 'Jane', 'B', 'Smith', 'alumni1@example.com', ''),
-(3, 'Alumni', 'alumni2', 'hashedpassword3', 'Alice', 'C', 'Johnson', 'alumni2@example.com', ''),
-(4, 'Manager', 'manager1', 'hashedpassword4', 'Bob', 'D', 'Lee', 'manager1@example.com', ''),
-(5, 'Manager', 'manager2', 'hashedpassword5', 'Charlie', 'E', 'Brown', 'manager2@example.com', '');
+INSERT INTO `users` (`userID`, `role`, `username`, `password`, `firstName`, `middleName`, `lastName`, `email`, `isOnline`, `profilePicture`) VALUES
+(1, 'Super Admin', 'admin', 'admin', 'John', 'A', 'Doe', 'superadmin@example.com', 0, ''),
+(2, 'Alumni', 'alumni1', 'hashedpassword2', 'Jane', 'B', 'Smith', 'alumni1@example.com', 0, ''),
+(3, 'Alumni', 'alumni2', 'hashedpassword3', 'Alice', 'C', 'Johnson', 'alumni2@example.com', 0, ''),
+(4, 'Manager', 'manager1', 'hashedpassword4', 'Bob', 'D', 'Lee', 'manager1@example.com', 0, ''),
+(5, 'Manager', 'manager2', 'hashedpassword5', 'Charlie', 'E', 'Brown', 'manager2@example.com', 0, '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

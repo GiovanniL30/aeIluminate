@@ -25,6 +25,7 @@ const renderContent = async (route) => {
     const response = await fetch(content);
     if (!response.ok) throw new Error("Failed to load content");
     const htmlContent = await response.text();
+    console.log(htmlContent);
     contents.innerHTML = htmlContent;
   } catch (error) {
     contents.innerHTML = "<p>Content could not be loaded.</p>";

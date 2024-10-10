@@ -67,3 +67,37 @@ tr {
 .action-list > *:hover {
   filter: hue-rotate(333deg);
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: none;
+  background-color: var(--primary);
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination button:first-child {
+  background-color: var(--drop);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  border: none;
+  cursor: not-allowed;
+  color: black;
+}
+
+.pagination span {
+  align-self: center;
+  margin: 0 10px;
+}

@@ -1,26 +1,3 @@
-<?php
-
-include('../backend/database.php');
-
-
-$query = "SELECT firstName, middleName, lastName, userID, username, email, role FROM users WHERE role != 'Super Admin'";
-$result = $conn->query($query);
-
-$total_users = $result->num_rows;
-$managers = 0;
-$alumni = 0;
-$accounts = [];
-
-while ($row = $result->fetch_assoc()) {
-    $accounts[] = $row;
-    if ($row['role'] === 'Manager') {
-        $managers++;
-    } elseif ($row['role'] === 'Alumni') {
-        $alumni++;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,19 +55,19 @@ while ($row = $result->fetch_assoc()) {
                     <div class="users-count"> 
                         <div class="total-users">
                             <p>Total Users</p>
-                            <h1><?php echo $total_users; ?></h1>
+                            <h1 class="total-users"></h1>
                         </div>
                         <div class="total-managers">
                             <p>Managers</p>
-                            <h1><?php echo $managers; ?></h1>
+                            <h1 class="total-managers"></h1>
                         </div>
                         <div class="total-alumni">
                             <p>Alumni</p>
-                            <h1><?php echo $alumni; ?></h1>
+                            <h1 class="total-alumni"></h1>
                         </div>
                     </div>
 
-                    <table>
+                    <table class='account-list' id="account-table">
                         <tr class="table-header">
                             <th>Name</th>
                             <th>User ID</th>
@@ -99,30 +76,13 @@ while ($row = $result->fetch_assoc()) {
                             <th>User Type</th>
                             <th>Action</th>
                         </tr>
-                        <?php foreach ($accounts as $account): ?>
-                            <tr>
-                                <td class="fullname">
-                                    <?php echo $account['firstName'] . ' ' . $account['middleName'] . ' ' . $account['lastName']; ?>
-                                </td>
-                                <td><?php echo $account['userID']; ?></td>
-                                <td><?php echo $account['username']; ?></td>
-                                <td><?php echo $account['email']; ?></td>
-                                <td><?php echo $account['role']; ?></td>
-                                <td>
-                                    <div class="action-list">
-                                        <a href="/pages/account_detail.php?userId=<?php echo $account['userID']?>" ><img src='../assets/edit.png'/></a>
-                                        <img src='../assets/check.png'/>
-                                        <img src='../assets/delete_account.png'/>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
                     </table>
+                    <div class="pages"></div>
                 </div>
             </div>
         </section>
     </div>
     <script src="../scripts/sidebar.js" type="module"></script>
+    <script src="../scripts/accounts.js"></script>
 </body>
 </html>
-

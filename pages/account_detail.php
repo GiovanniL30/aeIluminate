@@ -106,7 +106,114 @@ if (isset($_GET['userId'])) {
                                 </div>
 
                                 <div class='account-second-column'>
-                                    Data
+                                
+                                    <div class='account-info-container'>
+                                        <h1>User's Information</h1>
+
+                                        <div class='user-information-fields'>
+
+                                            <div>
+
+                                                <div class='input-field'>
+                                                    <p>First Name</p>
+                                                    <input name='firstName' type='text' value='{$user['firstName']}' />
+                                                </div>
+
+                                                <div class='input-field'>
+                                                    <p>Middle Name</p>
+                                                    <input name='middleName' type='text' value='{$user['middleName']}' />
+                                                </div>
+
+                                                <div class='input-field'>
+                                                    <p>Last Name</p>
+                                                    <input name='lastName' type='text' value='{$user['lastName']}' />
+                                                </div>
+
+                                            </div>
+
+                                            <div>
+
+                                                <div class='input-field'>
+                                                    <p>Username</p>
+                                                    <input name='userName' type='text' value='{$user['username']}' />
+                                                </div>
+
+                                                <div class='input-field'>
+                                                    <p>Middle Name</p>
+                                                    <select name='role'>
+                                                        <option value='Alumni'>Alumni</option>
+                                                        <option value='Manager'>Manager</option>
+                                                    </select>
+                                                </div>
+
+    
+
+                                            </div>
+
+                                            <div>
+
+                                                <div class='input-field'>
+                                                    <p>Email Address</p>
+                                                    <input name='email' type='text' value='{$user['email']}' />
+                                                </div>
+
+                                                <div class='input-field'>
+                                                    <p>Program</p>
+                                                    <input name='programName' type='text' value='program' />
+                                                </div>
+
+                                            </div>
+                                        
+
+                                        </div>
+
+                                        <div class='change-options change-option-information'>
+                                            <button>Save</button>
+                                            <button>Cancel</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class='account-info-container'> 
+                                    
+                                        <h1>Change Password</h1>
+
+                                        <div>
+                                            <div class='input-field password-field'>
+                                                <p>Current Password</p>
+                                                <input name='email' type='password' value='{$user['password']}' />
+                                                <button>Show Password </button>
+                                             </div>
+                                        </div>
+                                         
+                                        <div class='user-information-fields'>
+
+                                            <div>
+                                                <div class='input-field password-field'>
+                                                    
+                                                    <p>New Password</p>
+                                                    <input name='email' type='password' />
+                                                    <button>Show Password </button>
+                                                </div>
+
+                                                <div class='input-field password-field'>
+                                                    <p>Confirm Password</p>
+                                                    <input name='email' type='password' />
+                                                    <button>Show Password </button>
+                                                </div>
+
+                                            </div>
+
+                                 
+                                        </div>
+
+                                        <div class='change-options change-option-password'>
+                                            <button>Save</button>
+                                            <button>Cancel</button>
+                                        </div>
+                                        
+                                    </div>
+
                                 </div>
                             
                             </div>

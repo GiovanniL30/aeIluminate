@@ -68,3 +68,103 @@
 .account-options button:hover {
   opacity: 0.5;
 }
+
+.account-second-column {
+  min-width: 650px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.account-info-container {
+  border: 2px solid var(--grey);
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-information-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.user-information-fields div {
+  display: flex;
+  column-gap: 40px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+
+.input-field p {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.input-field input,
+.input-field select {
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid var(--grey);
+  padding-inline: 10px;
+}
+
+.input-field input:focus,
+.input-field select {
+  outline-color: var(--primary);
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field button {
+  position: absolute;
+  outline: none;
+  border: none;
+  background: none;
+  right: 10px;
+  top: 65%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--primary);
+  transition: all 500ms ease;
+}
+
+.password-field button:hover {
+  opacity: 0.5;
+}
+
+.change-options {
+  display: flex;
+  gap: 50px;
+}
+
+.change-options button {
+  border: none;
+  background-color: var(--primary);
+  outline: none;
+  color: white;
+  width: fit-content;
+  padding: 10px 70px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 500ms ease;
+}
+
+.change-options button:nth-child(2) {
+  background-color: var(--grey);
+  color: black;
+}
+
+.change-options button:hover {
+  opacity: 0.5;
+}

@@ -87,6 +87,6 @@
         </section>
     </div>
     <script src="../scripts/sidebar.js" type="module"></script>
-    <script src="../scripts/accounts.js"></script>
+    <script src="../scripts/accounts_pagination.js"></script>
 </body>
 </html>

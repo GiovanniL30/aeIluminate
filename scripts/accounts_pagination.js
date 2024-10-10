@@ -91,9 +91,9 @@ const fetchUsers = () => {
   fetch("../backend/get_users.php")
     .then((response) => response.json())
     .then((data) => {
-      document.querySelector(".total-users").innerText = data.total_users;
-      document.querySelector(".total-managers").innerText = data.managers;
-      document.querySelector(".total-alumni").innerText = data.alumni;
+      document.querySelector("h1.total-users").innerText = data.total_users;
+      document.querySelector("h1.total-managers").innerText = data.managers;
+      document.querySelector("h1.total-alumni").innerText = data.alumni;
 
       accounts = data.accounts;
       totalPages = Math.ceil(data.total_users / resultsPerPage);

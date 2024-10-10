@@ -39,8 +39,6 @@ if (isset($_GET['searchQuery'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 

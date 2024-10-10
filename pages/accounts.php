@@ -86,7 +86,58 @@
             </div>
         </section>
     </div>
+    <div class = "floating-add-user-form">
+    <form method="post" action="accounts.php">
+        <div id="nameFields">
+            <label for="firstname">First Name</label>
+            <input class= "inputFields" type="text" name="firstname" id="firstname" required />
+
+            <label for="middlename">Middle Name</label>
+            <input class= "inputFields" type="text" name="middlename" id="middlename" required />
+
+            <label for="lastname">Last Name</label>
+            <input class= "inputFields" type="text" name="lastname" id="lastname" required />
+        </div>
+
+        <div id="username-roleField">
+            <label for="username">Username</label>
+            <input class= "inputFields" type="text" name="username" id="username" required />
+
+            <label for="role">Role Type:</label>
+            <select name="role" id="role" required onchange="toggleFields()">
+                <option value="Alumni">Alumni</option>
+                <option value="Manager">Manager</option>
+            </select>
+        </div>
+
+        <div id="email-passwordField">
+            <label for="email">Email</label>
+            <input class= "inputFields" type="text" name="emailaddress" id="email" required />
+
+            <label for="password">Password</label>
+            <input class= "inputFields" type="text" name="password" id="password" required />
+        </div>
+
+        <div id="graduationFields">
+            <label for="graduation">Graduation Year:</label>
+            <input class= "inputFields" type="text" name="graduation" id="graduation" />
+            <label for="program">Program:</label>
+            <input class= "inputFields" type="text" name="program" id="program" />
+        </div>
+
+        <div id="workForField">
+            <label for="work_for">Work For:</label>
+            <input class= "inputFields" type="text" name="work_for" id="work_for" />
+        </div>
+
+        <div class ="buttons">
+            <button id ="addButton">Add</button>
+            <button id ="cancelButton">Cancel</button>
+        </div>
+    </form>
+    </div>
     <script src="../scripts/sidebar.js" type="module"></script>
     <script src="../scripts/accounts_pagination.js"></script>
+    <script src="../scripts/add_user.js"></script>
 </body>
 </html>

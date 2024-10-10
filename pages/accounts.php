@@ -19,16 +19,38 @@ while ($row = $result->fetch_assoc()) {
         $alumni++;
     }
 }
+
+if (isset($_GET['searchQuery'])) {
+    $query = $_GET['searchQuery'];
+    $query = $conn->real_escape_string($query); // Sanitize the input
+
+    $searchQ = "SELECT * FROM users WHERE firstName LIKE '%$query%' OR lastName LIKE '%$query%' OR email LIKE '%$query%'";
+    $searchRes = $conn->query($searchQ);
+
+    $accounts = []; // Reset the accounts array
+
+    if ($searchRes->num_rows > 0) {
+        while ($row = $searchRes->fetch_assoc()) {
+            $accounts[] = $row;
+        }
+    } else {
+        echo "No results found.";
+    }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/index.css" />
     <title>Accounts</title>
 </head>
+
 <body>
     <div class="app">
         <aside class="sidebar">
@@ -58,8 +80,10 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                     <div class="header-second-row">
                         <div class="search">
-                            <input type="text" placeholder="Search" />
-                            <img src="../assets/search.png" alt="search" />
+                            <form action="accounts.php" method="GET">
+                                <input type="text" name="searchQuery" placeholder="Search" />
+                                <button type="submit"><img src="../assets/search.png" alt="search" /></button>
+                            </form>
                         </div>
                         <div class="admin-activities">
                             <button>Add User +</button>
@@ -75,7 +99,7 @@ while ($row = $result->fetch_assoc()) {
                 </header>
 
                 <div class="account-contents">
-                    <div class="users-count"> 
+                    <div class="users-count">
                         <div class="total-users">
                             <p>Total Users</p>
                             <h1><?php echo $total_users; ?></h1>
@@ -110,7 +134,7 @@ while ($row = $result->fetch_assoc()) {
                                 <td><?php echo $account['role']; ?></td>
                                 <td>
                                     <div>
-                                        <a href="/pages/account_detail.php?userId=<?php echo $account['userID']?>" >Edit Account</a>
+                                        <a href="/pages/account_detail.php?userId=<?php echo $account['userID'] ?>">Edit Account</a>
                                     </div>
                                 </td>
                             </tr>
@@ -122,5 +146,5 @@ while ($row = $result->fetch_assoc()) {
     </div>
     <script src="../scripts/sidebar.js" type="module"></script>
 </body>
-</html>
 
+</html>

@@ -49,3 +49,7 @@ tr {
 .fullname {
   font-weight: bold;
 }
+
+.search > form {
+  display: flex;
+}

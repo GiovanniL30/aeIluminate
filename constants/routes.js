@@ -1,15 +1,10 @@
-import { html as accountHTML } from "../scripts/routes/account.js";
-import { html as dashboardHTML } from "../scripts/routes/dashboard.js";
-
 export const routes = {
-  "/": {
+  "/index.php": {
     label: "Dashboard",
-    content: async () => await dashboardHTML(),
     icon: "N/A",
   },
-  "/accounts": {
+  "/pages/accounts.php": {
     label: "Accounts",
-    content: async () => await accountHTML(),
     icon: "N/A",
   },
 };

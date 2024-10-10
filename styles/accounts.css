@@ -51,5 +51,17 @@ tr {
 }
 
 .search > form {
-  display: flex;
+  display: block;
+  width: 100%;
+}
+
+.search > form > input {
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.search > form > button > img {
+  width: 20px;
+  height: 20px;
 }

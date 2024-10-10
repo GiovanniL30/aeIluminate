@@ -1,0 +1,70 @@
+.account-details {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  margin-top: 40px;
+}
+
+.account-first-column {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.user-information {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.user-information img {
+  object-fit: cover;
+  width: 100px;
+  border-radius: 100%;
+}
+
+.user-name {
+  text-decoration: underline;
+}
+
+.user-name ~ p {
+  font-size: 0.9em;
+  color: lightgrey;
+}
+
+.user-id {
+  background-color: var(--grey);
+  text-align: center;
+  width: fit-content;
+  padding: 10px 40px;
+  border-radius: 20px;
+  color: black;
+}
+
+.user-id p span {
+  font-weight: bold;
+}
+
+.account-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 20px;
+}
+
+.account-options button {
+  background-color: transparent;
+  width: fit-content;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 500ms ease;
+  font-size: 0.9em;
+}
+
+.account-options button:hover {
+  opacity: 0.5;
+}

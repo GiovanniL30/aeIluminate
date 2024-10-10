@@ -116,3 +116,116 @@ tr {
   width: 20px;
   height: 20px;
 }
+
+.floating-add-user-form{
+  width: 1141px;
+  height: 615px;
+  flex-shrink: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 20px;
+  z-index: 1000;
+  border-radius: 10px;
+  border: 2px solid rgb(0, 0, 0);
+  display: none;
+  pointer-events: none;
+  background-color: #FFF;
+}
+
+.floating-add-user-form div#nameFields {
+  position: fixed;
+  top: 50px;
+  width: 100%;
+}
+
+.floating-add-user-form div#username-roleField
+{
+  position: fixed;
+  top: 150px;
+  width: 100%;
+}
+
+.floating-add-user-form div#email-passwordField
+{
+  position: fixed;
+  top: 250px;
+  width: 100%;
+}
+
+.floating-add-user-form form div.buttons
+{
+  position: fixed;
+  bottom: 50px;
+  left: 700px;
+  width: 100%;
+}
+
+.floating-add-user-form div#graduationFields,
+.floating-add-user-form div#workForField
+{
+  position: fixed;
+  bottom: 195px;
+  width: 100%;
+}
+
+.floating-add-user-form div#graduationFields
+{
+  display: block;
+}
+
+.floating-add-user-form div#workForField
+{
+  display: none;
+}
+
+.floating-add-user-form label
+{
+  position: absolute;
+  top: 0px;
+  margin: 5px 5px 5px 5px;
+}
+
+.floating-add-user-form form input[type="text"],
+.floating-add-user-form form textarea{
+  width: 30%;
+  padding: 12px 20px;
+  font-size: 14px;
+  border: 1px solid rgba(0,0,0);
+  border-radius: 5px;
+  color: black;
+  margin: 25px 5px 5px 5px;
+}
+
+.floating-add-user-form form input[name="username"],
+.floating-add-user-form form select{
+  width: 45%;
+  padding: 12px 32px;
+  font-size: 16px;
+  border: 1px solid rgba(0,0,0);
+  border-radius: 5px;
+  color: black;
+  margin: 25px 5px 5px 5px;
+}
+
+.floating-add-user-form form button{
+  width: 15%;
+  padding: 12px 32px;
+  font-size: 16px;
+  border: 1px solid rgba(0,0,0);
+  border-radius: 5px;
+  color: black;
+  margin: 5px 5px 5px 5px;
+  cursor: pointer;
+}
+
+.floating-add-user-form form button[id="addButton"]{
+  background-color: #4880FF;
+  color: #FFF;
+}
+
+.blur {
+  filter: blur(5px);
+}

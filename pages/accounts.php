@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/index.css" />
     <title>Accounts</title>
 </head>
+
 <body>
     <div class="app">
         <aside class="sidebar">
@@ -35,8 +37,10 @@
                     </div>
                     <div class="header-second-row">
                         <div class="search">
-                            <input type="text" placeholder="Search" />
-                            <img src="../assets/search.png" alt="search" />
+                            <form action="accounts.php" method="GET">
+                                <input type="text" name="searchQuery" placeholder="Search" />
+                                <button type="submit"><img src="../assets/search.png" alt="search" /></button>
+                            </form>
                         </div>
                         <div class="admin-activities">
                             <button>Add User +</button>
@@ -52,7 +56,7 @@
                 </header>
 
                 <div class="account-contents">
-                    <div class="users-count"> 
+                    <div class="users-count">
                         <div class="total-users">
                             <p>Total Users</p>
                             <h1 class="total-users"></h1>

@@ -50,7 +50,6 @@ tr {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
 .action-list {
   display: flex;
   gap: 20px;
@@ -101,7 +100,7 @@ tr {
 .pagination span {
   align-self: center;
   margin: 0 10px;
-=======
+}
 .search > form {
   display: block;
   width: 100%;
@@ -116,5 +115,4 @@ tr {
 .search > form > button > img {
   width: 20px;
   height: 20px;
->>>>>>> 96876c69dc294fd8c0acf5b26f6aba0ec5470b8e
 }

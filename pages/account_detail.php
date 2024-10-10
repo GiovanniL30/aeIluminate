@@ -66,7 +66,12 @@ if (isset($_GET['userId'])) {
 
             <div id="user-details"></div>
             
-            <script>
+
+        </div>
+    </section>
+</div>
+<script src="../scripts/sidebar.js" type="module"></script>
+<script>
                 const user = <?php echo json_encode($user ?? null); ?>;
 
                 const renderDetails = () => {
@@ -177,9 +182,5 @@ if (isset($_GET['userId'])) {
                 }
                 document.getElementById('user-details').innerHTML = renderDetails();
             </script>
-        </div>
-    </section>
-</div>
-<script src="../scripts/sidebar.js" type="module"></script>
 </body>
 </html>

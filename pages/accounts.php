@@ -109,8 +109,10 @@ while ($row = $result->fetch_assoc()) {
                                 <td><?php echo $account['email']; ?></td>
                                 <td><?php echo $account['role']; ?></td>
                                 <td>
-                                    <div>
-                                        <a href="/pages/account_detail.php?userId=<?php echo $account['userID']?>" >Edit Account</a>
+                                    <div class="action-list">
+                                        <a href="/pages/account_detail.php?userId=<?php echo $account['userID']?>" ><img src='../assets/edit.png'/></a>
+                                        <img src='../assets/check.png'/>
+                                        <img src='../assets/delete_account.png'/>
                                     </div>
                                 </td>
                             </tr>

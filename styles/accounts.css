@@ -29,7 +29,7 @@ table {
   margin: 0 auto;
   margin-top: 20px;
   border-collapse: collapse;
-  border: 1px solid var(--grey);
+  border: 1px solid var(--drop);
 }
 
 th {
@@ -43,9 +43,27 @@ th {
 tr {
   text-align: center;
   height: 55px;
-  border-bottom: 1px solid var(--grey);
+  border-bottom: 1px solid var(--drop);
 }
 
 .fullname {
   font-weight: bold;
+}
+
+.action-list {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-list > * {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: all 500ms ease;
+}
+
+.action-list > *:hover {
+  filter: hue-rotate(333deg);
 }

@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/index.css" />
-
-    <link href="" rel="stylesheet" />
-    <title>aeIluminate</title>
+    <title>Dashboard</title>
   </head>
   <body>
     <div class="app">
@@ -36,10 +34,12 @@
               </div>
             </div>
           </header>
-          <div class="contents"></div>
+          <div class="contents">
+  
+          </div>
         </div>
       </section>
     </div>
-    <script src="./scripts/index.js" type="module"></script>
+    <script src="./scripts/sidebar.js" type="module"></script>
   </body>
 </html>

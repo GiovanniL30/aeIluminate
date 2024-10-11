@@ -135,7 +135,7 @@ INSERT INTO `users` (`userID`, `role`, `username`, `password`, `firstName`, `mid
 (2, 'Alumni', 'alumni1', 'hashedpassword2', 'Jane', 'B', 'Smith', 'alumni1@example.com', 0, ''),
 (3, 'Alumni', 'alumni2', 'hashedpassword3', 'Alice', 'C', 'Johnson', 'alumni2@example.com', 0, ''),
 (4, 'Manager', 'manager1', 'hashedpassword4', 'Bob', 'D', 'Lee', 'manager1@example.com', 0, ''),
-(5, 'Manager', 'manager2', 'hashedpassword5', 'Charlie', 'E', 'Brown', 'manager2@example.com', 0, '')
+(5, 'Manager', 'manager2', 'hashedpassword5', 'Charlie', 'E', 'Brown', 'manager2@example.com', 0, ''),
 (6, 'Alumni', 'alumni6', 'hashedpassword6', 'Juan', 'Santos', 'De la Cruz', 'alumni6@example.com', 0, NULL),
 (7, 'Alumni', 'alumni7', 'hashedpassword7', 'Maria', 'Garcia', 'Reyes', 'alumni7@example.com', 0, NULL),
 (8, 'Alumni', 'alumni8', 'hashedpassword8', 'Jose', 'Mendoza', 'Bautista', 'alumni8@example.com', 0, NULL),

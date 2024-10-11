@@ -18,8 +18,8 @@ const renderAccounts = (page) => {
   currentAccounts.forEach((account) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-            <td class="fullname">${account.firstName} ${account.middleName} ${account.lastName}</td>
             <td>${account.userID}</td>
+            <td class="fullname">${account.firstName} ${account.middleName} ${account.lastName}</td>
             <td>${account.username}</td>
             <td>${account.email}</td>
             <td>${account.role}</td>

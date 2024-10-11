@@ -73,8 +73,8 @@
 
                     <table class='account-list' id="account-table">
                         <tr class="table-header">
-                            <th>Name</th>
                             <th>User ID</th>
+                            <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>User Type</th>

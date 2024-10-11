@@ -92,10 +92,6 @@ if (isset($_GET['userId'])) {
                                 </div>
                                 <div class="account-options">
                                     <button>
-                                        <img src="../assets/lock.png" alt="lock" />
-                                        <p>Change Password</p>
-                                    </button>
-                                    <button>
                                         <img src="../assets/delete.png" alt="delete" />
                                         <p>Delete Account</p>
                                     </button>

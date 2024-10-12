@@ -55,6 +55,11 @@
                     </div>
                 </header>
 
+                <div class="search-action">
+                    <a href="/pages/accounts.php"><img src="../assets/back.png" alt="back"></a>
+                    <p>as</p>
+                </div>
+
                 <div class="account-contents">
                     <div class="users-count">
                         <div class="total-users">

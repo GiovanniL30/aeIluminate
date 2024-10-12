@@ -104,6 +104,14 @@ const fetchUsers = (searchQuery = "") => {
       document.querySelector("h1.total-users").innerText = data.total_users;
       document.querySelector("h1.total-managers").innerText = data.managers;
       document.querySelector("h1.total-alumni").innerText = data.alumni;
+
+      if (searchQuery) {
+        document.querySelector(".search-action").style.display = "flex";
+        document.querySelector(
+          ".search-action p"
+        ).innerHTML = `Showing items with search "${searchQuery}"`;
+      }
+
       renderAccounts(currentPage);
       updatePaginationControls();
     })

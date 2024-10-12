@@ -87,8 +87,10 @@ const updatePageNumber = (i) => {
   ).innerHTML = `Page ${i} of ${totalPages} `;
 };
 
-const fetchUsers = (searchQuery = '') => {
-  const url = searchQuery ? `../backend/search.php?searchQuery=${searchQuery}` : '../backend/get_users.php';
+const fetchUsers = (searchQuery = "") => {
+  const url = searchQuery
+    ? `../backend/search.php?searchQuery=${searchQuery}`
+    : "../backend/get_users.php";
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -97,18 +99,13 @@ const fetchUsers = (searchQuery = '') => {
       return response.json();
     })
     .then((data) => {
-      if (searchQuery) {
-        accounts = data;
-        totalPages = Math.ceil(data.length / resultsPerPage);
-      } else {
-        document.querySelector("h1.total-users").innerText = data.total_users;
-        document.querySelector("h1.total-managers").innerText = data.managers;
-        document.querySelector("h1.total-alumni").innerText = data.alumni;
-
-        accounts = data.accounts;
-        totalPages = Math.ceil(data.total_users / resultsPerPage);
-      }
+      accounts = data.accounts;
+      totalPages = Math.ceil(data.total_users / resultsPerPage);
+      document.querySelector("h1.total-users").innerText = data.total_users;
+      document.querySelector("h1.total-managers").innerText = data.managers;
+      document.querySelector("h1.total-alumni").innerText = data.alumni;
       renderAccounts(currentPage);
+      updatePaginationControls();
     })
     .catch((error) => console.error("Error fetching user data:", error));
 };
@@ -117,9 +114,7 @@ document.querySelector(".search form").addEventListener("submit", (event) => {
   event.preventDefault();
   const searchQuery = document.querySelector(".search input").value;
   fetchUsers(searchQuery);
-  document.querySelector(".search input").value = '';
-
-
+  document.querySelector(".search input").value = "";
 });
 
 addControls();

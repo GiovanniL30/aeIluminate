@@ -10,7 +10,13 @@ const renderLinks = () => {
       const { label, icon } = routes[route];
 
       return `
-            <li class="link ${currentRoute === route ? "active-route" : ""}"> 
+            <li class="link ${
+              currentRoute === route ||
+              (currentRoute.includes("/pages/account_detail.php") &&
+                route == "/pages/accounts.php")
+                ? "active-route"
+                : ""
+            }"> 
                 <a href="${route}">${label}</a>
             </li>
         `;

@@ -36,41 +36,19 @@ if (isset($_GET['userId'])) {
     </title>
 </head>
 <body>
-<div class="app">
-    <aside class="sidebar">
-        <div>
-            <img class="logo" src="../assets/logo.png" alt="aeIluminate logo" />
-        </div>
-        <ul class="nav-links"></ul>
-    </aside>
-    <section>
-        <div class="container">
-            <header>
-                <div class="header-first-row">
-                    <div class="admin-name">
-                        <h1>Hello, <span>Julius</span>!</h1>
-                        <p>Have a nice day</p>
-                    </div>
-                    <div class="admin-action">
-                        <img src="../assets/bell.png" alt="" />
-                        <div class="admin-account">
-                            <img src="../assets/admin-img.png" alt="admin profile" />
-                            <div>
-                                <h1>Julius Sy</h1>
-                                <p>Admin</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <div id="user-details"></div>
-            
-
-        </div>
-    </section>
-</div>
-<script src="../scripts/sidebar.js" type="module"></script>
+    <div class="app">
+        <aside class="sidebar">
+            <?php include '../components/sidebar.php' ?>
+        </aside>
+        <section>
+            <div class="container">
+                <header>
+                    <?php include '../components/header.php' ?>
+                </header>
+                <div id="user-details"></div>
+            </div>
+        </section>
+    </div>
 <script>
                 const user = <?php echo json_encode($user ?? null); ?>;
 
@@ -149,7 +127,7 @@ if (isset($_GET['userId'])) {
                                     <div>
                                         <div class="input-field password-field">
                                             <p>Current Password</p>
-                                            <input name='currentPassword' type='password' />
+                                            <input name='currentPassword' type='password' value="${user.password}"/>
                                             <button>Show Password</button>
                                         </div>
                                     </div>

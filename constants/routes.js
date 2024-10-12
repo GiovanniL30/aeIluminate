@@ -7,4 +7,8 @@ export const routes = {
     label: "Accounts",
     icon: "N/A",
   },
+  "/pages/applications.php": {
+    label: "Applications",
+    icon: "N/A",
+  },
 };

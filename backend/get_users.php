@@ -1,10 +1,10 @@
-<?php 
-
+<?php
 include('../backend/database.php');
 
-$query = "SELECT firstName, middleName, lastName, userID, username, email, role FROM users WHERE role != 'Super Admin'";
-$result = $conn->query($query); 
-
+$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'userID';
+$sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'asc';
+$query = "SELECT firstName, middleName, lastName, userID, username, email, role FROM users WHERE role != 'Super Admin' ORDER BY $sortBy $sortOrder";
+$result = $conn->query($query);
 $accounts = [];
 $managers = 0;
 $alumni = 0;
@@ -12,8 +12,6 @@ $alumni = 0;
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $accounts[] = $row;
-
-
         if ($row['role'] === 'Manager') {
             $managers++;
         } elseif ($row['role'] === 'Alumni') {
@@ -29,8 +27,5 @@ $response = [
     'accounts' => $accounts,
 ];
 
-
 header('Content-Type: application/json');
 echo json_encode($response);
-
-?>

@@ -87,10 +87,15 @@ const updatePageNumber = (i) => {
   ).innerHTML = `Page ${i} of ${totalPages} `;
 };
 
-const fetchUsers = (searchQuery = "") => {
+
+let sortField = "userID";
+let sortOrder = "asc";
+let searchQuery = "";
+
+const fetchUsers = () => {
   const url = searchQuery
-    ? `../backend/search.php?searchQuery=${searchQuery}`
-    : "../backend/get_users.php";
+    ? `../backend/search.php?searchQuery=${searchQuery}&sortBy=${sortField}&sortOrder=${sortOrder}`
+    : `../backend/get_users.php?sortBy=${sortField}&sortOrder=${sortOrder}`;
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -118,11 +123,45 @@ const fetchUsers = (searchQuery = "") => {
     .catch((error) => console.error("Error fetching user data:", error));
 };
 
+// toggle the display of sort options
+const toggleSortOptions = () => {
+  const sortOptions = document.getElementById('sort-options');
+  sortOptions.style.display = sortOptions.style.display === 'none' ? 'block' : 'none';
+};
+
+document.getElementById('sort-button').addEventListener('click', (event) => {
+  event.stopPropagation();
+  toggleSortOptions();
+});
+
+document.addEventListener('click', (event) => {
+  const sortOptions = document.getElementById('sort-options');
+  if (sortOptions.style.display === 'block' 
+    && !sortOptions.contains(event.target) 
+    && event.target.id !== 'sort-button') {
+    sortOptions.style.display = 'none';
+  }
+});
+
+// Function to handle changes in sort fields and orders
+const handleSortChange = (event) => {
+  const { name, value } = event.target;
+  if (name === 'sortField') {
+    sortField = value;
+  } else if (name === 'sortOrder') {
+    sortOrder = value;
+  }
+  if (sortField && sortOrder) {
+    fetchUsers();
+  }
+};
+
+document.getElementById('sort-options').addEventListener('change', handleSortChange);
+
 document.querySelector(".search form").addEventListener("submit", (event) => {
   event.preventDefault();
-  const searchQuery = document.querySelector(".search input").value;
+  searchQuery = document.querySelector(".search input").value;
   fetchUsers(searchQuery);
-  document.querySelector(".search input").value = "";
 });
 
 addControls();

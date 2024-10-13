@@ -36,7 +36,7 @@
                 <div id="sort-options" style="display: none;">
                   <div class="sort-header">Sort By...</div>
                   <label>
-                    <input type="radio" name="sortField" value="userID">
+                    <input type="radio" name="sortField" value="userID" checked>
                     <span>User ID</span>
                   </label>
                   <label>
@@ -50,7 +50,7 @@
                   <div class="divider"></div>
                   <div class="sort-header">Sort Order...</div>
                   <label>
-                    <input type="radio" name="sortOrder" value="asc">
+                    <input type="radio" name="sortOrder" value="asc" checked>
                     <span>Ascending</span>
                   </label>
                   <label>
@@ -190,7 +190,7 @@
       </div>
     </form>
   </div>
-  <script src="../scripts/accounts_pagination.js"></script>
+  <script src="../scripts/accounts_pagination.js" type="module"></script>
   <script src="../scripts/add_user.js"></script>
 </body>
 

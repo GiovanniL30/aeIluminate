@@ -2,6 +2,9 @@ const resultsPerPage = 9;
 let currentPage = 1;
 let totalPages = 0;
 let accounts = [];
+let sortField = "userID";
+let sortOrder = "asc";
+let searchQuery = "";
 
 const renderAccounts = (page) => {
   const accountTable = document.getElementById("account-table");
@@ -87,11 +90,6 @@ const updatePageNumber = (i) => {
   ).innerHTML = `Page ${i} of ${totalPages} `;
 };
 
-
-let sortField = "userID";
-let sortOrder = "asc";
-let searchQuery = "";
-
 const fetchUsers = () => {
   const url = searchQuery
     ? `../backend/search.php?searchQuery=${searchQuery}&sortBy=${sortField}&sortOrder=${sortOrder}`
@@ -125,30 +123,17 @@ const fetchUsers = () => {
 
 // toggle the display of sort options
 const toggleSortOptions = () => {
-  const sortOptions = document.getElementById('sort-options');
-  sortOptions.style.display = sortOptions.style.display === 'none' ? 'block' : 'none';
+  const sortOptions = document.getElementById("sort-options");
+  sortOptions.style.display =
+    sortOptions.style.display === "none" ? "block" : "none";
 };
-
-document.getElementById('sort-button').addEventListener('click', (event) => {
-  event.stopPropagation();
-  toggleSortOptions();
-});
-
-document.addEventListener('click', (event) => {
-  const sortOptions = document.getElementById('sort-options');
-  if (sortOptions.style.display === 'block' 
-    && !sortOptions.contains(event.target) 
-    && event.target.id !== 'sort-button') {
-    sortOptions.style.display = 'none';
-  }
-});
 
 // Function to handle changes in sort fields and orders
 const handleSortChange = (event) => {
   const { name, value } = event.target;
-  if (name === 'sortField') {
+  if (name === "sortField") {
     sortField = value;
-  } else if (name === 'sortOrder') {
+  } else if (name === "sortOrder") {
     sortOrder = value;
   }
   if (sortField && sortOrder) {
@@ -156,12 +141,30 @@ const handleSortChange = (event) => {
   }
 };
 
-document.getElementById('sort-options').addEventListener('change', handleSortChange);
+document
+  .getElementById("sort-options")
+  .addEventListener("change", handleSortChange);
 
 document.querySelector(".search form").addEventListener("submit", (event) => {
   event.preventDefault();
   searchQuery = document.querySelector(".search input").value;
   fetchUsers(searchQuery);
+});
+
+document.getElementById("sort-button").addEventListener("click", (event) => {
+  event.stopPropagation();
+  toggleSortOptions();
+});
+
+document.addEventListener("click", (event) => {
+  const sortOptions = document.getElementById("sort-options");
+  if (
+    sortOptions.style.display === "block" &&
+    !sortOptions.contains(event.target) &&
+    event.target.id !== "sort-button"
+  ) {
+    sortOptions.style.display = "none";
+  }
 });
 
 addControls();

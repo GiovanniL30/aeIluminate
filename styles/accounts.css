@@ -335,14 +335,14 @@ tr {
 
 #sort-options input[type="radio"]:checked::before {
   content: "";
-  display: block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background-color: var(--primary);
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #sort-options input[type="radio"] + span {

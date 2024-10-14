@@ -111,7 +111,7 @@
           type="text"
           name="firstname"
           id="firstname"
-          required />
+          required minlength="4" maxlength="50" size="50"/>
 
         <label for="middlename">Middle Name</label>
         <input
@@ -119,7 +119,7 @@
           type="text"
           name="middlename"
           id="middlename"
-          required />
+          required minlength="4" maxlength="50" size="50"/>
 
         <label for="lastname">Last Name</label>
         <input
@@ -127,7 +127,7 @@
           type="text"
           name="lastname"
           id="lastname"
-          required />
+          required minlength="4" maxlength="50" size="50"/>
       </div>
 
       <div id="username-roleField">
@@ -137,7 +137,7 @@
           type="text"
           name="username"
           id="username"
-          required />
+          required minlength="4" maxlength="50" size="50"/>
 
         <label for="role">Role Type:</label>
         <select name="role" id="role" required onchange="toggleFields()">
@@ -153,15 +153,15 @@
           type="text"
           name="emailaddress"
           id="email"
-          required />
+          required minlength="4" maxlength="100" size="100"/>
 
         <label for="password">Password</label>
         <input
           class="inputFields"
-          type="text"
+          type="password"
           name="password"
           id="password"
-          required />
+          required minlength="8" maxlength="50" size="50"/>
       </div>
 
       <div id="graduationFields">
@@ -172,7 +172,17 @@
           name="graduation"
           id="graduation" />
         <label for="program">Program:</label>
-        <input class="inputFields" type="text" name="program" id="program" />
+        <input 
+          class="inputFields" 
+          type="text" 
+          name="program" 
+          id="program" 
+          required minlength="4" maxlength="50" size="50"/>
+        <label for="jobstatus">Job Status:</label>
+          <select name="jobstatus" id="jobstatus" required >
+            <option value="Employed">Employed</option>
+            <option value="Unemployed">Unemployed</option>
+          </select>
       </div>
 
       <div id="workForField">
@@ -181,7 +191,8 @@
           class="inputFields"
           type="text"
           name="work_for"
-          id="work_for" />
+          id="work_for"
+          required minlength="4" maxlength="100" size="100" />
       </div>
 
       <div class="buttons">

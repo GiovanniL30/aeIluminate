@@ -160,11 +160,22 @@ tr {
   width: 100%;
 }
 
-.floating-add-user-form div#graduationFields,
 .floating-add-user-form div#workForField {
   position: fixed;
   bottom: 195px;
   width: 100%;
+}
+
+.floating-add-user-form div#graduationFields {
+  position: fixed;
+  bottom: 195px;
+  width: 100%;
+}
+
+.floating-add-user-form div#graduationFields select{
+  position: fixed;
+  bottom: 195px;
+  width: 30%;
 }
 
 .floating-add-user-form div#graduationFields {
@@ -182,6 +193,7 @@ tr {
 }
 
 .floating-add-user-form form input[type="text"],
+.floating-add-user-form form input[type="password"],
 .floating-add-user-form form textarea {
   width: 30%;
   padding: 12px 20px;

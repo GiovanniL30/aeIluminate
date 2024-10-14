@@ -1,12 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  function toggleFields() {
-    var role = document.getElementById("role").value;
-    document.getElementById("graduationFields").style.display =
-      role === "Alumni" ? "block" : "none";
-    document.getElementById("workForField").style.display =
-      role === "Manager" ? "block" : "none";
-  }
-
   const addUserForm = document.querySelector(".floating-add-user-form form");
   const addUserButton = document.querySelector(".admin-activities button");
   const mainContent = document.querySelector("div.app");
@@ -55,3 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Form not found");
   }
 });
+
+function toggleFields() {
+  var role = document.getElementById("role").value;
+  document.getElementById("graduationFields").style.display =
+    role === "Alumni" ? "block" : "none";
+  document.getElementById("workForField").style.display =
+    role === "Manager" ? "block" : "none";
+}

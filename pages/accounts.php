@@ -106,95 +106,46 @@
     <form method="post" action="accounts.php">
       <div id="nameFields">
         <label for="firstname">First Name</label>
-        <input
-          class="inputFields"
-          type="text"
-          name="firstname"
-          id="firstname"
-          required minlength="4" maxlength="50" size="50"/>
-
+        <input class="inputFields" type="text" name="firstname" id="firstname" required minlength="4" maxlength="50" size="50"/>
         <label for="middlename">Middle Name</label>
-        <input
-          class="inputFields"
-          type="text"
-          name="middlename"
-          id="middlename"
-          required minlength="4" maxlength="50" size="50"/>
-
+        <input class="inputFields" type="text" name="middlename" id="middlename" required minlength="4" maxlength="50" size="50"/>
         <label for="lastname">Last Name</label>
-        <input
-          class="inputFields"
-          type="text"
-          name="lastname"
-          id="lastname"
-          required minlength="4" maxlength="50" size="50"/>
+        <input class="inputFields" type="text" name="lastname" id="lastname" required minlength="4" maxlength="50" size="50"/>
       </div>
-
       <div id="username-roleField">
         <label for="username">Username</label>
-        <input
-          class="inputFields"
-          type="text"
-          name="username"
-          id="username"
-          required minlength="4" maxlength="50" size="50"/>
-
+        <input class="inputFields" type="text" name="username" id="username" required minlength="4" maxlength="50" size="50"/>
         <label for="role">Role Type:</label>
         <select name="role" id="role" required onchange="toggleFields()">
           <option value="Alumni">Alumni</option>
           <option value="Manager">Manager</option>
         </select>
       </div>
-
       <div id="email-passwordField">
         <label for="email">Email</label>
-        <input
-          class="inputFields"
-          type="text"
-          name="emailaddress"
-          id="email"
-          required minlength="4" maxlength="100" size="100"/>
-
+        <input class="inputFields" type="text" name="emailaddress" id="email" required minlength="4" maxlength="100" size="100"/>
         <label for="password">Password</label>
-        <input
-          class="inputFields"
-          type="password"
-          name="password"
-          id="password"
-          required minlength="8" maxlength="50" size="50"/>
+        <input class="inputFields" type="password" name="password" id="password" required minlength="8" maxlength="50" size="50"/>
       </div>
-
       <div id="graduationFields">
         <label for="graduation">Graduation Year:</label>
-        <input
-          class="inputFields"
-          type="text"
-          name="graduation"
-          id="graduation" />
+        <input class="inputFields" type="text" name="graduation" id="graduation" />
         <label for="program">Program:</label>
-        <input 
-          class="inputFields" 
-          type="text" 
-          name="program" 
-          id="program" 
-          required minlength="4" maxlength="50" size="50"/>
+        <input class="inputFields" type="text" name="program" id="program" required minlength="4" maxlength="50" size="50"/>
         <label for="jobstatus">Job Status:</label>
-          <select name="jobstatus" id="jobstatus" required >
+          <select name="jobstatus" id="jobstatus" required onchange="toggleFieldsEmp()">
             <option value="Employed">Employed</option>
             <option value="Unemployed">Unemployed</option>
           </select>
       </div>
-
+      <div id="companyField">
+        <label for="company">Company:</label>
+        <input class="inputFields" type="text" name="company" id="company" required minlength="1" maxlength="100" size="100"/>
+      </div>
       <div id="workForField">
         <label for="work_for">Work For:</label>
-        <input
-          class="inputFields"
-          type="text"
-          name="work_for"
-          id="work_for"
-          required minlength="4" maxlength="100" size="100" />
+        <input class="inputFields" type="text" name="work_for" id="work_for" required minlength="1" maxlength="100" size="100" />
       </div>
-
       <div class="buttons">
         <button id="addButton">Add</button>
         <button id="cancelButton">Cancel</button>

@@ -143,13 +143,13 @@ tr {
 
 .floating-add-user-form div#username-roleField {
   position: fixed;
-  top: 150px;
+  top: 140px;
   width: 100%;
 }
 
 .floating-add-user-form div#email-passwordField {
   position: fixed;
-  top: 250px;
+  top: 230px;
   width: 100%;
 }
 
@@ -162,19 +162,26 @@ tr {
 
 .floating-add-user-form div#workForField {
   position: fixed;
-  bottom: 195px;
+  bottom: 220px;
   width: 100%;
 }
 
 .floating-add-user-form div#graduationFields {
   position: fixed;
-  bottom: 195px;
+  bottom: 220px;
   width: 100%;
+}
+
+.floating-add-user-form div#companyField {
+  position: fixed;
+  bottom: 130px;
+  width: 100%;
+  display: block;
 }
 
 .floating-add-user-form div#graduationFields select{
   position: fixed;
-  bottom: 195px;
+  bottom: 220px;
   width: 30%;
 }
 
@@ -189,7 +196,7 @@ tr {
 .floating-add-user-form label {
   position: absolute;
   top: 0px;
-  margin: 5px 5px 5px 5px;
+  margin: 5px 5px 10px 5px;
 }
 
 .floating-add-user-form form input[type="text"],

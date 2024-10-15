@@ -52,6 +52,14 @@ function toggleFields() {
   var role = document.getElementById("role").value;
   document.getElementById("graduationFields").style.display =
     role === "Alumni" ? "block" : "none";
+  document.getElementById("companyField").style.display =
+    role === "Alumni" ? "block" : "none";
   document.getElementById("workForField").style.display =
     role === "Manager" ? "block" : "none";
+}
+
+function toggleFieldsEmp() {
+  var jobstatus = document.getElementById("jobstatus").value;
+  document.getElementById("companyField").style.display =
+  jobstatus === "Employed" ? "block" : "none";
 }

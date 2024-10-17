@@ -103,27 +103,27 @@
     </section>
   </div>
   <div class="floating-add-user-form">
-    <form method="post" action="accounts.php">
+    <form method="post" action="../backend/add_user.php">
       <div id="nameFields">
         <label for="firstname">First Name</label>
-        <input class="inputFields" type="text" name="firstname" id="firstname" required minlength="4" maxlength="50" size="50"/>
+        <input class="inputFields" type="text" name="firstname" id="firstname" required minlength="1" maxlength="50" size="50"/>
         <label for="middlename">Middle Name</label>
-        <input class="inputFields" type="text" name="middlename" id="middlename" required minlength="4" maxlength="50" size="50"/>
+        <input class="inputFields" type="text" name="middlename" id="middlename" required minlength="1" maxlength="50" size="50"/>
         <label for="lastname">Last Name</label>
-        <input class="inputFields" type="text" name="lastname" id="lastname" required minlength="4" maxlength="50" size="50"/>
+        <input class="inputFields" type="text" name="lastname" id="lastname" required minlength="1" maxlength="50" size="50"/>
       </div>
       <div id="username-roleField">
         <label for="username">Username</label>
-        <input class="inputFields" type="text" name="username" id="username" required minlength="4" maxlength="50" size="50"/>
+        <input class="inputFields" type="text" name="username" id="username" required minlength="1" maxlength="50" size="50"/>
         <label for="role">Role Type:</label>
-        <select name="role" id="role" required onchange="toggleFields()">
+        <select name="role" id="role" required>
           <option value="Alumni">Alumni</option>
           <option value="Manager">Manager</option>
         </select>
       </div>
       <div id="email-passwordField">
         <label for="email">Email</label>
-        <input class="inputFields" type="text" name="emailaddress" id="email" required minlength="4" maxlength="100" size="100"/>
+        <input class="inputFields" type="text" name="emailaddress" id="email" required minlength="1" maxlength="100" size="100"/>
         <label for="password">Password</label>
         <input class="inputFields" type="password" name="password" id="password" required minlength="8" maxlength="50" size="50"/>
       </div>
@@ -131,9 +131,9 @@
         <label for="graduation">Graduation Year:</label>
         <input class="inputFields" type="text" name="graduation" id="graduation" />
         <label for="program">Program:</label>
-        <input class="inputFields" type="text" name="program" id="program" required minlength="4" maxlength="50" size="50"/>
+        <input class="inputFields" type="text" name="program" id="program" required minlength="1" maxlength="50" size="50"/>
         <label for="jobstatus">Job Status:</label>
-          <select name="jobstatus" id="jobstatus" required onchange="toggleFieldsEmp()">
+          <select name="jobstatus" id="jobstatus" required>
             <option value="Employed">Employed</option>
             <option value="Unemployed">Unemployed</option>
           </select>
@@ -147,8 +147,8 @@
         <input class="inputFields" type="text" name="work_for" id="work_for" required minlength="1" maxlength="100" size="100" />
       </div>
       <div class="buttons">
-        <button id="addButton">Add</button>
-        <button id="cancelButton">Cancel</button>
+        <button type="submit" id="addButton">Add</button>
+        <button type="reset" id="cancelButton">Cancel</button>
       </div>
     </form>
   </div>

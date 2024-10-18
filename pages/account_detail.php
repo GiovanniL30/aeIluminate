@@ -4,9 +4,10 @@ include('../backend/database.php');
 
 if (isset($_GET['userId'])) {
     $userid = $_GET['userId'];
-    $query = "SELECT * FROM users WHERE role != 'Super Admin' AND userID = ?";
+    $role = $_GET['role'];
+    $query = "SELECT * FROM users WHERE role = ? AND userID = ?";
     $stmt = $conn->prepare($query); 
-    $stmt->bind_param("i", $userid);
+    $stmt->bind_param("si", $role, $userid);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -98,9 +99,9 @@ if (isset($_GET['userId'])) {
                                                 <p>Username</p>
                                                 <input name='userName' type='text' value='${user.username}' />
                                             </div>
-                                            <div class="input-field">
+                                            <div class="input-field"
                                                 <p>Role</p>
-                                                <select name="role">
+                                                <select name="role" disabled>
                                                     <option value="Alumni" ${user.role === 'Alumni' ? 'selected' : ''}>Alumni</option>
                                                     <option value="Manager" ${user.role === 'Manager' ? 'selected' : ''}>Manager</option>
                                                 </select>

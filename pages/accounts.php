@@ -104,6 +104,9 @@
   </div>
   <div class="floating-add-user-form">
     <form method="post" action="../backend/add_user.php">
+      <div id="title">
+        <h1> Create Account </h1>
+      </div>
       <div id="nameFields">
         <label for="firstname">First Name</label>
         <input class="inputFields" type="text" name="firstname" id="firstname" required minlength="1" maxlength="50" size="50"/>

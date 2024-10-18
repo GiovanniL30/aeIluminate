@@ -135,21 +135,27 @@ tr {
   background-color: #fff;
 }
 
+.floating-add-user-form div#title{
+  position: fixed;
+  top: 25px;
+  width: 100%;
+}
+
 .floating-add-user-form div#nameFields {
   position: fixed;
-  top: 50px;
+  top: 75px;
   width: 100%;
 }
 
 .floating-add-user-form div#username-roleField {
   position: fixed;
-  top: 140px;
+  top: 155px;
   width: 100%;
 }
 
 .floating-add-user-form div#email-passwordField {
   position: fixed;
-  top: 230px;
+  top: 240px;
   width: 100%;
 }
 

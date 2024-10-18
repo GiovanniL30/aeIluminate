@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param('isss', $newUserID, $graduationYear, $program, $isEmployed);
             $stmt->execute();
         } elseif ($role === 'Manager') {
-            $insertManagerQuery = "INSERT INTO managers (userID, work_for) VALUES (?, ?)";
+            $insertManagerQuery = "INSERT INTO manager (userID, work_for) VALUES (?, ?)";
             $stmt = $conn->prepare($insertManagerQuery);
             $stmt->bind_param('is', $newUserID, $workFor);
             $stmt->execute();

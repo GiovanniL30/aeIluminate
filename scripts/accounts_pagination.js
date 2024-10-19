@@ -30,7 +30,7 @@ const renderAccounts = (page) => {
                 <div class="action-list">
                     <a href="/pages/account_detail.php?userId=${account.userID}&role=${account.role}"><img src='../assets/edit.png'/></a>
                     <img src='../assets/check.png'/>
-                    <img src='../assets/delete_account.png'/>
+                    <img src='../assets/delete_account.png' class="delete-icon" data-userid="${account.userID}" alt="Delete Account"/>
                 </div>
             </td>
         `;
@@ -165,6 +165,35 @@ document.addEventListener("click", (event) => {
   ) {
     sortOptions.style.display = "none";
   }
+});
+
+document.querySelectorAll('.delete-icon').forEach((icon) => {
+  icon.addEventListener('click', async (e) => {
+    try {
+      const userToDelete = e.target.dataset.userID;
+      const response = await fetch('../backend/delete.php', {
+        method: 'POST',
+        body: {
+          userID: userToDelete,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data.message);
+
+      if (data.message === 'User deleted successsfully') {
+        e.target.closest('tr').remove();
+      } else {
+        console.error('Failed to delete the user');
+      }
+    } catch (error) {
+      console.log('Error: ', error.message);
+    }
+  });
 });
 
 addControls();

@@ -14,4 +14,6 @@ if (isset($_POST['deleteUser'])) {
         echo json_encode(['message' => 'Error. Failed to delete user']);
     }
     exit();
+} else {
+    echo json_encode(['message' => 'No user ID provided']);
 }

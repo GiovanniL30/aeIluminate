@@ -314,6 +314,7 @@ tr {
 #sort-options {
   display: flex;
   flex-direction: column;
+  width: 150px;
   gap: 5px;
   margin-top: 10px;
   position: absolute;
@@ -345,7 +346,7 @@ tr {
 }
 
 #sort-options input[type="radio"] {
-  display: inline-block;
+  display: none;
   width: 16px;
   height: 16px;
   margin: 0;
@@ -380,4 +381,8 @@ tr {
 #sort-options input[type="radio"]:checked + span {
   background-color: var(--primary);
   color: white;
+}
+
+#sort-options img{
+  width: 16px;
 }

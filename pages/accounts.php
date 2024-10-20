@@ -34,26 +34,30 @@
                   <img src="../assets/chevron-down.png" alt="down" />
                 </button>
                 <div id="sort-options" style="display: none;">
-                  <div class="sort-header">Sort By...</div>
                   <label>
+                    <img src="../assets/user_dark.svg" alt="">
                     <input type="radio" name="sortField" value="userID" checked>
                     <span>User ID</span>
                   </label>
                   <label>
+                    <img src="../assets/firstname_dark.svg" alt="">
                     <input type="radio" name="sortField" value="firstName">
                     <span>First Name</span>
                   </label>
                   <label>
+                    <img src="../assets/lastname_dark.svg" alt="">
                     <input type="radio" name="sortField" value="lastName">
                     <span>Last Name</span>
                   </label>
                   <div class="divider"></div>
-                  <div class="sort-header">Sort Order...</div>
+                  <div class="sort-header">Order</div>
                   <label>
+                    <img src="../assets/ascending_dark.svg" alt="">
                     <input type="radio" name="sortOrder" value="asc" checked>
                     <span>Ascending</span>
                   </label>
                   <label>
+                    <img src="../assets/descending_dark.svg" alt="">
                     <input type="radio" name="sortOrder" value="desc">
                     <span>Descending</span>
                   </label>

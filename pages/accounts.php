@@ -96,7 +96,6 @@
           <a href="/pages/accounts.php"><img src="../assets/back.png" alt="back" /></a>
           <p>as</p>
         </div>
-
         <div class="account-contents">
           <div class="users-count">
             <div class="total-users">
@@ -112,7 +111,6 @@
               <h1 class="total-alumni"></h1>
             </div>
           </div>
-
           <table class="account-list" id="account-table">
             <tr class="table-header">
               <th>User ID</th>

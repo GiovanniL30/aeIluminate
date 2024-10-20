@@ -55,13 +55,13 @@ a {
   margin: 20px 0;           
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   text-align: left;       
-  max-width: 250px;          
+  width: 250px;          
   margin-left: auto;
-  margin-right: auto;        
+  margin-right: auto;    
+  float: left;    
 }
 
-.user-overview-box h2 {
-  font-size: 1.5em;
+.user-overview-box h4 {
   margin-bottom: 15px;
   color: #333;              
 }
@@ -69,15 +69,19 @@ a {
 .user-overview-box ul {
   list-style-type: none;     
   padding: 0;
+  margin: 0;
 }
 
 .user-overview-box ul li {
-  font-size: 1.1em;
-  margin: 20px 0;
+  display: flex; 
+  align-items: left; 
+  justify-content: space-between; 
+  margin-bottom: 10px;
 }
 
 .user-overview-box ul li span {
-  font-weight: bold;        
+  font-weight: bold; 
+  margin-right: 5px;   
 }
 
 hr {

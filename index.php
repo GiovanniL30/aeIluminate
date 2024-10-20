@@ -24,18 +24,37 @@
                         <h4>User Overview</h4>
                         <hr />
                         <ul>
-                            <li>69<span id="total-users"></span> Total Users</li>
+                            <li>
+                                <span>
+                                    <div class="total-users"></div>
+                                </span>Total Users</li>
                             <hr />
-                            <li><span id="total-managers"></span>Managers</li>
+                            <li><span>
+                                    <div class="total-managers"></div>
+                                </span>Managers</li>
                             <hr />
-                            <li><span id="total-alumni"></span>Alumni</li>
+                            <li><span>
+                                    <div class="total-alumni"></div>
+                                </span>Alumni</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('../backend/get_users.php')
+            .then(response => response.json())
+            .then(data => {
 
+                document.querySelector('.total-users').innerText = data.total_users;
+                document.querySelector('.total-managers').innerText = data.managers;
+                document.querySelector('.total-alumni').innerText = data.alumni;
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+    });
+    </script>
 </body>
 
 </html>

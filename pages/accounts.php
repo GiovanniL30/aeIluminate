@@ -35,36 +35,53 @@
                 </button>
                 <div id="sort-options" style="display: none;">
                   <label>
-                    <img src="../assets/user_dark.svg" alt="">
+                    <img src="../assets/user.svg" alt="">
                     <input type="radio" name="sortField" value="userID" checked>
                     <span>User ID</span>
                   </label>
                   <label>
-                    <img src="../assets/firstname_dark.svg" alt="">
+                    <img src="../assets/firstname.svg" alt="">
                     <input type="radio" name="sortField" value="firstName">
                     <span>First Name</span>
                   </label>
                   <label>
-                    <img src="../assets/lastname_dark.svg" alt="">
+                    <img src="../assets/lastname.svg" alt="">
                     <input type="radio" name="sortField" value="lastName">
                     <span>Last Name</span>
                   </label>
                   <div class="divider"></div>
                   <div class="sort-header">Order</div>
                   <label>
-                    <img src="../assets/ascending_dark.svg" alt="">
+                    <img src="../assets/ascending.svg" alt="">
                     <input type="radio" name="sortOrder" value="asc" checked>
                     <span>Ascending</span>
                   </label>
                   <label>
-                    <img src="../assets/descending_dark.svg" alt="">
+                    <img src="../assets/descending.svg" alt="">
                     <input type="radio" name="sortOrder" value="desc">
                     <span>Descending</span>
                   </label>
                 </div>
               </div>
-              <div class="settings">
-                <img src="../assets/settings.png" alt="settings" />
+              <div id="filter-button">
+                <button><img src="../assets/settings.png" alt="filter" /></button>
+                <div id="filter-options" style="display: none;">
+                  <label>
+                    <img src="../assets/user.svg" alt="">
+                    <input type="radio" name="filterField" value="">
+                    <span>All</span>
+                  </label>
+                  <label>
+                    <img src="../assets/alumni.svg" alt="">
+                    <input type="radio" name="filterField" value="Alumni">
+                    <span>Alumni</span>
+                  </label>
+                  <label>
+                    <img src="../assets/manager.svg" alt="">
+                    <input type="radio" name="filterField" value="Manager">
+                    <span>Managers</span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>

@@ -128,6 +128,12 @@ const toggleSortOptions = () => {
     sortOptions.style.display === "none" ? "block" : "none";
 };
 
+const toggleFilterOptions = () => {
+  const filterOptions = document.getElementById("filter-options");
+  filterOptions.style.display = 
+    filterOptions.style.display === "none" ? "block" : "none";
+}
+
 // Function to handle changes in sort fields and orders
 const handleSortChange = (event) => {
   const { name, value } = event.target;
@@ -155,6 +161,11 @@ document.getElementById("sort-button").addEventListener("click", (event) => {
   event.stopPropagation();
   toggleSortOptions();
 });
+
+document.getElementById("filter-button").addEventListener("click",  (event) => {
+  event.stopPropagation;
+  toggleFilterOptions();
+})
 
 document.addEventListener("click", (event) => {
   const sortOptions = document.getElementById("sort-options");

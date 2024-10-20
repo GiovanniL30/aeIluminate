@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../styles/index.css" />
   <title>Accounts</title>
+  <style>
+    #filter-options img {
+  width: 16px;
+}
+  </style>
 </head>
 
 <body>

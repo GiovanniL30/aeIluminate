@@ -131,7 +131,7 @@ const toggleSortOptions = () => {
 const toggleFilterOptions = () => {
   const filterOptions = document.getElementById("filter-options");
   filterOptions.style.display = 
-    filterOptions.style.display === "none" ? "block" : "none";
+    filterOptions.style.display === "none" ? "flex" : "none";
 }
 
 // Function to handle changes in sort fields and orders

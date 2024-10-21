@@ -150,9 +150,10 @@
       </div>
       <div id="email-passwordField">
         <label for="email">Email</label>
-        <input class="inputFields" type="text" name="emailaddress" id="email" required minlength="1" maxlength="100" size="100"/>
+        <input class="inputFields" type="email" name="emailaddress" id="email" required minlength="1" maxlength="100" size="100"/>
         <label for="password">Password</label>
         <input class="inputFields" type="password" name="password" id="password" required minlength="8" maxlength="50" size="50"/>
+        <input type="checkbox" id="showPassword"/> Show Password
       </div>
       <div id="graduationFields">
         <label for="graduation">Graduation Year:</label>

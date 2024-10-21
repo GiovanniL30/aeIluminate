@@ -42,11 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function showPassword() {
+    var password = document.getElementById("password");
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  }
+
   const addUserForm = document.querySelector(".floating-add-user-form form");
   const addUserButton = document.querySelector(".admin-activities button");
   const mainContent = document.querySelector("div.app");
   const closeAddUserButton = document.getElementById("cancelButton");
   const formInputs = document.querySelectorAll(".floating-add-user-form input");
+  const showPasswordButton = document.getElementById("showPassword");
+
+
+  showPasswordButton.addEventListener("click", showPassword);
 
   // Debugging: Check if the form is selected correctly
   console.log(addUserForm);

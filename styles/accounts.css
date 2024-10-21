@@ -207,6 +207,7 @@ tr {
 
 .floating-add-user-form form input[type="text"],
 .floating-add-user-form form input[type="password"],
+.floating-add-user-form form input[type="email"],
 .floating-add-user-form form textarea {
   width: 30%;
   padding: 12px 20px;

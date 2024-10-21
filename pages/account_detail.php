@@ -4,8 +4,11 @@ include('../backend/database.php');
 
 if (isset($_GET['userId'])) {
     $userid = $_GET['userId'];
-    $role = $_GET['role'];
-    $query = "SELECT * FROM users WHERE role = ? AND userID = ?";
+    $role = $_GET['role']; 
+    $query = "SELECT users.*, alumni.degree, alumni.isEmployed 
+        FROM users 
+        LEFT JOIN alumni USING(userID) 
+        WHERE users.role = ? AND users.userID = ?";
     $stmt = $conn->prepare($query); 
     $stmt->bind_param("si", $role, $userid);
     $stmt->execute();
@@ -57,6 +60,20 @@ if (isset($_GET['userId'])) {
                     if (!user) {
                         return `<h1>User not Found</h1>`;
                     }
+
+                    const alumniFields = user.degree ? `
+                        <div class="input-field">
+                            <p>Degree</p>
+                            <input name='degree' type='text' value='${user.degree}' />
+                        </div>
+                        <div class="input-field">
+                            <p>Employment Status</p>
+                            <select name="isEmployed">
+                                <option value="Employed" ${user.isEmployed == 1 ? 'selected' : ''}>Employed</option>
+                                <option value="Unemployed" ${user.isEmployed == 0 ? 'selected' : ''}>Unemployed</option>
+                            </select>
+                        </div>
+                    ` : '';
 
                     return `
                         <div class="account-details">
@@ -113,10 +130,13 @@ if (isset($_GET['userId'])) {
                                                 <input name='email' type='text' value='${user.email}' />
                                             </div>
                                             <div class="input-field">
-                                                <p>Program</p>
-                                                <input name="programName" type="text" value="${user.programName || 'program'}" />
+                                                <p>Company</p>
+                                                <input name="company" type="text" value="${user.company}" />
                                             </div>
                                         </div>
+                                        <div>
+                                            ${alumniFields}
+                                        </div> 
                                     </div>
                                     <div class="change-options change-option-information">
                                         <button>Save</button>

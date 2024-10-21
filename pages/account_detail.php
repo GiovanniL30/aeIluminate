@@ -2,7 +2,7 @@
 
 include('../backend/database.php');
 
-if (isset($_GET['userId'])) {
+if (isset($_GET['userId']) && isset($_GET['role'])) {
     $userid = $_GET['userId'];
     $role = $_GET['role']; 
     $query = "SELECT users.*, alumni.degree, alumni.isEmployed 
@@ -139,8 +139,8 @@ if (isset($_GET['userId'])) {
                                         </div> 
                                     </div>
                                     <div class="change-options change-option-information">
-                                        <button>Save</button>
-                                        <button>Cancel</button>
+                                        <button id="saveDetails" type="submit">Save</button>
+                                        <button id="cancelDetails" type="button">Cancel</button>
                                     </div>
                                 </div>
                                 <div class="account-info-container">
@@ -149,7 +149,7 @@ if (isset($_GET['userId'])) {
                                         <div class="input-field password-field">
                                             <p>Current Password</p>
                                             <input name='currentPassword' type='password' value="${user.password}"/>
-                                            <button>Show Password</button>
+                                            <button id="showCurrentPassword" type="button">Show Password</button>
                                         </div>
                                     </div>
                                     <div class="user-information-fields">
@@ -157,18 +157,18 @@ if (isset($_GET['userId'])) {
                                             <div class="input-field password-field">
                                                 <p>New Password</p>
                                                 <input name="newPassword" type="password" />
-                                                <button>Show Password</button>
+                                                <button id="showNewPassword" type="button">Show Password</button>
                                             </div>
                                             <div class="input-field password-field">
                                                 <p>Confirm Password</p>
                                                 <input name="confirmPassword" type="password" />
-                                                <button>Show Password</button>
+                                                <button id="showConfirmPassword" type="button">Show Password</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="change-options change-option-password">
-                                        <button>Save</button>
-                                        <button>Cancel</button>
+                                        <button id="savePassword" type="submit">Save</button>
+                                        <button id="cancelPassword" type="button">Cancel</button>
                                     </div>
                                 </div>
                             </div>

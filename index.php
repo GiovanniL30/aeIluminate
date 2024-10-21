@@ -17,7 +17,7 @@
         </video>
     </div>
 
-    <div class="app">
+    <div id="main-content" class="app">
         <aside class="sidebar">
             <?php include'./components/sidebar.php' ?>
         </aside>

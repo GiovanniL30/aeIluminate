@@ -10,6 +10,13 @@
 </head>
 
 <body>
+    <div id="video-overlay">
+        <video id="intro-video" autoplay muted>
+            <source src="assets\aelluminate intro.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
     <div class="app">
         <aside class="sidebar">
             <?php include'./components/sidebar.php' ?>
@@ -27,7 +34,8 @@
                             <li>
                                 <span>
                                     <div class="total-users"></div>
-                                </span>Total Users</li>
+                                </span>Total Users
+                            </li>
                             <hr />
                             <li><span>
                                     <div class="total-managers"></div>
@@ -44,17 +52,24 @@
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        fetch('../backend/get_users.php')
-            .then(response => response.json())
-            .then(data => {
+            const video = document.getElementById('intro-video');
+            const videoOverlay = document.getElementById('video-overlay');
+            const mainContent = document.getElementById('main-content');
 
-                document.querySelector('.total-users').innerText = data.total_users;
-                document.querySelector('.total-managers').innerText = data.managers;
-                document.querySelector('.total-alumni').innerText = data.alumni;
-            })
-            .catch(error => console.error('Error fetching user data:', error));
+            video.onended = () => {
+                videoOverlay.style.display = 'none'; 
+                mainContent.style.display = 'block'; 
+            };
+
+            fetch('../backend/get_users.php')
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('.total-users').innerText = data.total_users;
+                    document.querySelector('.total-managers').innerText = data.managers;
+                    document.querySelector('.total-alumni').innerText = data.alumni;
+                })
+                .catch(error => console.error('Error fetching user data:', error));
     });
     </script>
 </body>
-
 </html>

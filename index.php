@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <div id="video-overlay">
+    <!-- <div id="video-overlay">
         <video id="intro-video" autoplay muted>
             <source src="assets\aelluminate intro.mp4" type="video/mp4" />
             Your browser does not support the video tag.
         </video>
-    </div>
+    </div> -->
 
     <div id="main-content" class="app">
         <aside class="sidebar">

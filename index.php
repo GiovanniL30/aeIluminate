@@ -10,21 +10,21 @@
 </head>
 
 <body>
-    <!-- <div id="video-overlay">
+    <div id="video-overlay">
         <video id="intro-video" autoplay muted>
             <source src="assets\aelluminate intro.mp4" type="video/mp4" />
             Your browser does not support the video tag.
         </video>
-    </div> -->
+    </div>
 
     <div id="main-content" class="app">
         <aside class="sidebar">
-            <?php include'./components/sidebar.php' ?>
+            <?php include './components/sidebar.php' ?>
         </aside>
         <section>
             <div class="container">
                 <header>
-                    <?php include'./components/header.php' ?>
+                    <?php include './components/header.php' ?>
                 </header>
                 <div class="contents">
                     <div class="user-overview-box">
@@ -50,34 +50,7 @@
             </div>
         </section>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const video = document.getElementById('intro-video');
-        const videoOverlay = document.getElementById('video-overlay');
-        const mainContent = document.getElementById('main-content');
-
-        const hasPlayedIntro = localStorage.getItem('introPlayed');
-
-        if (hasPlayedIntro) {
-            videoOverlay.style.display = 'none';
-            mainContent.style.display = 'block';
-        } else {
-            video.onended = () => {
-                videoOverlay.style.display = 'none';
-                mainContent.style.display = 'block';
-                localStorage.setItem('introPlayed', 'true');
-            };
-        }
-
-        fetch('../backend/get_users.php')
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector('.total-users').innerText = data.total_users;
-                document.querySelector('.total-managers').innerText = data.managers;
-                document.querySelector('.total-alumni').innerText = data.alumni;
-            })
-            .catch(error => console.error('Error fetching user data:', error));
-    });
-    </script>
+    <script src="./scripts/index.js"></script>
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   
-    function showPassword(inputName) {
+    function showEditPassword(inputName) {
         const passwordField = document.getElementsByName(inputName)[0];
         
         if (passwordField.type === "password") {
@@ -9,96 +9,46 @@ document.addEventListener("DOMContentLoaded", () => {
             passwordField.type = "password";
         }
     }
-  
-    const addUserForm = document.querySelector(".floating-add-user-form form");
-    const addUserButton = document.querySelector(".admin-activities button");
-    const mainContent = document.querySelector("div.app");
-    const closeAddUserButton = document.getElementById("cancelButton");
-    const formInputs = document.querySelectorAll(".floating-add-user-form input");
 
     document.getElementById("showCurrentPassword").addEventListener("click", function() {
-        togglePasswordVisibility('currentPassword');
+        showEditPassword('currentPassword');
     });
     
     document.getElementById("showNewPassword").addEventListener("click", function() {
-        togglePasswordVisibility('newPassword');
+        showEditPassword('newPassword');
     });
     
     document.getElementById("showConfirmPassword").addEventListener("click", function() {
-        togglePasswordVisibility('confirmPassword');
+        showEditPassword('confirmPassword');
     });
   
-    // Debugging: Check if the form is selected correctly
-    console.log(addUserForm);
-  
-    if (addUserForm) {
-      addUserButton.addEventListener("click", () => {
-        console.log("Add User button clicked");
-        addUserForm.parentElement.style.display = "block";
-        addUserForm.parentElement.style.pointerEvents = "auto";
-        mainContent.classList.add("blur");
-        mainContent.style.pointerEvents = "none";
-      });
-    }
-  
-      if (closeAddUserButton) {
-        closeAddUserButton.addEventListener("click", (event) => {
-          event.preventDefault(); // prevent the form from submitting
-          console.log("Cancel button clicked");
-          addUserForm.parentElement.style.display = "none";
-          mainContent.classList.remove("blur");
-          mainContent.style.pointerEvents = "auto";
-          addUserForm.reset(); // reset the fields
-        });
-      } else {
-        console.error("Cancel button not found");
-      }
-  
-      formInputs.forEach((input) => {
-        input.addEventListener("focus", () => {
-          input.previousElementSibling.classList.add("active");
-        });
-      });
-  
-      formInputs.forEach((input) => {
-        input.addEventListener("blur", () => {
-          if (input.value === "") {
-            input.previousElementSibling.classList.remove("active");
-          }
-        });
-      });
-      // Call toggleFields on page load to set the initial state
-      toggleFields();
-      toggleFieldsEmp();
-  
-      // Add event listener to role select element
-      document.getElementById("role").addEventListener("change", toggleFields);
-      document.getElementById("jobstatus").addEventListener("change", toggleFieldsEmp);
-  
-      addUserForm.addEventListener("submit", async (event) => {
-        event.preventDefault(); // prevent the default form submission
-    
-        try {
-          const formData = new FormData(addUserForm);
-          const response = await fetch(addUserForm.action, {
-            method: "POST",
-            body: formData,
-          });
-    
-          if (response.ok) {
-            alert("User added successfully.");
-            addUserForm.parentElement.style.display = "none";
-            mainContent.classList.remove("blur");
-            mainContent.style.pointerEvents = "auto";
-            addUserForm.reset(); // reset the fields
-          } else {
-            const errorText = await response.text();
-            console.error("Error adding user:", errorText);
-            alert("Error adding user: " + errorText);
-          }
-        } catch (error) {
-          console.error("Error adding user:", error);
-          alert("Error adding user: " + error.message);
+});
+
+document.getElementById("saveDetails").addEventListener("click", function(event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('userId', user.userID); 
+    formData.append('firstName', document.querySelector("input[name='firstName']").value);
+    formData.append('middleName', document.querySelector("input[name='middleName']").value);
+    formData.append('lastName', document.querySelector("input[name='lastName']").value);
+    formData.append('username', document.querySelector("input[name='userName']").value);
+    formData.append('email', document.querySelector("input[name='email']").value);
+    formData.append('company', document.querySelector("input[name='company']").value);
+    formData.append('degree', document.querySelector("input[name='degree']").value);
+    formData.append('isEmployed', document.querySelector("select[name='isEmployed']").value);
+
+    fetch('../backend/edit_user.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("User details updated successfully!");
+        } else {
+            alert("Failed to update user details. " + (data.error || ''));
         }
-      });
-  });
+    })
+    .catch(error => console.error("Error:", error));
+});

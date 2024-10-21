@@ -52,23 +52,31 @@
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('intro-video');
-            const videoOverlay = document.getElementById('video-overlay');
-            const mainContent = document.getElementById('main-content');
+        const video = document.getElementById('intro-video');
+        const videoOverlay = document.getElementById('video-overlay');
+        const mainContent = document.getElementById('main-content');
 
+        const hasPlayedIntro = localStorage.getItem('introPlayed');
+
+        if (hasPlayedIntro) {
+            videoOverlay.style.display = 'none';
+            mainContent.style.display = 'block';
+        } else {
             video.onended = () => {
-                videoOverlay.style.display = 'none'; 
-                mainContent.style.display = 'block'; 
+                videoOverlay.style.display = 'none';
+                mainContent.style.display = 'block';
+                localStorage.setItem('introPlayed', 'true');
             };
+        }
 
-            fetch('../backend/get_users.php')
-                .then(response => response.json())
-                .then(data => {
-                    document.querySelector('.total-users').innerText = data.total_users;
-                    document.querySelector('.total-managers').innerText = data.managers;
-                    document.querySelector('.total-alumni').innerText = data.alumni;
-                })
-                .catch(error => console.error('Error fetching user data:', error));
+        fetch('../backend/get_users.php')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.total-users').innerText = data.total_users;
+                document.querySelector('.total-managers').innerText = data.managers;
+                document.querySelector('.total-alumni').innerText = data.alumni;
+            })
+            .catch(error => console.error('Error fetching user data:', error));
     });
     </script>
 </body>

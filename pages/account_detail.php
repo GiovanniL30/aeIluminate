@@ -69,8 +69,8 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                         <div class="input-field">
                             <p>Employment Status</p>
                             <select name="isEmployed">
-                                <option value="Employed" ${user.isEmployed == 1 ? 'selected' : ''}>Employed</option>
-                                <option value="Unemployed" ${user.isEmployed == 0 ? 'selected' : ''}>Unemployed</option>
+                                <option value="1" ${user.isEmployed == 1 ? 'selected' : ''}>Employed</option>
+                                <option value="0" ${user.isEmployed == 0 ? 'selected' : ''}>Unemployed</option>
                             </select>
                         </div>
                     ` : '';
@@ -96,86 +96,92 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                             <div class="account-second-column">
                                 <div class="account-info-container">
                                     <h1>User's Information</h1>
-                                    <div class="user-information-fields">
-                                        <div>
-                                            <div class="input-field">
-                                                <p>First Name</p>
-                                                <input name='firstName' type='text' value='${user.firstName}' />
+                                    <form method="post" action="../backend/edit.php" id="details-form">
+                                        <div class="user-information-fields">
+                                            <div>
+                                                <div class="input-field">
+                                                    <p>First Name</p>
+                                                    <input name='firstName' type='text' value='${user.firstName}' />
+                                                </div>
+                                                <div class="input-field">
+                                                    <p>Middle Name</p>
+                                                    <input name='middleName' type='text' value='${user.middleName}' />
+                                                </div>
+                                                <div class="input-field">
+                                                    <p>Last Name</p>
+                                                    <input name='lastName' type='text' value='${user.lastName}' />
+                                                </div>
                                             </div>
-                                            <div class="input-field">
-                                                <p>Middle Name</p>
-                                                <input name='middleName' type='text' value='${user.middleName}' />
+                                            <div>
+                                                <div class="input-field">
+                                                    <p>Username</p>
+                                                    <input name='username' type='text' value='${user.username}' />
+                                                </div>
+                                                <div class="input-field"
+                                                    <p>Role</p>
+                                                    <select name="role" disabled>
+                                                        <option value="Alumni" ${user.role === 'Alumni' ? 'selected' : ''}>Alumni</option>
+                                                        <option value="Manager" ${user.role === 'Manager' ? 'selected' : ''}>Manager</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="input-field">
-                                                <p>Last Name</p>
-                                                <input name='lastName' type='text' value='${user.lastName}' />
+                                            <div>
+                                                <div class="input-field">
+                                                    <p>Email Address</p>
+                                                    <input name='email' type='text' value='${user.email}' />
+                                                </div>
+                                                <div class="input-field">
+                                                    <p>Company</p>
+                                                    <input name="company" type="text" value="${user.company}" />
+                                                </div>
                                             </div>
+                                            <div>
+                                                ${alumniFields}
+                                            </div> 
                                         </div>
-                                        <div>
-                                            <div class="input-field">
-                                                <p>Username</p>
-                                                <input name='userName' type='text' value='${user.username}' />
-                                            </div>
-                                            <div class="input-field"
-                                                <p>Role</p>
-                                                <select name="role" disabled>
-                                                    <option value="Alumni" ${user.role === 'Alumni' ? 'selected' : ''}>Alumni</option>
-                                                    <option value="Manager" ${user.role === 'Manager' ? 'selected' : ''}>Manager</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="input-field">
-                                                <p>Email Address</p>
-                                                <input name='email' type='text' value='${user.email}' />
-                                            </div>
-                                            <div class="input-field">
-                                                <p>Company</p>
-                                                <input name="company" type="text" value="${user.company}" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            ${alumniFields}
-                                        </div> 
-                                    </div>
+                                    </form>
                                     <div class="change-options change-option-information">
                                         <button id="saveDetails" type="submit">Save</button>
                                         <button id="cancelDetails" type="button">Cancel</button>
                                     </div>
                                 </div>
-                                <div class="account-info-container">
-                                    <h1>Change Password</h1>
-                                    <div>
-                                        <div class="input-field password-field">
-                                            <p>Current Password</p>
-                                            <input name='currentPassword' type='password' value="${user.password}"/>
-                                            <button id="showCurrentPassword" type="button">Show Password</button>
-                                        </div>
-                                    </div>
-                                    <div class="user-information-fields">
+                                <form method="post" action="../backend/edit_pass.php" id="password-form">
+                                     <div class="account-info-container">
+                                    
+                                        <h1>Change Password</h1>
                                         <div>
                                             <div class="input-field password-field">
-                                                <p>New Password</p>
-                                                <input name="newPassword" type="password" />
-                                                <button id="showNewPassword" type="button">Show Password</button>
-                                            </div>
-                                            <div class="input-field password-field">
-                                                <p>Confirm Password</p>
-                                                <input name="confirmPassword" type="password" />
-                                                <button id="showConfirmPassword" type="button">Show Password</button>
+                                                <p>Current Password</p>
+                                                <input name='currentPassword' type='password' value="${user.password}"/>
+                                                <button id="showCurrentPassword" type="button">Show Password</button>
                                             </div>
                                         </div>
+                                        <div class="user-information-fields">
+                                            <div>
+                                                <div class="input-field password-field">
+                                                    <p>New Password</p>
+                                                    <input name="newPassword" type="password" />
+                                                    <button id="showNewPassword" type="button">Show Password</button>
+                                                </div>
+                                                <div class="input-field password-field">
+                                                    <p>Confirm Password</p>
+                                                    <input name="confirmPassword" type="password" />
+                                                    <button id="showConfirmPassword" type="button">Show Password</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="change-options change-option-password">
+                                            <button id="savePassword" type="submit">Save</button>
+                                            <button id="cancelPassword" type="button">Cancel</button>
+                                        </div>
                                     </div>
-                                    <div class="change-options change-option-password">
-                                        <button id="savePassword" type="submit">Save</button>
-                                        <button id="cancelPassword" type="button">Cancel</button>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     `;
                 }
                 document.getElementById('user-details').innerHTML = renderDetails();
             </script>
+            <script src="../scripts/edit_user.js"></script>
 </body>
 </html>

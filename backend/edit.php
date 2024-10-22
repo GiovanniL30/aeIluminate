@@ -1,5 +1,4 @@
 <?php
-
 include('../backend/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,8 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $company = $_POST['company'];
-    $degree = $_POST['degree'];
-    $isEmployed = $_POST['isEmployed'];
+    $role = $_POST['role']; 
     $userId = $_SESSION['userId']; 
     
     $query = "UPDATE users 
@@ -21,16 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssssssi", $firstName, $middleName, $lastName, $username, $email, $company, $userId);
     
     if ($stmt->execute()) {
-        $query2 = "UPDATE alumni SET degree = ?, isEmployed = ? WHERE userID = ?";
-        $stmt2 = $conn->prepare($query2);
-        $stmt2->bind_param("sii", $degree, $isEmployed, $userId);
-        
-        if ($stmt2->execute()) {
-            echo json_encode(['success' => true]);
+       
+        if ($role === 'Alumni') {
+            $degree = $_POST['degree'];
+            $isEmployed = $_POST['isEmployed'];
+            
+            $query2 = "UPDATE alumni SET degree = ?, isEmployed = ? WHERE userID = ?";
+            $stmt2 = $conn->prepare($query2);
+            $stmt2->bind_param("sii", $degree, $isEmployed, $userId);
+            
+            if ($stmt2->execute()) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'error' => 'Failed to update alumni details']);
+            }
+            $stmt2->close();
         } else {
-            echo json_encode(['success' => false, 'error' => 'Failed to update alumni details']);
+            echo json_encode(['success' => true]);
         }
-        $stmt2->close();
     } else {
         echo json_encode(['success' => false, 'error' => 'Failed to update user details']);
     }
@@ -38,3 +44,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
+
+?>

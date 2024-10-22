@@ -2,6 +2,7 @@ const resultsPerPage = 9;
 let currentPage = 1;
 let totalPages = 0;
 let accounts = [];
+let filterField = "";
 let sortField = "userID";
 let sortOrder = "asc";
 let searchQuery = "";
@@ -150,6 +151,13 @@ const handleSortChange = (event) => {
 document
   .getElementById("sort-options")
   .addEventListener("change", handleSortChange);
+
+  document.getElementById("filter-options").addEventListener("change", (event) => {
+    const {name, value} = event.target;
+    if (filterField){
+      fetchUsers();
+    }
+  });
 
 document.querySelector(".search form").addEventListener("submit", (event) => {
   event.preventDefault();

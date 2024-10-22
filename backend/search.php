@@ -3,13 +3,14 @@ include('../backend/database.php');
 
 
 $query = $_GET['searchQuery'];
+$filter = $_GET['filterBy'];
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'userID';
 $sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'asc';
 $query = $conn->real_escape_string($query);
 
 $searchQ = "SELECT * FROM users 
                 WHERE (firstName LIKE '%$query%' OR lastName LIKE '%$query%' 
-                OR middleName LIKE '%$query%' OR username LIKE '%$query%')
+                OR middleName LIKE '%$query%' OR username LIKE '%$query%' OR role = $filter)
                 AND role != 'Super Admin' ORDER BY $sortBy $sortOrder";
 
 $searchRes = $conn->query($searchQ);

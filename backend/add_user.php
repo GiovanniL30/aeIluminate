@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newUserID = $lastUserID + 1;
 
         // Insert the user into the users table
-        $insertUserQuery = "INSERT INTO users (userID, firstName, middleName, lastName, username, password, email, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertUserQuery = "INSERT INTO users (userID, firstName, middleName, lastName, username, password, email, role, company) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertUserQuery);
-        $stmt->bind_param('isssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role);
+        $stmt->bind_param('issssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role, $company);
         $stmt->execute();
 
         // Get the last inserted userID
@@ -47,16 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare($insertAlumniQuery);
             $stmt->bind_param('isss', $newUserID, $graduationYear, $program, $isEmployed);
             $stmt->execute();
-        } elseif ($role === 'Manager') {
-            $insertManagerQuery = "INSERT INTO manager (userID, work_for) VALUES (?, ?)";
-            $stmt = $conn->prepare($insertManagerQuery);
-            $stmt->bind_param('is', $newUserID, $workFor);
-            $stmt->execute();
         }
-
-    //     echo "User added successfully with userID: $newUserID.";
-    // } else {
-    //     echo "Error: User already exists.";
     }
     $stmt->close();
     $conn->close();

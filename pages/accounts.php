@@ -171,8 +171,8 @@
         <input class="inputFields" type="text" name="company" id="company" required minlength="1" maxlength="100" size="100"/>
       </div>
       <div id="workForField">
-        <label for="work_for">Work For:</label>
-        <input class="inputFields" type="text" name="work_for" id="work_for" required minlength="1" maxlength="100" size="100" />
+        <label for="company">Work For:</label>
+        <input class="inputFields" type="text" name="company" id="work_for" required minlength="1" maxlength="100" size="100" />
       </div>
       <div class="buttons">
         <button type="submit" id="addButton">Add</button>

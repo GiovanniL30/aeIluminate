@@ -131,9 +131,9 @@ const toggleSortOptions = () => {
 
 const toggleFilterOptions = () => {
   const filterOptions = document.getElementById("filter-options");
-  filterOptions.style.display = 
+  filterOptions.style.display =
     filterOptions.style.display === "none" ? "flex" : "none";
-}
+};
 
 // Function to handle changes in sort fields and orders
 const handleSortChange = (event) => {
@@ -152,9 +152,11 @@ document
   .getElementById("sort-options")
   .addEventListener("change", handleSortChange);
 
-  document.getElementById("filter-options").addEventListener("change", (event) => {
-    const {name, value} = event.target;
-    if (filterField){
+document
+  .getElementById("filter-options")
+  .addEventListener("change", (event) => {
+    const { name, value } = event.target;
+    if (filterField) {
       fetchUsers();
     }
   });
@@ -162,6 +164,7 @@ document
 document.querySelector(".search form").addEventListener("submit", (event) => {
   event.preventDefault();
   searchQuery = document.querySelector(".search input").value;
+  console.log(searchQuery);
   fetchUsers(searchQuery);
 });
 
@@ -170,10 +173,10 @@ document.getElementById("sort-button").addEventListener("click", (event) => {
   toggleSortOptions();
 });
 
-document.getElementById("filter-button").addEventListener("click",  (event) => {
+document.getElementById("filter-button").addEventListener("click", (event) => {
   event.stopPropagation;
   toggleFilterOptions();
-})
+});
 
 document.addEventListener("click", (event) => {
   const sortOptions = document.getElementById("sort-options");
@@ -186,12 +189,12 @@ document.addEventListener("click", (event) => {
   }
 });
 
-document.querySelectorAll('.delete-icon').forEach((icon) => {
-  icon.addEventListener('click', async (e) => {
+document.querySelectorAll(".delete-icon").forEach((icon) => {
+  icon.addEventListener("click", async (e) => {
     try {
       const userToDelete = e.target.dataset.userID;
-      const response = await fetch('../backend/delete.php', {
-        method: 'POST',
+      const response = await fetch("../backend/delete.php", {
+        method: "POST",
         body: {
           userID: userToDelete,
         },
@@ -204,13 +207,13 @@ document.querySelectorAll('.delete-icon').forEach((icon) => {
       const data = await response.json();
       console.log(data.message);
 
-      if (data.message === 'User deleted successsfully') {
-        e.target.closest('tr').remove();
+      if (data.message === "User deleted successsfully") {
+        e.target.closest("tr").remove();
       } else {
-        console.error('Failed to delete the user');
+        console.error("Failed to delete the user");
       }
     } catch (error) {
-      console.log('Error: ', error.message);
+      console.log("Error: ", error.message);
     }
   });
 });

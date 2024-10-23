@@ -1,25 +1,42 @@
 <?php
 include('../backend/database.php');
 
-
-$query = $_GET['searchQuery'];
-$filter = $_GET['filterBy'];
+$query = isset($_GET['searchQuery']) ? $_GET['searchQuery'] : '';
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'userID';
 $sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'asc';
-$query = $conn->real_escape_string($query);
 
-$searchQ = "SELECT * FROM users 
-                WHERE (firstName LIKE '%$query%' OR lastName LIKE '%$query%' 
-                OR middleName LIKE '%$query%' OR username LIKE '%$query%' OR role = $filter)
-                AND role != 'Super Admin' ORDER BY $sortBy $sortOrder";
+$allowedSortBy = ['userID', 'firstName', 'lastName', 'username', 'role'];
+$allowedSortOrder = ['asc', 'desc'];
 
-$searchRes = $conn->query($searchQ);
+if (!in_array($sortBy, $allowedSortBy)) {
+    $sortBy = 'userID'; 
+}
+if (!in_array($sortOrder, $allowedSortOrder)) {
+    $sortOrder = 'asc'; 
+}
+$query = "%{$query}%"; 
+
+$sql = "SELECT * FROM users 
+        WHERE (firstName LIKE ? 
+        OR lastName LIKE ? 
+        OR middleName LIKE ? 
+        OR username LIKE ?)
+        AND role != 'Super Admin'
+        ORDER BY $sortBy $sortOrder";
+
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('ssss', $query, $query, $query, $query);
+
+$stmt->execute();
+$result = $stmt->get_result();
+
 $accounts = [];
 $managers = 0;
 $alumni = 0;
 
-if ($searchRes->num_rows > 0) {
-    while ($row = $searchRes->fetch_assoc()) {
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
         $accounts[] = $row;
 
         if ($row['role'] === 'Manager') {
@@ -38,5 +55,11 @@ $response = [
     'accounts' => $accounts,
 ];
 
+
 header('Content-Type: application/json');
 echo json_encode($response);
+
+
+$stmt->close();
+$conn->close();
+?>

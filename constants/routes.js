@@ -1,13 +1,13 @@
 export const routes = {
-  "/index.php": {
+  "aeiluminate/index.php": {
     label: "Dashboard",
     icon: "N/A",
   },
-  "/pages/accounts.php": {
+  "aeiluminate/pages/accounts.php": {
     label: "Accounts",
     icon: "N/A",
   },
-  "/pages/applications.php": {
+  "aeiluminate/pages/applications.php": {
     label: "Applications",
     icon: "N/A",
   },

@@ -2,7 +2,7 @@
 // Database configuration
 $serverName = "localhost";
 $userName = "root";
-$password = "";
+$password = "password";
 $dbName = "webtek";
 $con = null;
 

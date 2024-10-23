@@ -120,7 +120,6 @@ tr {
 .floating-add-user-form {
   width: 1141px;
   height: 615px;
-  flex-shrink: 0;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -129,13 +128,13 @@ tr {
   border-radius: 20px;
   z-index: 1000;
   border-radius: 10px;
-  border: 2px solid rgb(0, 0, 0);
+  border: 1px solid var(--grey);
   display: none;
   pointer-events: none;
-  background-color: #fff;
+  background-color: white;
 }
 
-.floating-add-user-form div#title{
+.floating-add-user-form div#title {
   position: fixed;
   top: 25px;
   width: 100%;
@@ -185,7 +184,7 @@ tr {
   display: block;
 }
 
-.floating-add-user-form div#graduationFields select{
+.floating-add-user-form div#graduationFields select {
   position: fixed;
   bottom: 220px;
   width: 30%;
@@ -203,6 +202,9 @@ tr {
   position: absolute;
   top: 0px;
   margin: 5px 5px 10px 5px;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
 
 .floating-add-user-form form input[type="text"],
@@ -212,7 +214,7 @@ tr {
   width: 30%;
   padding: 12px 20px;
   font-size: 14px;
-  border: 1px solid rgba(0, 0, 0);
+  border: 1px solid var(--grey);
   border-radius: 5px;
   color: black;
   margin: 25px 5px 5px 5px;
@@ -221,23 +223,37 @@ tr {
 .floating-add-user-form form input[name="username"],
 .floating-add-user-form form select {
   width: 45%;
-  padding: 12px 32px;
   font-size: 16px;
-  border: 1px solid rgba(0, 0, 0);
   border-radius: 5px;
   color: black;
   margin: 25px 5px 5px 5px;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid var(--grey);
+  padding-inline: 10px;
+}
+
+.floating-add-user-form form input[name="username"],
+.floating-add-user-form form select {
+  outline-color: var(--primary);
+}
+
+.floating-add-user-form form input[type="text"],
+.floating-add-user-form form input[type="password"],
+.floating-add-user-form form input[type="email"],
+.floating-add-user-form form textarea {
+  outline-color: var(--primary);
 }
 
 .floating-add-user-form form button {
   width: 15%;
   padding: 12px 32px;
   font-size: 16px;
-  border: 1px solid rgba(0, 0, 0);
   border-radius: 5px;
   color: black;
   margin: 5px 5px 5px 5px;
   cursor: pointer;
+  outline: none;
 }
 
 .floating-add-user-form form button[id="addButton"] {
@@ -384,11 +400,11 @@ tr {
   color: white;
 }
 
-#sort-options img{
+#sort-options img {
   width: 16px;
 }
 
-#filter-options{
+#filter-options {
   flex-direction: column;
   width: 150px;
   margin-top: 10px;

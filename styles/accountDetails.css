@@ -168,3 +168,36 @@
 .change-options button:hover {
   opacity: 0.5;
 }
+
+.back-accounts {
+  margin-block: 10px;
+  align-items: center;
+  gap: 20px;
+  display: flex;
+}
+
+.back-accounts a {
+  color: var(--primary);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-color: var(--drop);
+  border-radius: 10px;
+  transition: all 500ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-accounts a img {
+  width: 50%;
+  object-fit: cover;
+}
+
+.back-accounts a:hover {
+  opacity: 0.5;
+}
+
+.back-accounts p {
+  font-size: 0.9rem;
+}

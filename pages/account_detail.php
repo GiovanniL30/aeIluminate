@@ -2,6 +2,7 @@
 
 include('../backend/database.php');
 
+
 if (isset($_GET['userId']) && isset($_GET['role'])) {
     $userId = $_GET['userId'];
     $role = $_GET['role'];
@@ -49,7 +50,11 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                 <header>
                     <?php include '../components/header.php'; ?>
                 </header>
+               
+         
+    
                 <div id="user-details"></div>
+        
             </div>
         </section>
     </div>
@@ -80,6 +85,12 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
             return `
                 <div class="account-details">
                     <div class="account-first-column">
+                        <div class="back-accounts">
+                            <a href="../pages/accounts.php">
+                                <img src="../assets/back.png" alt="back" />
+                            </a>
+                            <p>Return</p>
+                        </div>
                         <div class="user-information">
                             <img src="../assets/admin-img.png" alt="image" />
                             <h1 class="user-name">${user.email}</h1>
@@ -130,7 +141,7 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                                     <div>
                                         <div class="input-field">
                                             <p>Email Address</p>
-                                            <input name='email' type='text' value='${user.email}' />
+                                            <input name='email' type='email' required value='${user.email}' />
                                         </div>
                                         <div class="input-field">
                                             <p>Company</p>
@@ -154,21 +165,21 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                             <div>
                                 <div class="input-field password-field">
                                     <p>Current Password</p>
-                                    <input name='currentPassword' type='password' value="${user.password}"/>
-                                    <button id="showCurrentPassword" type="button">Show Password</button>
+                                    <input type='password' value="${user.password}"/>
+                                    <button class="showPassword" type="button">Show Password</button>
                                 </div>
                             </div>
                             <div class="user-information-fields">
                                 <div>
                                     <div class="input-field password-field">
                                         <p>New Password</p>
-                                        <input name="newPassword" type="password" />
-                                        <button id="showNewPassword" type="button">Show Password</button>
+                                        <input type="password" />
+                                        <button class="showPassword" type="button">Show Password</button>
                                     </div>
                                     <div class="input-field password-field">
                                         <p>Confirm Password</p>
-                                        <input name="confirmPassword" type="password" />
-                                        <button id="showConfirmPassword" type="button">Show Password</button>
+                                        <input type="password" />
+                                        <button class="showPassword" type="button">Show Password</button>
                                     </div>
                                 </div>
                             </div>

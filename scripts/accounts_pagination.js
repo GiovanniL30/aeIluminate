@@ -29,7 +29,7 @@ const renderAccounts = (page) => {
             <td>${account.role}</td>
             <td>
                 <div class="action-list">
-                    <a href="/pages/account_detail.php?userId=${account.userID}&role=${account.role}"><img src='../assets/edit.png'/></a>
+                    <a href="/aeiluminate/pages/account_detail.php?userId=${account.userID}&role=${account.role}"><img src='../assets/edit.png'/></a>
                     <img src='../assets/check.png'/>
                     <img src='../assets/delete_account.png' class="delete-icon" data-userid="${account.userID}" alt="Delete Account"/>
                 </div>

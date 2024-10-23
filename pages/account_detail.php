@@ -149,13 +149,17 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                         </div>
                         <form method="post" action="../backend/edit_pass.php" id="password-form">
                             <div class="account-info-container">
-                                <h1>Change Password</h1>
-                                <div class="user-information-fields">
-                                    <div class="input-field password-field">
-                                        <p>Current Password</p>
-                                        <input name='currentPassword' type='password' />
-                                        <button id="showCurrentPassword" type="button">Show Password</button>
-                                    </div>
+                        
+                            <h1>Change Password</h1>
+                            <div>
+                                <div class="input-field password-field">
+                                    <p>Current Password</p>
+                                    <input name='currentPassword' type='password' value="${user.password}"/>
+                                    <button id="showCurrentPassword" type="button">Show Password</button>
+                                </div>
+                            </div>
+                            <div class="user-information-fields">
+                                <div>
                                     <div class="input-field password-field">
                                         <p>New Password</p>
                                         <input name="newPassword" type="password" />
@@ -167,11 +171,12 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                                         <button id="showConfirmPassword" type="button">Show Password</button>
                                     </div>
                                 </div>
-                                <div class="change-options change-option-password">
-                                    <button id="savePassword" type="submit">Save</button>
-                                    <button id="cancelPassword" type="button">Cancel</button>
-                                </div>
                             </div>
+                            <div class="change-options change-option-password">
+                                <button id="savePassword" type="submit">Save</button>
+                                <button id="cancelPassword" type="button">Cancel</button>
+                            </div>
+                        </div>
                         </form>
                     </div>
                 </div>

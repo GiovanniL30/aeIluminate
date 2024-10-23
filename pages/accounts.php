@@ -1,3 +1,7 @@
+<?php
+$base_url = "http://" . $_SERVER['HTTP_HOST'] . "/aeiluminate/";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,7 +92,9 @@
         </header>
 
         <div class="search-action">
-          <a href="/pages/accounts.php"><img src="../assets/back.png" alt="back" /></a>
+        <a href="<?php echo $base_url; ?>pages/accounts.php">
+          <img src="../assets/back.png" alt="back" />
+        </a>
           <p>as</p>
         </div>
         <div class="account-contents">
@@ -175,7 +181,7 @@
       </div>
     </form>
   </div>
-  <script src="../scripts/accounts_pagination.js" type="module"></script>
+  <script src="../scripts/accounts_pagination.js"></script>
   <script src="../scripts/add_user.js"></script>
 </body>
 

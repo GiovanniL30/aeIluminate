@@ -1,0 +1,30 @@
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-links li {
+  padding: 1em;
+}
+
+.active-route {
+  background-color: var(--primary);
+  border-radius: 5px;
+  position: relative;
+}
+
+.active-route::before {
+  content: "";
+  width: 5px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: var(--primary);
+  position: absolute;
+  left: -20px;
+  top: 0;
+}
+
+.active-route a {
+  color: white;
+}

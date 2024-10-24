@@ -1,0 +1,133 @@
+@import url(sidebar.css);
+@import url(header.css);
+@import url(accounts.css);
+@import url(accountDetails.css);
+
+:root {
+  --grey: rgb(222, 222, 222);
+  --drop: rgb(245, 246, 250);
+  --primary: rgb(72, 128, 255);
+  --text: rgb(64, 64, 64);
+  --dropText: rgb(143, 155, 179);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  color: var(--text);
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  border-right: 1px solid var(--grey);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+}
+
+.container {
+  padding: 2em;
+  margin-left: 250px;
+}
+
+#video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#intro-video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#main-content {
+  display: none;
+}
+
+.slide-top {
+  animation: slide-top 0.75s forwards ease-in-out;
+}
+
+/* STATISTICS */
+.user-overview-box {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+}
+
+.user-overview-box h4 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.user-overview-box ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-overview-box ul li {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.user-overview-box ul li span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+@keyframes slide-top {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

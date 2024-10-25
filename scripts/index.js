@@ -1,3 +1,5 @@
+import { baseUrl } from "./utils";
+
 document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("intro-video");
   const videoOverlay = document.getElementById("video-overlay");
@@ -40,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Fetch user data
-  fetch("/aeiluminate/backend/get_users.php")
+  fetch(`${baseUrl}backend/get_users.php`)
     .then((response) => response.json())
     .then((data) => {
       document.querySelector(".total-users").innerText = data.total_users;

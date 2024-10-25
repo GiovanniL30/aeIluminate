@@ -1,18 +1,20 @@
 <?php
-$base_url = "http://" . $_SERVER['HTTP_HOST'] . "/aeiluminate/";
+
+$projectRoot = basename(dirname(__DIR__));
+$base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 ?>
 
 <div>
-  <img src="<?php echo $base_url; ?>assets/logo.png" alt="Logo">
+  <img src="<?php echo $base_url; ?>/assets/logo.png" alt="Logo">
 </div>
 <ul class="nav-links"></ul>
 
 <script>
 
-  const baseUrl = "/aeiluminate/";
+  const baseUrl = "<?php echo $base_url; ?>/";
 
   const routes = {
-    [`${baseUrl}`]: {
+    [`${baseUrl}/index.php`]: {
       label: "Dashboard",
       icon: "N/A",
     },
@@ -29,25 +31,19 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/aeiluminate/";
   const navLinks = document.querySelector("ul.nav-links");
 
   const renderLinks = () => {
-    const currentRoute = window.location.pathname;
-
-    console.log(currentRoute)
-
+    const currentRoute = window.location.href.toLowerCase();
 
     const linksHTML = Object.keys(routes)
       .map((route) => {
         const { label, icon } = routes[route];
-        console.log(route)
+        const isActive = currentRoute === route.toLowerCase() ||
+          (currentRoute.includes("/pages/account_detail.php") && route === `${baseUrl}pages/accounts.php`);
 
         return `
-        <li class="link ${currentRoute.toLocaleLowerCase() === route.toLocaleLowerCase() ||
-            (currentRoute.includes("/pages/account_detail.php") && route === `${baseUrl}pages/accounts.php`)
-            ? "active-route"
-            : ""
-          }">
-          <a href="${route}">${label}</a>
-        </li>
-      `;
+          <li class="link ${isActive ? "active-route" : ""}">
+            <a href="${route}">${label}</a>
+          </li>
+        `;
       })
       .join("");
 
@@ -55,5 +51,4 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/aeiluminate/";
   };
 
   renderLinks();
-
 </script>

@@ -50,7 +50,7 @@
             </div>
         </section>
     </div>
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" type="module"></script>
 </body>
 
 </html>

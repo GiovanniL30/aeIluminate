@@ -1,5 +1,6 @@
 <?php
-$base_url = "http://" . $_SERVER['HTTP_HOST'] . "/aeiluminate/";
+$projectRoot = basename(dirname(__DIR__));
+$base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +94,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/aeiluminate/";
         </header>
 
         <div class="search-action">
-          <a href="<?php echo $base_url; ?>pages/accounts.php">
+          <a href="<?php echo $base_url; ?>/pages/accounts.php">
             <img src="../assets/back.png" alt="back" />
           </a>
           <p>as</p>
@@ -191,7 +192,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/aeiluminate/";
       </div>
     </form>
   </div>
-  <script src="../scripts/accounts_pagination.js"></script>
+  <script src="../scripts/accounts_pagination.js" type="module"></script>
   <script src="../scripts/add_user.js"></script>
 </body>
 

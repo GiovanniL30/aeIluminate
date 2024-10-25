@@ -186,7 +186,7 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
         </section>
     </div>
 
-    <script src="../scripts/edit_user.js"></script>
+    <script src="../scripts/edit_user.js" type="module"></script>
 </body>
 
 </html>

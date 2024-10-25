@@ -1,3 +1,5 @@
+import { baseUrl } from "./utils";
+
 /**
  * Edit user function handler
  *
@@ -72,7 +74,7 @@ const deleteUser = async () => {
         return;
       }
 
-      window.location.href = "/aeiluminate/pages/accounts.php";
+      window.location.href = `${baseUrl}/pages/accounts.php`;
     } catch (error) {
       alert(error.message);
     }

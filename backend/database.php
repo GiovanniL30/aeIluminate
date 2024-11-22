@@ -1,13 +1,20 @@
 <?php
+// Load vlucas/phpdotenv
+require __DIR__ . '/../vendor/autoload.php';
+
+// Load .env file
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
 // Database configuration
-$serverName = "localhost";
-$userName = "root";
-$password = "password";
-$dbName = "webtek";
+$serverName = $_ENV['DATABASE_HOST'];
+$userName = $_ENV['DATABASE_USER'];
+$password = $_ENV['DATABASE_PASSWORD'];
+$dbName = $_ENV['DATABASE_NAME'];;
 $con = null;
 
 // Establish Connection once only
-if($con == null) {
+if ($con == null) {
     $conn = new mysqli($serverName, $userName, $password, $dbName);
 }
 

@@ -5,7 +5,15 @@ $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'userID';
 $sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'asc';
 $filterField = isset($_GET['filterField']) ? $_GET['filterField'] : '';
 
-$query = "SELECT firstName, middleName, lastName, userID, username, email, role FROM users WHERE role != 'Super Admin'";
+$query = "SELECT firstName, 
+                 middleName, 
+                 lastName, 
+                 DATE_FORMAT(dateCreated, '%M %d, %Y') AS fdateCreated,
+                 username, 
+                 email, 
+                 role 
+          FROM users 
+          WHERE role != 'Super Admin'";
 
 
 if ($filterField) {
@@ -30,13 +38,18 @@ if ($result && $result->num_rows > 0) {
     }
 }
 
+// Retrieve super admin details
+$superAdminQuery = "SELECT firstName, lastName FROM users WHERE role = 'Admin' LIMIT 1";
+$superAdminResult = $conn->query($superAdminQuery);
+$superAdmin = $superAdminResult->fetch_assoc();
+
 $response = [
     'total_users' => count($accounts),
     'managers' => $managers,
     'alumni' => $alumni,
     'accounts' => $accounts,
+    'super_admin' => $superAdmin
 ];
 
 header('Content-Type: application/json');
 echo json_encode($response);
-

@@ -34,23 +34,24 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
             <div class="admin-activities">
               <button>Add User +</button>
               <div class="sort">
+
                 <button id="sort-button">
                   <span>Sort By</span>
                   <img src="../assets/chevron-down.png" alt="down" />
                 </button>
                 <div id="sort-options" style="display: none;">
                   <label>
-                    <img src="../assets/user.svg" alt="">
-                    <input type="radio" name="sortField" value="userID" checked>
-                    <span>User ID</span>
+                    <img src="../assets/date.svg" alt="date">
+                    <input type="radio" name="sortField" value="dateCreated" checked>
+                    <span>Date Created</span>
                   </label>
                   <label>
-                    <img src="../assets/firstname.svg" alt="">
+                    <img src="../assets/firstname.svg" alt="firstname">
                     <input type="radio" name="sortField" value="firstName">
                     <span>First Name</span>
                   </label>
                   <label>
-                    <img src="../assets/lastname.svg" alt="">
+                    <img src="../assets/lastname.svg" alt="lastname">
                     <input type="radio" name="sortField" value="lastName">
                     <span>Last Name</span>
                   </label>
@@ -68,24 +69,26 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
                   </label>
                 </div>
               </div>
-              <div id="filter-button">
-                <img id="filter-img" src="../assets/settings.png" alt="filter" />
-                <div id="filter-options">
-                  <div>
+              <div class="filter">
+                <button id="filter-button">
+                  <img id="filter-img" src="../assets/settings.png" alt="filter" />
+                </button>
+                <div id="filter-options" style="display: none;">
+                  <label>
                     <img src="../assets/user.svg" alt="All users">
-                    <input checked type="radio" id="all" name="role" value="">
-                    <label for="all">All</label>
-                  </div>
-                  <div>
+                    <input type="radio" id="all" name="role" value="" checked>
+                    <span>All</span>
+                  </label>
+                  <label>
                     <img src="../assets/alumni.svg" alt="Alumni">
                     <input type="radio" id="alumni" name="role" value="Alumni">
-                    <label for="alumni">Alumni</label>
-                  </div>
-                  <div>
+                    <span>Alumni</span>
+                  </label>
+                  <label>
                     <img src="../assets/manager.svg" alt="Managers">
                     <input type="radio" id="manager" name="role" value="Manager">
-                    <label for="manager">Managers</label>
-                  </div>
+                    <span>Managers</span>
+                  </label>
                 </div>
               </div>
 
@@ -116,7 +119,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           </div>
           <table class="account-list" id="account-table">
             <tr class="table-header">
-              <th>User ID</th>
+              <th>Date Created</th>
               <th>Name</th>
               <th>Username</th>
               <th>Email</th>

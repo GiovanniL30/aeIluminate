@@ -24,7 +24,7 @@ const renderAccounts = (page) => {
   currentAccounts.forEach((account) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-            <td>${account.userID}</td>
+            <td>${account.fdateCreated}</td>
             <td class="fullname">${account.firstName} ${account.middleName} ${account.lastName}</td>
             <td>${account.username}</td>
             <td>${account.email}</td>
@@ -134,7 +134,7 @@ const toggleSortOptions = () => {
 const toggleFilterOptions = () => {
   const filterOptions = document.getElementById("filter-options");
   filterOptions.style.display =
-    filterOptions.style.display === "none" ? "flex" : "none";
+    filterOptions.style.display === "none" ? "block" : "none";
 };
 
 const handleSortChange = (event) => {
@@ -213,11 +213,10 @@ document.getElementById("sort-button").addEventListener("click", (event) => {
   toggleSortOptions();
 });
 
-document
-  .querySelector("#filter-button img")
-  .addEventListener("click", (event) => {
-    toggleFilterOptions();
-  });
+document.getElementById("filter-button").addEventListener("click", (event) => {
+  event.stopPropagation();
+  toggleFilterOptions();
+});
 
 document.addEventListener("click", (event) => {
   const sortOptions = document.getElementById("sort-options");
@@ -227,6 +226,17 @@ document.addEventListener("click", (event) => {
     event.target.id !== "sort-button"
   ) {
     sortOptions.style.display = "none";
+  }
+});
+
+document.addEventListener("click", (event) => {
+  const filterOptions = document.getElementById("filter-options");
+  if (
+    filterOptions.style.display === "block" &&
+    !filterOptions.contains(event.target) &&
+    event.target.id !== "filter-button"
+  ) {
+    filterOptions.style.display = "none";
   }
 });
 

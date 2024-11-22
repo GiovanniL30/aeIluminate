@@ -33,7 +33,31 @@ Follow the steps below to set up and run the application locally.
  git clone https://github.com/GiovanniL30/aeIluminate.git
 ```
 
-2. Import the schema (webtek.sql) located at the root directory of the project
+2. Create a .env file for the database configuration, include the following variables:
+
+```bash
+ $SERVERNAME
+ $USERNAME
+ $PASSWORD
+ $DBNAME
+```
+
+### Additional Installation
+
+1. Install Composer dependencies:
+
+```bash
+ composer install
+```
+
+2. If composer is not installed, download it from [Composer](https://getcomposer.org/download/)
+3. During the installation, when prompted to select the php.exe file, navigate to the WAMP installation directory (usually C:\wamp64\bin\php\phpX.X.X\) and select the php.exe file.
+4. Restart the terminal
+5. To check if composer is installed, run the following command:
+
+```bash
+ composer -v
+```
 
 ### Group Members
 

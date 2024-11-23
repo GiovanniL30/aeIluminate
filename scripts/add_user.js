@@ -1,4 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const schoolSelect = document.getElementById("school");
+  const programSelect = document.getElementById("program");
+
+  // Load schools on page load instead of click
+  loadSchools();
+
+  function loadSchools() {
+    fetch("../backend/get_school.php")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text().then(text => {
+          try {
+            return JSON.parse(text);
+          } catch (e) {
+            console.error('Server response:', text);
+            throw new Error('Invalid JSON response from server');
+          }
+        });
+      })
+      .then(data => {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        schoolSelect.innerHTML = '<option value="">Select School</option>';
+        data.forEach(school => {
+          const option = document.createElement("option");
+          option.value = school;
+          option.textContent = school;
+          schoolSelect.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching school data:", error);
+        schoolSelect.innerHTML = '<option value="">Error loading schools</option>';
+      });
+  }
+
+  schoolSelect.addEventListener("change", (event) => {
+    const school = event.target.value;
+    if (!school) {
+      programSelect.innerHTML = '<option value="">Select Program</option>';
+      return;
+    }
+
+    fetch(`../backend/get_programs.php?school=${encodeURIComponent(school)}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        programSelect.innerHTML = '<option value="">Select Program</option>';
+        data.forEach(program => {
+          const option = document.createElement("option");
+          option.value = program;
+          option.textContent = program;
+          programSelect.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching program data:", error);
+        programSelect.innerHTML = '<option value="">Error loading programs</option>';
+      });
+  });
+
   function toggleFields() {
     var role = document.getElementById("role").value;
     var graduationFields = document.getElementById("graduationFields");
@@ -9,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       graduationFields.style.display = "block";
       companyField.style.display = "block";
       workForField.style.display = "none";
+      document.getElementById("school").setAttribute("required", "required");
       document.getElementById("program").setAttribute("required", "required");
       document.getElementById("company").setAttribute("required", "required");
       document.getElementById("work_for").removeAttribute("required");
@@ -16,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       graduationFields.style.display = "none";
       companyField.style.display = "none";
       workForField.style.display = "block";
+      document.getElementById("school").removeAttribute("required");
       document.getElementById("program").removeAttribute("required");
       document.getElementById("company").removeAttribute("required");
       document.getElementById("work_for").setAttribute("required", "required");
@@ -23,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       graduationFields.style.display = "none";
       companyField.style.display = "none";
       workForField.style.display = "none";
+      document.getElementById("school").removeAttribute("required");
       document.getElementById("program").removeAttribute("required");
       document.getElementById("company").removeAttribute("required");
       document.getElementById("work_for").removeAttribute("required");

@@ -171,27 +171,26 @@ tr {
   width: 100%;
 }
 
-.floating-add-user-form div#graduationFields {
-  position: fixed;
-  bottom: 220px;
-  width: 100%;
-}
-
 .floating-add-user-form div#companyField {
   position: fixed;
-  bottom: 130px;
+  bottom: 110px;
   width: 100%;
   display: block;
+}
+
+.floating-add-user-form div#graduationFields {
+  position: fixed;
+  bottom: 200px;
+  width: 100%;
 }
 
 .floating-add-user-form div#graduationFields select {
-  position: fixed;
-  bottom: 220px;
-  width: 30%;
+  width: 25%; /* Adjust width as needed */
+  position: relative;
 }
 
-.floating-add-user-form div#graduationFields {
-  display: block;
+.floating-add-user-form div#graduationFields input[type="text"]{
+  width: 13%;
 }
 
 .floating-add-user-form div#workForField {

@@ -170,9 +170,17 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       <div id="graduationFields">
         <label for="graduation">Graduation Year:</label>
         <input class="inputFields" type="text" name="graduation" id="graduation" />
+
+        <label for="school">Academic School:</label>
+        <select name="school" id="school" required>
+          <option value="">Select School</option>
+        </select>
+
         <label for="program">Program:</label>
-        <input class="inputFields" type="text" name="program" id="program" required minlength="1" maxlength="50"
-          size="50" />
+        <select name="program" id="program" required >
+          <option value="">Select Program</option>
+        </select>
+
         <label for="jobstatus">Job Status:</label>
         <select name="jobstatus" id="jobstatus" required>
           <option value="Employed">Employed</option>

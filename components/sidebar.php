@@ -16,15 +16,15 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
   const routes = {
     [`${baseUrl}/index.php`]: {
       label: "Dashboard",
-      icon: "N/A",
+      icon: `${baseUrl}/assets/dashboard.svg`,
     },
     [`${baseUrl}pages/accounts.php`]: {
       label: "Accounts",
-      icon: "N/A",
+      icon: `${baseUrl}/assets/user-accounts.svg`,
     },
-    [`${baseUrl}pages/applications.php`]: {
-      label: "Applications",
-      icon: "N/A",
+    [`${baseUrl}pages/logs.php`]: {
+      label: "System Logs",
+      icon: `${baseUrl}/assets/clock.svg`,
     },
   };
 
@@ -41,6 +41,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 
         return `
           <li class="link ${isActive ? "active-route" : ""}">
+            <img src="${icon}" class="sidebar-img">
             <a href="${route}">${label}</a>
           </li>
         `;

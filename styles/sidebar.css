@@ -6,6 +6,9 @@
 
 .nav-links li {
   padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .active-route {
@@ -27,4 +30,12 @@
 
 .active-route a {
   color: white;
+}
+
+.sidebar-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
 }

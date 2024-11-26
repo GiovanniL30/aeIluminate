@@ -38,10 +38,11 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
         const { label, icon } = routes[route];
         const isActive = currentRoute === route.toLowerCase() ||
           (currentRoute.includes("/pages/account_detail.php") && route === `${baseUrl}pages/accounts.php`);
+        const imgClass = isActive ? "sidebar-img active" : "sidebar-img";
 
         return `
           <li class="link ${isActive ? "active-route" : ""}">
-            <img src="${icon}" class="sidebar-img">
+            <img src="${icon}" class="${imgClass}">
             <a href="${route}">${label}</a>
           </li>
         `;

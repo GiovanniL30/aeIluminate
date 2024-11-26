@@ -39,3 +39,7 @@
   height: 30px;
   width: 30px;
 }
+
+.nav-links img.active {
+  filter: invert(100%);
+}

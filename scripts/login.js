@@ -1,45 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const inputs = document.querySelectorAll(".input-group input");
+  const loginForm = document.getElementById("loginForm");
+  const recoveryBtn = document.getElementById("recovery-btn");
   const loaderOverlay = document.querySelector(".loader-overlay");
+  const recoveryModal = document.getElementById("recovery-modal");
+  const closeModal = document.querySelector(".close");
+  const recoveryForm = document.getElementById("recoveryForm");
+  const updatePasswordForm = document.getElementById("updatePasswordForm");
 
   loaderOverlay.style.display = "none";
 
-  inputs.forEach((input) => {
-    input.addEventListener("focus", () => {
-      input.parentElement.classList.add("focused");
-    });
-
-    input.addEventListener("blur", () => {
-      if (input.value === "") {
-        input.parentElement.classList.remove("focused");
-      }
-    });
-
-    // Check if input has value on page load
-    if (input.value !== "") {
-      input.parentElement.classList.add("focused");
-    }
-  });
-
-  // Show loader
   const showLoader = () => {
     loaderOverlay.style.display = "flex";
   };
 
-  // Hide loader
   const hideLoader = () => {
     loaderOverlay.style.display = "none";
   };
 
-  // Handle form submission
-  document.getElementById("loginForm").addEventListener("submit", (e) => {
+  loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     showLoader();
-    const form = e.target;
-    const formData = new FormData(form);
+    const formData = new FormData(loginForm);
 
-    fetch(form.action, {
-      method: form.method,
+    fetch(loginForm.action, {
+      method: loginForm.method,
       body: formData,
     })
       .then((response) => response.json())
@@ -47,13 +31,76 @@ document.addEventListener("DOMContentLoaded", () => {
         hideLoader();
         if (data.success) {
           window.location.href = "../index.php";
-          alert(data.successMessage);
+        } else {
+          alert(data.error);
+          if (data.failed_attempts >= 3) {
+            recoveryBtn.style.display = "block";
+          }
+        }
+      })
+      .catch((error) => {
+        hideLoader();
+        console.error("Error:", error);
+      });
+  });
+
+  recoveryBtn.addEventListener("click", () => {
+    recoveryModal.style.display = "block";
+  });
+
+  closeModal.addEventListener("click", () => {
+    recoveryModal.style.display = "none";
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target == recoveryModal) {
+      recoveryModal.style.display = "none";
+    }
+  });
+
+  recoveryForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(recoveryForm);
+
+    fetch("../backend/recover_account.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert(data.message);
+          document.getElementById("recovery-modal").style.display = "none";
+          document.getElementById("update-password-modal").style.display =
+            "block";
         } else {
           alert(data.error);
         }
       })
       .catch((error) => {
-        hideLoader();
+        console.error("Error:", error);
+      });
+  });
+
+  updatePasswordForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(updatePasswordForm);
+
+    fetch("../backend/update_password.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert(data.message);
+          document.getElementById("update-password-modal").style.display =
+            "none";
+        } else {
+          alert(data.error);
+        }
+      })
+      .catch((error) => {
         console.error("Error:", error);
       });
   });

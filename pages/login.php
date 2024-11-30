@@ -29,9 +29,55 @@
                 <input type="password" id="password" name="password" required>
                 <label for="password">Password</label>
             </div>
-            <button type="submit" class="login-btn">Login</button>
+            <div class="button-group">
+                <button type="submit" class="login-btn">Login</button>
+                <button type="button" id="recovery-btn" class="recovery-btn" style="display: none;">Recover Account</button>
+            </div>
         </form>
     </div>
+
+    <!-- Recovery Modal -->
+    <div id="recovery-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Account Recovery</h2>
+            <form id="recoveryForm">
+                <div class="input-group">
+                    <input type="text" id="recovery-username" name="username" required>
+                    <label for="recovery-username">Username</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="recovery-email" name="email" required>
+                    <label for="recovery-email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="master-key" name="master_key" required>
+                    <label for="master-key">Master Recovery Key</label>
+                </div>
+                <button type="submit" class="recovery-btn">Verify</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Update Password Modal -->
+    <div id="update-password-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Update Password</h2>
+            <form id="updatePasswordForm">
+                <div class="input-group">
+                    <input type="password" id="new-password" name="new_password" required>
+                    <label for="new-password">New Password</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirm-password" name="confirm_password" required>
+                    <label for="confirm-password">Confirm Password</label>
+                </div>
+                <button type="submit" class="update-btn">Update Password</button>
+            </form>
+        </div>
+    </div>
+
     <script src="../scripts/login.js"></script>
 </body>
 

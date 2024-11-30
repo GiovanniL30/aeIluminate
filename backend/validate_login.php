@@ -11,6 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    if (!isset($_SESSION['failed_attempts'])) {
+        $_SESSION['failed_attempts'] = 0;
+    }
+
     // Validate credentials
     $query = "SELECT userID, username FROM users WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($query);
@@ -25,12 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['userID'] = $userID;
         $_SESSION['username'] = $username;
         $_SESSION['loggedIn'] = true;
+        $_SESSION['failed_attempts'] = 0; // Reset failed attempts
 
         // Return success response
         echo json_encode(['success' => true, 'successMessage' => 'Login successful']);
     } else {
+        $_SESSION['failed_attempts'] += 1;
         // Return error response
-        echo json_encode(['success' => false, 'error' => 'Invalid username or password']);
+        echo json_encode(['success' => false, 'error' => 'Invalid username or password', 'failed_attempts' => $_SESSION['failed_attempts']]);
     }
 
     $stmt->close();

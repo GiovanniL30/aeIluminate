@@ -13,7 +13,7 @@ $query = "SELECT firstName,
                  email, 
                  role 
           FROM users 
-          WHERE role != 'Super Admin'";
+          WHERE role != 'Admin'";
 
 
 if ($filterField) {

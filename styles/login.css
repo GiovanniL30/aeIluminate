@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.login-page {
+  min-height: 100vh;
+  background-image: url("../assets/slu_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+body.login-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(161, 202, 234, 0.65),
+    rgba(156, 199, 233, 0.65),
+    rgba(145, 182, 211, 0.65)
+  );
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 55px;
+  height: 80px;
+}
+
+.corner-logo {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.corner-logo img {
+  width: 70px;
+  height: 70px;
+}
+
+.login-container {
+  position: relative;
+  z-index: 2;
+  padding: 40px;
+  backdrop-filter: blur(2px);
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.login-container h1 {
+  color: #ffffff;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #72aee6;
+  outline: none;
+}
+
+.input-group label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-group input:focus,
+.input-group input:valid {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(8, 65, 139, 0.5);
+  color: #333;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+  top: 0;
+  font-size: 14px;
+  font-weight: 600;
+  background: rgba(65, 105, 225, 0.8);
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.login-btn {
+  background: #4169e1;
+  color: white;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+}
+
+.login-btn:hover {
+  background: #3157d5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(65, 105, 225, 0.4);
+}

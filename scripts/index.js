@@ -5,11 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const videoOverlay = document.getElementById("video-overlay");
   const mainContent = document.getElementById("main-content");
 
-  // check session storage for video and animation state
+  // Check session storage for video and animation state
   const videoPlayed = sessionStorage.getItem("videoPlayed") === "true";
   const animationPlayed = sessionStorage.getItem("animationPlayed") === "true";
 
-  // Function to show main content and update session storage
   const showMainContent = () => {
     videoOverlay.style.display = "none";
     mainContent.style.display = "grid";
@@ -24,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     video.onended = showMainContent;
   }
 
-  // Handle animation state
   if (!animationPlayed) {
     mainContent.classList.add("slide-top");
     mainContent.addEventListener("animationend", () => {
@@ -34,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent.classList.remove("slide-top");
   }
 
-  // Attach a click event to skip video
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       video.pause();
@@ -52,5 +49,37 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => {
       console.error("Error fetching user data:", error);
+    });
+
+  // Fetch posts stats and render chart
+  fetch(`${baseUrl}/backend/get_posts_stats.php`)
+    .then((response) => response.json())
+    .then((data) => {
+      const ctx = document.getElementById("postsChart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Today", "Yesterday", "Monthly Average"],
+          datasets: [
+            {
+              label: "Number of Posts",
+              data: [data.today, data.yesterday, data.monthly_average],
+              backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching posts stats:", error);
     });
 });

@@ -59,6 +59,13 @@ Follow the steps below to set up and run the application locally.
  composer -v
 ```
 
+**_Note:_** LOGIN CREDENTIALS
+
+```bash
+Username: giovanni123
+Password: helloworld
+```
+
 ### Group Members
 
 - Leo, Giovanni M.

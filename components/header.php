@@ -27,12 +27,3 @@ if ($response !== false) {
     </div>
   </div>
 </div>
-
-<!-- Modal for logout -->
-<div id="logout-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Are you sure you want to logout?</p>
-    <button id="logout-button">Logout</button>
-  </div>
-</div>

@@ -4,10 +4,25 @@ $projectRoot = basename(dirname(__DIR__));
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 ?>
 
-<div>
+<div class="sidebar-logo">
   <img src="<?php echo $base_url; ?>/assets/logo.png" alt="Logo">
 </div>
 <ul class="nav-links"></ul>
+<div class="logout-link">
+  <li class="link">
+    <img src="<?php echo $base_url; ?>/assets/logout.svg" class="sidebar-img">
+    <a href="#" id="logout-link">Logout</a>
+  </li>
+</div>
+
+<!-- Modal for logout confirmation -->
+<div id="logout-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Are you sure you want to logout?</p>
+    <button id="confirm-logout-button">Logout</button>
+  </div>
+</div>
 
 <script>
   const baseUrl = "<?php echo $base_url; ?>/";
@@ -55,4 +70,30 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
   };
 
   renderLinks();
+
+  // Logout modal functionality
+  document.addEventListener("DOMContentLoaded", () => {
+    const logoutLink = document.getElementById("logout-link");
+    const logoutModal = document.getElementById("logout-modal");
+    const closeModal = document.getElementsByClassName("close")[0];
+    const confirmLogoutButton = document.getElementById("confirm-logout-button");
+
+    logoutLink.onclick = function() {
+      logoutModal.style.display = "block";
+    };
+
+    closeModal.onclick = function() {
+      logoutModal.style.display = "none";
+    };
+
+    window.onclick = function(event) {
+      if (event.target == logoutModal) {
+        logoutModal.style.display = "none";
+      }
+    };
+
+    confirmLogoutButton.onclick = function() {
+      window.location.href = `${baseUrl}backend/logout.php`;
+    };
+  });
 </script>

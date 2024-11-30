@@ -28,12 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
       method: form.method,
       body: formData,
     })
-      .then((response) => response.text())
-      .then((text) => {
-        if (text.includes("Invalid")) {
-          alert(text);
-        } else {
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
           window.location.href = "../index.php";
+          alert(data.successMessage);
+        } else {
+          alert(data.error);
         }
       })
       .catch((error) => console.error("Error:", error));

@@ -11,4 +11,8 @@ export const routes = {
     label: "Applications",
     icon: "N/A",
   },
+  "aeiluminate/backend/logout.php": {
+    label: "Logout",
+    icon: "N/A",
+  },
 };

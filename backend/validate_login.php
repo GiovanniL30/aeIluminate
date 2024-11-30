@@ -2,6 +2,8 @@
 session_start();
 include('../backend/database.php');
 
+header('Content-Type: application/json');
+
 $projectRoot = basename(dirname(__DIR__));
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 
@@ -24,17 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $username;
         $_SESSION['loggedIn'] = true;
 
-        // Redirect to dashboard
-        header('Location: ' . $base_url . '/index.php');
-        exit();
+        // Return success response
+        echo json_encode(['success' => true, 'successMessage' => 'Login successful']);
     } else {
-        $error = 'Invalid username or password';
+        // Return error response
+        echo json_encode(['success' => false, 'error' => 'Invalid username or password']);
     }
 
     $stmt->close();
     $conn->close();
 }
-
-// If login fails, redirect back to login page with error message
-header('Location: ' . $base_url . '/pages/login.php?error=' . urlencode($error));
-exit();

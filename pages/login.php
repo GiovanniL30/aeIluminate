@@ -11,7 +11,7 @@
 
 <body class="login-page">
     <div class="logo">
-        <img src="../assets/slu.png" alt="Company Logo">
+        <img src="../assets/slu.png" alt="SLU Logo">
     </div>
     <div class="corner-logo">
         <img src="../assets/website icon.png" alt="">

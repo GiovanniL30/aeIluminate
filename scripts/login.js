@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const inputs = document.querySelectorAll(".input-group input");
+  const loaderOverlay = document.querySelector(".loader-overlay");
+
+  loaderOverlay.style.display = "none";
 
   inputs.forEach((input) => {
     input.addEventListener("focus", () => {
@@ -18,9 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Show loader
+  const showLoader = () => {
+    loaderOverlay.style.display = "flex";
+  };
+
+  // Hide loader
+  const hideLoader = () => {
+    loaderOverlay.style.display = "none";
+  };
+
   // Handle form submission
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    showLoader();
     const form = e.target;
     const formData = new FormData(form);
 
@@ -30,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        hideLoader();
         if (data.success) {
           window.location.href = "../index.php";
           alert(data.successMessage);
@@ -37,6 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
           alert(data.error);
         }
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        hideLoader();
+        console.error("Error:", error);
+      });
   });
 });

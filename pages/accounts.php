@@ -1,5 +1,6 @@
 <?php
 include '../backend/session_check.php';
+include('../components/loader.php');
 $projectRoot = basename(dirname(__DIR__));
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 ?>

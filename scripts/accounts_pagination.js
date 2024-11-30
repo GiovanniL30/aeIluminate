@@ -9,6 +9,18 @@ let sortField = "userID";
 let sortOrder = "asc";
 let searchQuery = "";
 
+const loaderOverlay = document.querySelector(".loader-overlay");
+
+loaderOverlay.style.display = "none";
+
+const showLoader = () => {
+  loaderOverlay.style.display = "flex";
+};
+
+const hideLoader = () => {
+  loaderOverlay.style.display = "none";
+};
+
 const renderAccounts = (page) => {
   const accountTable = document.getElementById("account-table");
 
@@ -98,6 +110,7 @@ const fetchUsers = () => {
     ? `../backend/search.php?searchQuery=${searchQuery}&sortBy=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}`
     : `../backend/get_users.php?sortBy=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}`;
 
+  showLoader();
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -106,23 +119,31 @@ const fetchUsers = () => {
       return response.json();
     })
     .then((data) => {
-      accounts = data.accounts;
-      totalPages = Math.ceil(data.total_users / resultsPerPage);
-      document.querySelector("h1.total-users").innerText = data.total_users;
-      document.querySelector("h1.total-managers").innerText = data.managers;
-      document.querySelector("h1.total-alumni").innerText = data.alumni;
+      setTimeout(() => {
+        hideLoader();
+        accounts = data.accounts;
+        totalPages = Math.ceil(data.total_users / resultsPerPage);
+        document.querySelector("h1.total-users").innerText = data.total_users;
+        document.querySelector("h1.total-managers").innerText = data.managers;
+        document.querySelector("h1.total-alumni").innerText = data.alumni;
 
-      if (searchQuery) {
-        document.querySelector(".search-action").style.display = "flex";
-        document.querySelector(
-          ".search-action p"
-        ).innerHTML = `Showing items with search "${searchQuery}"`;
-      }
+        if (searchQuery) {
+          document.querySelector(".search-action").style.display = "flex";
+          document.querySelector(
+            ".search-action p"
+          ).innerHTML = `Showing items with search "${searchQuery}"`;
+        }
 
-      renderAccounts(currentPage);
-      updatePaginationControls();
+        renderAccounts(currentPage);
+        updatePaginationControls();
+      }, 500); // Simulate a delay of 500ms
     })
-    .catch((error) => console.error("Error fetching user data:", error));
+    .catch((error) => {
+      setTimeout(() => {
+        hideLoader();
+        console.error("Error fetching user data:", error);
+      }, 500); // Simulate a delay of 500ms
+    });
 };
 
 const toggleSortOptions = () => {
@@ -165,6 +186,7 @@ const deleteUser = async (e) => {
 
     if (confirmed) {
       try {
+        showLoader();
         const response = await fetch(
           `../backend/delete.php?userID=${userToDelete}`,
           {
@@ -173,13 +195,22 @@ const deleteUser = async (e) => {
         );
 
         if (!response.ok) {
-          alert("Failed to delete the user");
+          setTimeout(() => {
+            hideLoader();
+            alert("Failed to delete the user");
+          }, 500); // Simulate a delay of 500ms
           return;
         }
 
-        fetchUsers();
+        setTimeout(() => {
+          hideLoader();
+          fetchUsers();
+        }, 500); // Simulate a delay of 500ms
       } catch (error) {
-        alert(error.message);
+        setTimeout(() => {
+          hideLoader();
+          alert(error.message);
+        }, 500); // Simulate a delay of 500ms
       }
     } else {
       console.log("Deletion cancelled");

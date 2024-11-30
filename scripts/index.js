@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("intro-video");
   const videoOverlay = document.getElementById("video-overlay");
   const mainContent = document.getElementById("main-content");
+
   // check session storage for video and animation state
   const videoPlayed = sessionStorage.getItem("videoPlayed") === "true";
   const animationPlayed = sessionStorage.getItem("animationPlayed") === "true";
@@ -42,12 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Fetch user data
-  fetch(`${baseUrl}backend/get_users.php`)
+  fetch(`${baseUrl}/backend/get_users.php`)
     .then((response) => response.json())
     .then((data) => {
       document.querySelector(".total-users").innerText = data.total_users;
       document.querySelector(".total-managers").innerText = data.managers;
       document.querySelector(".total-alumni").innerText = data.alumni;
     })
-    .catch((error) => console.error("Error fetching user data:", error));
+    .catch((error) => {
+      console.error("Error fetching user data:", error);
+    });
 });

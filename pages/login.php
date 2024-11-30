@@ -1,3 +1,5 @@
+<?php include('../components/loader.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

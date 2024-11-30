@@ -1,3 +1,6 @@
+<?php
+include('../backend/session_check.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +22,7 @@
           <?php include '../components/header.php' ?>
         </header>
         <div class="contents">
-          <h1>Applications</h1>
+          <h1>System Logs</h1>
         </div>
       </div>
     </section>

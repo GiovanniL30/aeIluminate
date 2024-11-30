@@ -1,4 +1,5 @@
 <?php
+include '../backend/session_check.php';
 $projectRoot = basename(dirname(__DIR__));
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 ?>
@@ -34,7 +35,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
             <div class="admin-activities">
               <button>Add User +</button>
               <div class="sort">
-
                 <button id="sort-button">
                   <span>Sort By</span>
                   <img src="../assets/chevron-down.png" alt="down" />
@@ -91,7 +91,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
                   </label>
                 </div>
               </div>
-
             </div>
           </div>
         </header>
@@ -177,7 +176,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
         </select>
 
         <label for="program">Program:</label>
-        <select name="program" id="program" required >
+        <select name="program" id="program" required>
           <option value="">Select Program</option>
         </select>
 

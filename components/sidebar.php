@@ -10,11 +10,10 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 <ul class="nav-links"></ul>
 
 <script>
-
   const baseUrl = "<?php echo $base_url; ?>/";
 
   const routes = {
-    [`${baseUrl}/index.php`]: {
+    [`${baseUrl}index.php`]: {
       label: "Dashboard",
       icon: `${baseUrl}/assets/dashboard.svg`,
     },
@@ -35,7 +34,10 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 
     const linksHTML = Object.keys(routes)
       .map((route) => {
-        const { label, icon } = routes[route];
+        const {
+          label,
+          icon
+        } = routes[route];
         const isActive = currentRoute === route.toLowerCase() ||
           (currentRoute.includes("/pages/account_detail.php") && route === `${baseUrl}pages/accounts.php`);
         const imgClass = isActive ? "sidebar-img active" : "sidebar-img";

@@ -1,5 +1,6 @@
 <?php
 include('../backend/database.php');
+include('../backend/session_check.php');
 
 if (isset($_GET['userId']) && isset($_GET['role'])) {
     $userId = $_GET['userId'];

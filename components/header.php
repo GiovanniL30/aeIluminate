@@ -18,12 +18,21 @@ if ($response !== false) {
   </div>
   <div class="admin-action">
     <img src="<?php echo $base_url; ?>/assets/bell.png" alt="Notification bell" />
-    <div class="admin-account">
-      <img src="<?php echo $base_url; ?>/assets/admin-img.png" alt="admin profile" />
+    <div class="admin-account" id="admin-account">
+      <img src="<?php echo $base_url; ?>/assets/admin-img.png" alt="admin profile" id="profile-photo" />
       <div>
         <h1><?php echo $superAdmin ? $superAdmin['firstName'] . ' ' . $superAdmin['lastName'] : 'Admin'; ?></h1>
         <p>Admin</p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal for logout -->
+<div id="logout-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Are you sure you want to logout?</p>
+    <button id="logout-button">Logout</button>
   </div>
 </div>

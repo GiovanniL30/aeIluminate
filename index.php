@@ -1,3 +1,6 @@
+<?php
+include('./backend/session_check.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,6 +54,7 @@
         </section>
     </div>
     <script src="./scripts/index.js" type="module"></script>
+    <script src="./scripts/header.js"></script>
 </body>
 
 </html>

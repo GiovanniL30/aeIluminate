@@ -36,10 +36,12 @@ Follow the steps below to set up and run the application locally.
 2. Create a .env file for the database configuration, include the following variables:
 
 ```bash
- $SERVERNAME
- $USERNAME
- $PASSWORD
- $DBNAME
+ DATABASE_HOST
+ DATABASE_USER
+ DATABASE_PASSWORD
+ DATABASE_PORT
+ DATABASE_NAME
+ MASTER_RECOVERY_KEY
 ```
 
 ### Additional Installation

@@ -206,6 +206,10 @@ tr {
   font-weight: 500;
 }
 
+/* .floating-add-user-form div#nameFields input[type="text"] {
+  width: 20%;
+} */
+
 .floating-add-user-form form input[type="text"],
 .floating-add-user-form form input[type="password"],
 .floating-add-user-form form input[type="email"],

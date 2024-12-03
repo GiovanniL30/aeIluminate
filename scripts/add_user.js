@@ -144,99 +144,99 @@ document.addEventListener("DOMContentLoaded", () => {
     const nameInputs = ["firstname", "lastname"];
     const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$/;
     const middleNameInput = document.getElementById("middlename");
+    const noMiddleNameCheckbox = document.getElementById("noMiddleName");
 
+    // Handle checkbox for no middle name
+    noMiddleNameCheckbox.addEventListener("change", (e) => {
+        if (e.target.checked) {
+            middleNameInput.value = "N/A";
+            middleNameInput.disabled = true;
+            middleNameInput.classList.remove("input-error");
+            middleNameInput.classList.add("input-valid");
+            middleNameInput.setAttribute("title", "No middle name selected");
+        } else {
+            middleNameInput.value = "";
+            middleNameInput.disabled = false;
+            middleNameInput.classList.remove("input-valid");
+            if (middleNameInput.value.length === 0) {
+                middleNameInput.classList.add("input-error");
+            }
+        }
+    });
+
+    // Handle middle name input validation
     middleNameInput.addEventListener("input", (e) => {
-      let value = e.target.value;
-      if (value.startsWith(" ")) {
-        value = value.trimStart();
-        middleNameInput.value = value;
-      }
+        if (noMiddleNameCheckbox.checked) return;
 
-      if (value.length === 0) {
-        middleNameInput.setAttribute("title", "Please enter N/A if you don't have a middle name");
-        middleNameInput.classList.add("input-error");
-        middleNameInput.classList.remove("input-valid");
-        return;
-      }
-
-      if (value.toUpperCase() === "N/A") {
-        middleNameInput.setAttribute("title", "N/A is accepted for no middle name");
-        middleNameInput.classList.remove("input-error");
-        middleNameInput.classList.add("input-valid");
-        return;
-      }
-
-      if (!nameRegex.test(value)) {
-        middleNameInput.setAttribute("title", "Name must start with a letter and contain only letters, hyphens and apostrophes");
-        middleNameInput.classList.add("input-error");
-        middleNameInput.classList.remove("input-valid");
-      } else {
-        middleNameInput.setAttribute("title", "");
-        middleNameInput.classList.remove("input-error");
-        middleNameInput.classList.add("input-valid");
-      }
-    });
-
-    middleNameInput.addEventListener("keypress", (e) => {
-      if (middleNameInput.value.length === 0 && e.key === " ") {
-        e.preventDefault();
-      }
-    });
-
-    middleNameInput.addEventListener("blur", (e) => {
-      middleNameInput.value = middleNameInput.value.trim();
-
-      if (middleNameInput.value.length === 0) {
-        middleNameInput.setAttribute("title", "Please enter N/A if you don't have a middle name");
-        middleNameInput.classList.add("input-error");
-        middleNameInput.classList.remove("input-valid");
-      }
-    });
-
-    nameInputs.forEach((inputId) => {
-      const input = document.getElementById(inputId);
-
-      input.addEventListener("input", (e) => {
         let value = e.target.value;
         if (value.startsWith(" ")) {
-          value = value.trimStart();
-          input.value = value;
+            value = value.trimStart();
+            middleNameInput.value = value;
         }
 
-        if (value.trim().length === 0) {
-          input.setAttribute("title", "Name cannot be empty or contain only spaces");
-          input.classList.add("input-error");
-          input.classList.remove("input-valid");
-          return;
+        if (value.length === 0) {
+            middleNameInput.setAttribute("title", "Middle name is required unless 'No Middle Name' is checked");
+            middleNameInput.classList.add("input-error");
+            middleNameInput.classList.remove("input-valid");
+            return;
         }
 
         if (!nameRegex.test(value)) {
-          input.setAttribute("title", "Name must start with a letter and contain only letters, hyphens and apostrophes");
-          input.classList.add("input-error");
-          input.classList.remove("input-valid");
+            middleNameInput.setAttribute("title", "Name must start with a letter and contain only letters, hyphens and apostrophes");
+            middleNameInput.classList.add("input-error");
+            middleNameInput.classList.remove("input-valid");
         } else {
-          input.setAttribute("title", "");
-          input.classList.remove("input-error");
-          input.classList.add("input-valid");
+            middleNameInput.setAttribute("title", "");
+            middleNameInput.classList.remove("input-error");
+            middleNameInput.classList.add("input-valid");
         }
-      });
-
-      input.addEventListener("keypress", (e) => {
-        if (input.value.length === 0 && e.key === " ") {
-          e.preventDefault();
-        }
-      });
-
-      input.addEventListener("blur", (e) => {
-        input.value = input.value.trim();
-        if (input.value.length === 0) {
-          input.setAttribute("title", "Name cannot be empty or contain only spaces");
-          input.classList.add("input-error");
-          input.classList.remove("input-valid");
-        }
-      });
     });
-    middleNameInput.setAttribute("placeholder", "Enter N/A if no middle name");
+
+    // Handle first and last name validation
+    nameInputs.forEach((inputId) => {
+        const input = document.getElementById(inputId);
+        
+        input.addEventListener("input", (e) => {
+            let value = e.target.value;
+            if (value.startsWith(" ")) {
+                value = value.trimStart();
+                input.value = value;
+            }
+
+            if (value.trim().length === 0) {
+                input.setAttribute("title", "Name cannot be empty or contain only spaces");
+                input.classList.add("input-error");
+                input.classList.remove("input-valid");
+                return;
+            }
+
+            if (!nameRegex.test(value)) {
+                input.setAttribute("title", "Name must start with a letter and contain only letters, hyphens and apostrophes");
+                input.classList.add("input-error");
+                input.classList.remove("input-valid");
+            } else {
+                input.setAttribute("title", "");
+                input.classList.remove("input-error");
+                input.classList.add("input-valid");
+            }
+        });
+
+        input.addEventListener("keypress", (e) => {
+            if (input.value.length === 0 && e.key === " ") {
+                e.preventDefault();
+            }
+        });
+
+        input.addEventListener("blur", (e) => {
+            input.value = input.value.trim();
+            if (input.value.length === 0) {
+                input.setAttribute("title", "Name cannot be empty or contain only spaces");
+                input.classList.add("input-error");
+                input.classList.remove("input-valid");
+            }
+        });
+    });
+    middleNameInput.setAttribute('placeholder', 'Click the Checkbox if you have no Middle Name');
   }
   validateNames();
 
@@ -579,7 +579,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add event listener to role select element
   document.getElementById("role").addEventListener("change", toggleFields);
   document.getElementById("jobstatus").addEventListener("change", toggleFieldsEmp);
-  
+
   addUserForm.addEventListener("submit", async (event) => {
   event.preventDefault(); // prevent the default form submission
     

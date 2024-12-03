@@ -138,40 +138,40 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
         <h1> Create Account </h1>
       </div>
       <div id="nameFields">
-      <label for="firstname">First Name</label>
-      <input class="inputFields" 
-         type="text" 
-         name="firstname" 
-         id="firstname" 
-         required 
-         minlength="1" 
-         maxlength="15"
-         pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
-         title="Name must start with a letter and contain only letters, hyphens and apostrophes"
-         size="15" />
-      <label for="middlename">Middle Name</label>
-      <input class="inputFields" 
-         type="text" 
-         name="middlename" 
-         id="middlename" 
-         required 
-         minlength="1" 
-         maxlength="15"
-         pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
-         title="Name must start with a letter and contain only letters, hyphens and apostrophes"
-         size="15" />
-  
-      <label for="lastname">Last Name</label>
-      <input class="inputFields" 
-         type="text" 
-         name="lastname" 
-         id="lastname" 
-         required 
-         minlength="1" 
-         maxlength="15"
-         pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
-         title="Name must start with a letter and contain only letters, hyphens and apostrophes"
-         size="15" />
+        <label for="firstname">First Name</label>
+        <input class="inputFields" 
+          type="text" 
+          name="firstname" 
+          id="firstname" 
+          required 
+          minlength="1" 
+          maxlength="15"
+          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
+          title="Name must start with a letter and contain only letters, hyphens and apostrophes"
+          size="15" />
+        <label for="middlename">Middle Name</label>
+        <input class="inputFields" 
+          type="text" 
+          name="middlename" 
+          id="middlename" 
+          required 
+          minlength="1" 
+          maxlength="15"
+          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
+          title="Name must start with a letter and contain only letters, hyphens and apostrophes"
+          size="15" />
+        <input type="checkbox" id="noMiddleName" />
+        <label for="lastname">Last Name</label>
+        <input class="inputFields" 
+          type="text" 
+          name="lastname" 
+          id="lastname" 
+          required 
+          minlength="1" 
+          maxlength="15"
+          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
+          title="Name must start with a letter and contain only letters, hyphens and apostrophes"
+          size="15" />
       </div>
       <div id="username-roleField">
         <label for="username">Username</label>

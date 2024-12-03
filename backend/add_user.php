@@ -3,14 +3,11 @@ include('../backend/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = $_POST['firstname'];
-    $middleName = $_POST['middlename'];
+    $middleName = empty($_POST['middlename']) || $_POST['middlename'] === "N/A" ? "N/A" : $_POST['middlename'];
     $lastName = $_POST['lastname'];
     $username = $_POST['username'];
     $email = $_POST['emailaddress'];
     $role = $_POST['role'];
-
-
-
     //$password = password_hash($_POST['password'], PASSWORD_DEFAULT); this is how to hash the password
     $password = $_POST['password'];
     $graduationYear = $_POST['graduation'] ?? null;

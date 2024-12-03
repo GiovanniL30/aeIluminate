@@ -38,6 +38,7 @@
   padding: 10px 40px;
   border-radius: 20px;
   color: black;
+  max-width: 270px;
 }
 
 .user-id p span {
@@ -120,27 +121,6 @@
 .input-field input:focus,
 .input-field select {
   outline-color: var(--primary);
-}
-
-.password-field {
-  position: relative;
-}
-
-.password-field button {
-  position: absolute;
-  outline: none;
-  border: none;
-  background: none;
-  right: 10px;
-  top: 65%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: var(--primary);
-  transition: all 500ms ease;
-}
-
-.password-field button:hover {
-  opacity: 0.5;
 }
 
 .change-options {

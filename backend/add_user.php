@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $graduationYear = $_POST['graduation'] ?? null;
     $isEmployed = isset($_POST['isEmployed']) && $_POST['isEmployed'] === 'Employed' ? 1 : 0;
+    $school = $_POST['school'] ?? null;
     $program = $_POST['program'] ?? null;
     $workFor = $_POST['work_for'] ?? null;
     $company = $_POST['company'] ?? null;
@@ -24,18 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->store_result();
 
     if ($stmt->num_rows == 0) {
-
-        // Retrieve the last userID
-        $lastUserIDQuery = "SELECT MAX(userID) AS lastUserID FROM users";
-        $result = $conn->query($lastUserIDQuery);
-        $row = $result->fetch_assoc();
-        $lastUserID = $row['lastUserID'] ?? 0;
-        $newUserID = $lastUserID + 1;
+        // Generate UUID v4
+        $newUserID = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
 
         // Insert the user into the users table
         $insertUserQuery = "INSERT INTO users (userID, firstName, middleName, lastName, username, password, email, role, company) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertUserQuery);
-        $stmt->bind_param('issssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role, $company);
+        $stmt->bind_param('sssssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role, $company);
         $stmt->execute();
 
         // Get the last inserted userID
@@ -43,9 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Insert into the corresponding table based on the role
         if ($role === 'Alumni') {
-            $insertAlumniQuery = "INSERT INTO alumni (userID, year_graduated, degree, isEmployed) VALUES (?, ?, ?, ?)";
+            // First get the programID from academic_programs
+            $getProgramIDQuery = "SELECT programID FROM academic_programs WHERE school_name = ? AND program_name = ? LIMIT 1";
+            $stmt = $conn->prepare($getProgramIDQuery);
+            $stmt->bind_param('ss', $school, $program);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $programData = $result->fetch_assoc();
+            $programID = $programData['programID'];
+
+            // Then insert into alumni table with the found programID
+            $insertAlumniQuery = "INSERT INTO alumni (userID, year_graduated, programID, isEmployed) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($insertAlumniQuery);
-            $stmt->bind_param('isss', $newUserID, $graduationYear, $program, $isEmployed);
+            $stmt->bind_param('isii', $newUserID, $graduationYear, $programID, $isEmployed);
             $stmt->execute();
         }
     }

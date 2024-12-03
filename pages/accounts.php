@@ -176,15 +176,15 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       <div id="username-roleField">
         <label for="username">Username</label>
         <input class="inputFields"
-        type="text" 
-        name="username" 
-        id="username" 
-        required 
-        minlength="1" 
-        maxlength="15"
-        pattern="^[a-zA-Z0-9_-]+$"
-        title="Username can only contain letters, numbers, underscores and hyphens"
-        size="15" />
+          type="text" 
+          name="username" 
+          id="username" 
+          required 
+          minlength="1" 
+          maxlength="15"
+          pattern="^[a-zA-Z0-9_-]+$"
+          title="Username can only contain letters, numbers, underscores and hyphens"
+          size="15" />
         <label for="role">Role Type:</label>
         <select name="role" id="role" required>
           <option value="Alumni">Alumni</option>
@@ -194,37 +194,37 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       <div id="email-passwordField">
         <label for="email">Email</label>
         <input class="inputFields" 
-        type="email" 
-        name="emailaddress" 
-        id="email" 
-        required 
-        minlength="1" 
-        maxlength="100"
-        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-        title="Please enter a valid email address"
-        size="100" />
+          type="email" 
+          name="emailaddress" 
+          id="email" 
+          required 
+          minlength="1" 
+          maxlength="100"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          title="Please enter a valid email address"
+          size="100" />
         <label for="password">Password</label>
         <input class="inputFields" 
-        type="password" 
-        name="password" 
-        id="password" 
-        required 
-        minlength="8" 
-        maxlength="50"
-        pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9!@#$%^&*]{8,}$"
-        title="Password must contain at least 8 characters, one uppercase letter, one number, and one special character"
-        size="50" />
+          type="password" 
+          name="password" 
+          id="password" 
+          required 
+          minlength="8" 
+          maxlength="50"
+          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9!@#$%^&*]{8,}$"
+          title="Password must contain at least 8 characters, one uppercase letter, one number, and one special character"
+          size="50" />
         <input type="checkbox" id="showPassword" /> Show Password
       </div>
       <div id="graduationFields">
         <label for="graduation">Graduation Year:</label>
         <input class="inputFields" type="number" 
-        name="graduation" 
-        id="graduation"
-        min="1973"
-        placeholder="YYYY"
-        pattern="\d{4}"
-        required />
+          name="graduation" 
+          id="graduation"
+          min="1973"
+          placeholder="YYYY"
+          pattern="\d{4}"
+          required />
         <label for="school">Academic School:</label>
         <select name="school" id="school" required>
           <option value="">Select School</option>

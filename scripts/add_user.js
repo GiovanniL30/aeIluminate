@@ -477,6 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("school").removeAttribute("required");
       document.getElementById("program").removeAttribute("required");
       document.getElementById("company").removeAttribute("required");
+      document.getElementById("graduation").removeAttribute("required");
       document.getElementById("work_for").setAttribute("required", "required");
       document.getElementById("school").value = "";
       document.getElementById("program").value = "";
@@ -489,6 +490,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("school").removeAttribute("required");
       document.getElementById("program").removeAttribute("required");
       document.getElementById("company").removeAttribute("required");
+      document.getElementById("graduation").removeAttribute("required");
       document.getElementById("work_for").removeAttribute("required");
       document.getElementById("school").value = "";
       document.getElementById("program").value = "";
@@ -593,14 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
           mainContent.classList.remove("blur");
           mainContent.style.pointerEvents = "auto";
           addUserForm.reset(); // reset the fields
-
-          // Reload the accounts list
-          const accountsPagination = document.querySelector("script[src='../scripts/accounts_pagination.js']");
-          if (accountsPagination) {
-          // Reset to first page and fetch updated users
-          window.currentPage = 1;
-          window.fetchUsers();
-          }
+          window.location.reload();
         } else {
           const errorText = await response.text();
           console.error("Error adding user:", errorText);

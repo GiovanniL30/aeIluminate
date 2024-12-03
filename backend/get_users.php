@@ -11,6 +11,7 @@ $query = "SELECT firstName,
                  DATE_FORMAT(dateCreated, '%M %d, %Y') AS fdateCreated,
                  username, 
                  email, 
+                 userID,
                  role 
           FROM users 
           WHERE role != 'Admin'";

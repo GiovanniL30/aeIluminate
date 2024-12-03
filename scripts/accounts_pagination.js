@@ -34,6 +34,7 @@ const renderAccounts = (page) => {
   const currentAccounts = accounts.slice(start, end);
 
   currentAccounts.forEach((account) => {
+    console.log(account);
     const row = document.createElement("tr");
     row.innerHTML = `
             <td>${account.fdateCreated}</td>
@@ -93,16 +94,12 @@ const addControls = () => {
 };
 
 const updatePaginationControls = () => {
-  document.querySelector(".pagination button:first-child").disabled =
-    currentPage === 1;
-  document.querySelector(".pagination button:last-child").disabled =
-    currentPage === totalPages;
+  document.querySelector(".pagination button:first-child").disabled = currentPage === 1;
+  document.querySelector(".pagination button:last-child").disabled = currentPage === totalPages;
 };
 
 const updatePageNumber = (i) => {
-  document.querySelector(
-    ".page-number"
-  ).innerHTML = `Page ${i} of ${totalPages} `;
+  document.querySelector(".page-number").innerHTML = `Page ${i} of ${totalPages} `;
 };
 
 const fetchUsers = () => {
@@ -129,9 +126,7 @@ const fetchUsers = () => {
 
         if (searchQuery) {
           document.querySelector(".search-action").style.display = "flex";
-          document.querySelector(
-            ".search-action p"
-          ).innerHTML = `Showing items with search "${searchQuery}"`;
+          document.querySelector(".search-action p").innerHTML = `Showing items with search "${searchQuery}"`;
         }
 
         renderAccounts(currentPage);
@@ -148,14 +143,12 @@ const fetchUsers = () => {
 
 const toggleSortOptions = () => {
   const sortOptions = document.getElementById("sort-options");
-  sortOptions.style.display =
-    sortOptions.style.display === "none" ? "block" : "none";
+  sortOptions.style.display = sortOptions.style.display === "none" ? "block" : "none";
 };
 
 const toggleFilterOptions = () => {
   const filterOptions = document.getElementById("filter-options");
-  filterOptions.style.display =
-    filterOptions.style.display === "none" ? "block" : "none";
+  filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
 };
 
 const handleSortChange = (event) => {
@@ -180,19 +173,14 @@ const deleteUser = async (e) => {
   if (e.target.classList.contains("delete-icon")) {
     const userToDelete = e.target.dataset.userid;
 
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this account?"
-    );
+    const confirmed = window.confirm("Are you sure you want to delete this account?");
 
     if (confirmed) {
       try {
         showLoader();
-        const response = await fetch(
-          `../backend/delete.php?userID=${userToDelete}`,
-          {
-            method: "GET",
-          }
-        );
+        const response = await fetch(`../backend/delete.php?userID=${userToDelete}`, {
+          method: "GET",
+        });
 
         if (!response.ok) {
           setTimeout(() => {
@@ -224,13 +212,9 @@ const deleteUser = async (e) => {
  * =======================
  */
 
-document
-  .getElementById("sort-options")
-  .addEventListener("change", handleSortChange);
+document.getElementById("sort-options").addEventListener("change", handleSortChange);
 
-document
-  .getElementById("filter-options")
-  .addEventListener("change", handleFilterChange);
+document.getElementById("filter-options").addEventListener("change", handleFilterChange);
 
 document.querySelector(".search form").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -251,22 +235,14 @@ document.getElementById("filter-button").addEventListener("click", (event) => {
 
 document.addEventListener("click", (event) => {
   const sortOptions = document.getElementById("sort-options");
-  if (
-    sortOptions.style.display === "block" &&
-    !sortOptions.contains(event.target) &&
-    event.target.id !== "sort-button"
-  ) {
+  if (sortOptions.style.display === "block" && !sortOptions.contains(event.target) && event.target.id !== "sort-button") {
     sortOptions.style.display = "none";
   }
 });
 
 document.addEventListener("click", (event) => {
   const filterOptions = document.getElementById("filter-options");
-  if (
-    filterOptions.style.display === "block" &&
-    !filterOptions.contains(event.target) &&
-    event.target.id !== "filter-button"
-  ) {
+  if (filterOptions.style.display === "block" && !filterOptions.contains(event.target) && event.target.id !== "filter-button") {
     filterOptions.style.display = "none";
   }
 });

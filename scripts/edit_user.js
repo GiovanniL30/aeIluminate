@@ -29,9 +29,7 @@ const editUser = (event) => {
 
   if (role === "Alumni") {
     const degree = document.querySelector("input[name='degree']").value;
-    const isEmployed = document.querySelector(
-      "select[name='isEmployed']"
-    ).value;
+    const isEmployed = document.querySelector("select[name='isEmployed']").value;
     params.append("degree", degree);
     params.append("isEmployed", isEmployed);
   }
@@ -59,9 +57,7 @@ const editUser = (event) => {
 const deleteUser = async () => {
   const userId = new URLSearchParams(window.location.search).get("userId");
 
-  const confirmed = window.confirm(
-    "Are you sure you want to delete this account?"
-  );
+  const confirmed = window.confirm("Are you sure you want to delete this account?");
 
   if (confirmed) {
     try {
@@ -84,48 +80,6 @@ const deleteUser = async () => {
 };
 
 /**
- * Edit password function handler
- *
- */
-const editPassword = (event) => {
-  event.preventDefault();
-
-  const currentPassword = document.querySelector(
-    "input[name='currentPassword']"
-  ).value;
-  const newPassword = document.querySelector("input[name='newPassword']").value;
-  const confirmPassword = document.querySelector(
-    "input[name='confirmPassword']"
-  ).value;
-  const userId = new URLSearchParams(window.location.search).get("userId");
-
-  if (newPassword !== confirmPassword) {
-    alert("New passwords do not match.");
-    return;
-  }
-
-  const params = new URLSearchParams({
-    currentPassword,
-    newPassword,
-    userId,
-  });
-
-  fetch("../backend/change_password.php?" + params.toString(), {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        alert("Password updated successfully!");
-        window.location.reload();
-      } else {
-        alert("Failed to update password: " + (data.error || ""));
-      }
-    })
-    .catch((error) => console.error("Error:", error));
-};
-
-/**
  * Form reset
  *
  * @param formId, id of the form we want to reset
@@ -141,31 +95,8 @@ const resetForm = (event, formId) => {
  * =======================
  */
 
-document.querySelectorAll(".showPassword").forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const currentButton = e.target;
-
-    const inputSibling = currentButton.previousElementSibling;
-
-    if (inputSibling && inputSibling.tagName === "INPUT") {
-      inputSibling.type =
-        inputSibling.type === "password" ? "text" : "password";
-      currentButton.textContent =
-        inputSibling.type === "password" ? "Show Password" : "Hide Password";
-    }
-  });
-});
-
-document
-  .getElementById("cancelDetails")
-  .addEventListener("click", (e) => resetForm(e, "details-form"));
-
-document
-  .getElementById("cancelPassword")
-  .addEventListener("click", (e) => resetForm(e, "password-form"));
+document.getElementById("cancelDetails").addEventListener("click", (e) => resetForm(e, "details-form"));
 
 document.querySelector(".delete-btn").addEventListener("click", deleteUser);
-
-document.getElementById("savePassword").addEventListener("click", editPassword);
 
 document.getElementById("saveDetails").addEventListener("click", editUser);

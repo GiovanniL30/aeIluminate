@@ -32,18 +32,60 @@ include('./backend/session_check.php');
                 <!-- Dashboard -->
                 <div class="dashboard">
                     <h2>Dashboard</h2>
-                    <!-- User Overview -->
-                    <div class="user-overview-box" style="position: relative; height:350px; width:300px">
-                        <h4 id="total-users" style="text-align: center;"></h4>
-                        <canvas id="userOverviewChart"></canvas>
-                    </div>
-                    <!-- Post Activity -->
-                    <div class="charts">
-                        <h5>Post Activity</h5>
-                        <canvas id="postsChart" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
+                    <!-- User Overview and Post Activity -->
+                    <div class="dashboard-charts">
+                        <!-- User Overview -->
+                        <div class="user-overview-box" style="position: relative; height:380px; width:200px">
+                            <h5 id="total-users" style="text-align: center;"></h5>
+                            <canvas id="userOverviewChart"></canvas>
+                        </div>
+                        <!-- Posts Chart -->
+                        <div class="posts-chart" style="position: relative; height:380px; width:200px">
+                            <h4>Post Activity</h4>
+                            <!-- Month Navigation -->
+                            <div class="month-navigation-container">
+                                <div class="month-navigation">
+                                    <img id="prev-month" src="assets/previous" alt="Previous Month" />
+                                    <span id="current-month">December</span>
+                                    <img id="next-month" src="assets/next" alt="Next Month" />
+                                </div>
+                            </div>
+                            <canvas id="postsChart"></canvas>
+                            <!-- Statistics for Today, Yesterday, and Average -->
+                            <div class="stats-container">
+                                <span id="today-stat">Today: 0</span>
+                                <span id="yesterday-stat">Yesterday: 0</span>
+                                <span id="average-stat">Average: 0</span>
+                            </div>
+                        </div> <!-- END OF POSTS CHART -->
+                        <!-- Graduation Year Doughnut Chart -->
+                        <div class="graduation-year-chart" style="position: relative; height:380px; width:200px">
+                            <h4>Graduation Year Distribution</h4>
+                            <div class="month-navigation-container">
+                                <div class="month-navigation">
+                                    <img id="prev-month" src="assets/previous" alt="Previous Month" />
+                                    <span id="current-month">December</span>
+                                    <img id="next-month" src="assets/next" alt="Next Month" />
+                                </div>
+                            </div>
+                            <canvas id="graduationYearChart"></canvas>
+                        </div> <!-- END OF GRADUATION YEAR CHART -->
+                        <!--Employment Doughnut Chart -->
+                        <div class="job-status-chart" style="position: relative; height:380px; width:200px">
+                            <h4>Job Status</h4>
+                            <div class="month-navigation-container">
+                                <div class="month-navigation">
+                                    <img id="prev-month" src="assets/previous" alt="Previous Month" />
+                                    <span id="current-month">December</span>
+                                    <img id="next-month" src="assets/next" alt="Next Month" />
+                                </div>
+                            </div>
+                            <canvas id="jobStatusChart"></canvas>
+                        </div> <!-- END OF GRADUATION YEAR CHART -->
+
+                    </div> <!-- END OF DASHBOARD CHARTS -->
+                </div> <!-- END OF DASHBOARD -->
+            </div> <!-- END OF CONTAINER -->
         </section>
     </div>
     <script src="./scripts/index.js" type="module"></script>

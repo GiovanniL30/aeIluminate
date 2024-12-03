@@ -1,0 +1,42 @@
+<?php
+include('../backend/database.php');
+
+// Initialize response array
+$response = [];
+
+// Check for database connection errors
+if ($conn->connect_error) {
+    // If the connection fails, return an error message
+    $response['error'] = 'Database connection failed: ' . $conn->connect_error;
+    echo json_encode($response);
+    exit;
+}
+
+// Query to get the count of users by job status
+$query = "SELECT job_status, COUNT(*) as total FROM alumni GROUP BY job_status ORDER BY job_status ASC";
+
+$result = $conn->query($query);
+
+// Check for query execution errors
+if (!$result) {
+    // If the query fails, return an error message
+    $response['error'] = 'Error executing query: ' . $conn->error;
+    echo json_encode($response);
+    exit;
+}
+
+$jobStatusData = [];
+// Fetch results if the query is successful
+while ($row = $result->fetch_assoc()) {
+    $jobStatusData[] = [
+        'status' => $row['job_status'],
+        'total' => $row['total']
+    ];
+}
+
+// Return the data as a JSON response
+echo json_encode($jobStatusData);
+
+// Close the database connection
+$conn->close();
+?>

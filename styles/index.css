@@ -81,24 +81,66 @@ a {
 }
 
 /* STATISTICS */
-.user-overview-box {
+.dashboard-charts {
+  display: flex; 
+  justify-content: space-between; 
+  gap: 20px; 
+  flex-wrap: wrap; 
+}
+
+.user-overview-box,
+.posts-chart, .graduationYearChart,
+.jobStatusChart {
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  margin: 20px 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
-  width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  float: left;
+  width: 200px; 
+  flex-grow: 1; 
+  height: 350px; 
 }
 
-.user-overview-box #total-users {
-  color: #333;
-  font-size: 24px;
+.month-navigation-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.month-navigation img {
+  cursor: pointer;
+  width: 15px; 
+  height: 15px; 
+  margin: 0 10px;
+}
+
+.month-navigation span {
   font-weight: bold;
+  font-size: 16px;
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-container span {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; 
+    font-size: 12px;
+}
+
+.stats-container span:last-child {
+    border-bottom: none; 
 }
 
 hr {
@@ -206,5 +248,11 @@ hr {
   }
   100% {
     background-position: 100% 0, 100% 100%, 0 100%, 0 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-charts {
+    flex-direction: column; 
   }
 }

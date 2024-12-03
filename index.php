@@ -33,24 +33,9 @@ include('./backend/session_check.php');
                 <div class="dashboard">
                     <h2>Dashboard</h2>
                     <!-- User Overview -->
-                    <div class="user-overview-box">
-                        <h4>User Overview</h4>
-                        <hr />
-                        <ul>
-                            <li>
-                                <span>
-                                    <div class="total-users"></div>
-                                </span>Total Users
-                            </li>
-                            <hr />
-                            <li><span>
-                                    <div class="total-managers"></div>
-                                </span>Managers</li>
-                            <hr />
-                            <li><span>
-                                    <div class="total-alumni"></div>
-                                </span>Alumni</li>
-                        </ul>
+                    <div class="user-overview-box" style="position: relative; height:350px; width:300px">
+                        <h4 id="total-users" style="text-align: center;"></h4>
+                        <canvas id="userOverviewChart"></canvas>
                     </div>
                     <!-- Post Activity -->
                     <div class="charts">
@@ -64,6 +49,7 @@ include('./backend/session_check.php');
     <script src="./scripts/index.js" type="module"></script>
     <script src="./scripts/header.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </body>
 
 </html>

@@ -39,47 +39,75 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Fetch user data
+  // Fetch user data and render chart
   fetch(`${baseUrl}/backend/get_users.php`)
     .then((response) => response.json())
     .then((data) => {
-      document.querySelector(".total-users").innerText = data.total_users;
-      document.querySelector(".total-managers").innerText = data.managers;
-      document.querySelector(".total-alumni").innerText = data.alumni;
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
-    });
-
-  // Fetch posts stats and render chart
-  fetch(`${baseUrl}/backend/get_posts_stats.php`)
-    .then((response) => response.json())
-    .then((data) => {
-      const ctx = document.getElementById("postsChart").getContext("2d");
+      const ctx = document.getElementById("userOverviewChart").getContext("2d");
+      const totalUsers = document.getElementById("total-users");
+      totalUsers.innerText = `Aelluminate Total Users: ${data.total_users}`;
       new Chart(ctx, {
-        type: "bar",
+        type: "doughnut",
         data: {
-          labels: ["Today", "Yesterday", "Monthly Average"],
+          labels: ["Managers", "Alumni"],
           datasets: [
             {
-              label: "Number of Posts",
-              data: [data.today, data.yesterday, data.monthly_average],
-              backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-              borderWidth: 1,
+              data: [data.managers, data.alumni],
+              backgroundColor: ["#F3C623", "#10375C"],
+              hoverBackgroundColor: ["#F3C623", "#10375C"],
             },
           ],
         },
         options: {
           responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
+          plugins: {
+            legend: {
+              position: "bottom",
+            },
+            tooltip: {
+              callbacks: {
+                label: (tooltipItem) => {
+                  return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                },
+              },
             },
           },
         },
       });
     })
     .catch((error) => {
-      console.error("Error fetching posts stats:", error);
+      console.error("Error fetching user data:", error);
     });
+
+  // // Fetch posts stats and render chart
+  // fetch(`${baseUrl}/backend/get_post_stats.php`)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     const ctx = document.getElementById("postsChart").getContext("2d");
+  //     new Chart(ctx, {
+  //       type: "bar",
+  //       data: {
+  //         labels: ["Today", "Yesterday", "Monthly Average"],
+  //         datasets: [
+  //           {
+  //             label: "Number of Posts",
+  //             data: [data.today, data.yesterday, data.monthly_average],
+  //             backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+  //             borderWidth: 1,
+  //           },
+  //         ],
+  //       },
+  //       options: {
+  //         responsive: true,
+  //         scales: {
+  //           y: {
+  //             beginAtZero: true,
+  //           },
+  //         },
+  //       },
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error fetching posts stats:", error);
+  //   });
 });

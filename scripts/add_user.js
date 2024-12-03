@@ -579,10 +579,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add event listener to role select element
   document.getElementById("role").addEventListener("change", toggleFields);
   document.getElementById("jobstatus").addEventListener("change", toggleFieldsEmp);
-
+  
   addUserForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // prevent the default form submission
-
+  event.preventDefault(); // prevent the default form submission
+    
     try {
       const formData = new FormData(addUserForm);
       const response = await fetch(addUserForm.action, {
@@ -596,62 +596,10 @@ document.addEventListener("DOMContentLoaded", () => {
         mainContent.classList.remove("blur");
         mainContent.style.pointerEvents = "auto";
         addUserForm.reset(); // reset the fields
-
-<<<<<<< HEAD
-    formInputs.forEach((input) => {
-      input.addEventListener("focus", () => {
-        input.previousElementSibling.classList.add("active");
-      });
-    });
-
-    formInputs.forEach((input) => {
-      input.addEventListener("blur", () => {
-        if (input.value === "") {
-          input.previousElementSibling.classList.remove("active");
-        }
-      });
-    });
-    // Call toggleFields on page load to set the initial state
-    toggleFields();
-    toggleFieldsEmp();
-
-    // Add event listener to role select element
-    document.getElementById("role").addEventListener("change", toggleFields);
-    document.getElementById("jobstatus").addEventListener("change", toggleFieldsEmp);
-
-    addUserForm.addEventListener("submit", async (event) => {
-      event.preventDefault(); // prevent the default form submission
-  
-      try {
-        const formData = new FormData(addUserForm);
-        const response = await fetch(addUserForm.action, {
-          method: "POST",
-          body: formData,
-        });
-  
-        if (response.ok) {
-          alert("User added successfully.");
-          addUserForm.parentElement.style.display = "none";
-          mainContent.classList.remove("blur");
-          mainContent.style.pointerEvents = "auto";
-          addUserForm.reset(); // reset the fields
-          window.location.reload();
-        } else {
-          const errorText = await response.text();
-          console.error("Error adding user:", errorText);
-          alert("Error adding user: " + errorText);
-=======
-        // Reload the accounts list
-        const accountsPagination = document.querySelector("script[src='../scripts/accounts_pagination.js']");
-        if (accountsPagination) {
-          // Reset to first page and fetch updated users
-          window.currentPage = 1;
-          window.fetchUsers();
->>>>>>> 5738a98d9fe0677e0811e57b3e195bd7ab0e717d
-        }
+        window.location.reload();
       } else {
         const errorText = await response.text();
-        console.error("Error adding user:", errorText);
+          onsole.error("Error adding user:", errorText);
         alert("Error adding user: " + errorText);
       }
     } catch (error) {

@@ -61,9 +61,15 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                                     <p>Return</p>
                                 </div>
                                 <div class="user-information">
-                                    <img src="../assets/admin-img.png" alt="image" />
-                                    <h1 class="user-name"><?php echo $user['email']; ?></h1>
-                                    <p class="last-online">Last signed in 1 hour ago</p>
+                                <img src="<?php 
+                                    $defaultProfilePic = "https://cloud.appwrite.io/v1/storage/buckets/674c025e00102761c23f/files/674ebc5c00240f4ca9f2/view?project=674c022d00339c9cad92&project=674c022d00339c9cad92&mode=admin";
+                                    echo !empty($user['profilePicture']) ? htmlspecialchars($user['profilePicture']) : $defaultProfilePic; 
+                                ?>" 
+                                alt="<?php echo htmlspecialchars($user['firstName']); ?>'s profile" 
+                                onerror="this.src='<?php echo $defaultProfilePic; ?>';"
+                                class="profile-image" />
+                                <h1 class="user-name"><?php echo htmlspecialchars($user['email']); ?></h1>
+                                <p class="last-online">Last signed in 1 hour ago</p>
                                 </div>
                                 <div class="user-id">
                                     <p><span>User ID: </span><?php echo $user['userID']; ?></p>

@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $program = $_POST['program'] ?? null;
     $workFor = $_POST['work_for'] ?? null;
     $company = $_POST['company'] ?? null;
+    $defaultProfilePic = "https://cloud.appwrite.io/v1/storage/buckets/674c025e00102761c23f/files/674ebc5c00240f4ca9f2/view?project=674c022d00339c9cad92&project=674c022d00339c9cad92&mode=admin";
 
     // Check if the user already exists
     $checkUserQuery = "SELECT 1 FROM users WHERE username = ?";
@@ -35,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         // Insert the user into the users table
-        $insertUserQuery = "INSERT INTO users (userID, firstName, middleName, lastName, username, password, email, role, company) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertUserQuery = "INSERT INTO users (userID, firstName, middleName, lastName, username, password, email, role, company, profilePicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertUserQuery);
-        $stmt->bind_param('sssssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role, $company);
+        $stmt->bind_param('sssssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role, $company, $defaultProfilePic);
         $stmt->execute();
 
         // Get the last inserted userID

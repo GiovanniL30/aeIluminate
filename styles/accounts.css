@@ -189,7 +189,7 @@ tr {
   position: relative;
 }
 
-.floating-add-user-form div#graduationFields input[type="text"]{
+.floating-add-user-form div#graduationFields input[type="number"]{
   width: 13%;
 }
 
@@ -209,6 +209,7 @@ tr {
 .floating-add-user-form form input[type="text"],
 .floating-add-user-form form input[type="password"],
 .floating-add-user-form form input[type="email"],
+.floating-add-user-form form input[type="number"],
 .floating-add-user-form form textarea {
   width: 30%;
   padding: 12px 20px;
@@ -240,6 +241,7 @@ tr {
 .floating-add-user-form form input[type="text"],
 .floating-add-user-form form input[type="password"],
 .floating-add-user-form form input[type="email"],
+.floating-add-user-form form input[type="number"],
 .floating-add-user-form form textarea {
   outline-color: var(--primary);
 }
@@ -262,6 +264,25 @@ tr {
 
 .blur {
   filter: blur(5px);
+}
+
+.floating-add-user-form form input.input-error,
+.floating-add-user-form form select.input-error {
+  border: 1px solid #ff0000;
+  background-color: #fff0f0;
+  outline-color: #ff0000;
+}
+
+.floating-add-user-form form input.input-valid,
+.floating-add-user-form form select.input-valid {
+  border: 1px solid #00ff00;
+  background-color: #f0fff0;
+  outline-color: #00ff00;
+}
+
+.floating-add-user-form form input.input-validating {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
 }
 
 .search-action {

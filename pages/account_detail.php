@@ -7,7 +7,7 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
     $userId = $_GET['userId'];
     $role = $_GET['role'];
 
-    $query = "SELECT users.*, alumni.degree, alumni.isEmployed
+    $query = "SELECT users.*, alumni.programID, alumni.isEmployed
               FROM users
               LEFT JOIN alumni USING(userID)
               WHERE users.role = ? AND users.userID = ?";

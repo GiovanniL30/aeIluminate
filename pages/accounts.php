@@ -138,20 +138,53 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
         <h1> Create Account </h1>
       </div>
       <div id="nameFields">
-        <label for="firstname">First Name</label>
-        <input class="inputFields" type="text" name="firstname" id="firstname" required minlength="1" maxlength="50"
-          size="50" />
-        <label for="middlename">Middle Name</label>
-        <input class="inputFields" type="text" name="middlename" id="middlename" required minlength="1" maxlength="50"
-          size="50" />
-        <label for="lastname">Last Name</label>
-        <input class="inputFields" type="text" name="lastname" id="lastname" required minlength="1" maxlength="50"
-          size="50" />
+      <label for="firstname">First Name</label>
+      <input class="inputFields" 
+         type="text" 
+         name="firstname" 
+         id="firstname" 
+         required 
+         minlength="1" 
+         maxlength="15"
+         pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
+         title="Name must start with a letter and contain only letters, hyphens and apostrophes"
+         size="15" />
+      <label for="middlename">Middle Name</label>
+      <input class="inputFields" 
+         type="text" 
+         name="middlename" 
+         id="middlename" 
+         required 
+         minlength="1" 
+         maxlength="15"
+         pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
+         title="Name must start with a letter and contain only letters, hyphens and apostrophes"
+         size="15" />
+  
+      <label for="lastname">Last Name</label>
+      <input class="inputFields" 
+         type="text" 
+         name="lastname" 
+         id="lastname" 
+         required 
+         minlength="1" 
+         maxlength="15"
+         pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
+         title="Name must start with a letter and contain only letters, hyphens and apostrophes"
+         size="15" />
       </div>
       <div id="username-roleField">
         <label for="username">Username</label>
-        <input class="inputFields" type="text" name="username" id="username" required minlength="1" maxlength="50"
-          size="50" />
+        <input class="inputFields"
+        type="text" 
+        name="username" 
+        id="username" 
+        required 
+        minlength="1" 
+        maxlength="15"
+        pattern="^[a-zA-Z0-9_-]+$"
+        title="Username can only contain letters, numbers, underscores and hyphens"
+        size="15" />
         <label for="role">Role Type:</label>
         <select name="role" id="role" required>
           <option value="Alumni">Alumni</option>
@@ -160,17 +193,38 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       </div>
       <div id="email-passwordField">
         <label for="email">Email</label>
-        <input class="inputFields" type="email" name="emailaddress" id="email" required minlength="1" maxlength="100"
-          size="100" />
+        <input class="inputFields" 
+        type="email" 
+        name="emailaddress" 
+        id="email" 
+        required 
+        minlength="1" 
+        maxlength="100"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        title="Please enter a valid email address"
+        size="100" />
         <label for="password">Password</label>
-        <input class="inputFields" type="password" name="password" id="password" required minlength="8" maxlength="50"
-          size="50" />
+        <input class="inputFields" 
+        type="password" 
+        name="password" 
+        id="password" 
+        required 
+        minlength="8" 
+        maxlength="50"
+        pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9!@#$%^&*]{8,}$"
+        title="Password must contain at least 8 characters, one uppercase letter, one number, and one special character"
+        size="50" />
         <input type="checkbox" id="showPassword" /> Show Password
       </div>
       <div id="graduationFields">
         <label for="graduation">Graduation Year:</label>
-        <input class="inputFields" type="text" name="graduation" id="graduation" />
-
+        <input class="inputFields" type="number" 
+        name="graduation" 
+        id="graduation"
+        min="1973"
+        placeholder="YYYY"
+        pattern="\d{4}"
+        required />
         <label for="school">Academic School:</label>
         <select name="school" id="school" required>
           <option value="">Select School</option>
@@ -189,13 +243,13 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       </div>
       <div id="companyField">
         <label for="company">Company:</label>
-        <input class="inputFields" type="text" name="company" id="company" required minlength="1" maxlength="100"
-          size="100" />
+        <input class="inputFields" type="text" name="company" id="company" required minlength="1" maxlength="25"
+          size="25" />
       </div>
       <div id="workForField">
         <label for="company">Work For:</label>
-        <input class="inputFields" type="text" name="company" id="work_for" required minlength="1" maxlength="100"
-          size="100" />
+        <input class="inputFields" type="text" name="company" id="work_for" required minlength="1" maxlength="25"
+          size="25" />
       </div>
       <div class="buttons">
         <button type="submit" id="addButton">Add</button>

@@ -63,7 +63,7 @@ if (isset($_GET['userId']) && isset($_GET['role'])) {
                                 <div class="user-information">
                                 <img src="<?php 
                                     $defaultProfilePic = "https://cloud.appwrite.io/v1/storage/buckets/674c025e00102761c23f/files/674ebc5c00240f4ca9f2/view?project=674c022d00339c9cad92&project=674c022d00339c9cad92&mode=admin";
-                                    echo !empty($user['profilePicture']) ? htmlspecialchars($user['profilePicture']) : $defaultProfilePic; 
+                                    echo !empty($user['profile_picture']) ? htmlspecialchars($user['profile_picture']) : $defaultProfilePic; 
                                 ?>" 
                                 alt="<?php echo htmlspecialchars($user['firstName']); ?>'s profile" 
                                 onerror="this.src='<?php echo $defaultProfilePic; ?>';"

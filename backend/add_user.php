@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         // Insert the user into the users table
-        $insertUserQuery = "INSERT INTO users (userID, firstName, middleName, lastName, username, password, email, role, company, profilePicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertUserQuery = "INSERT INTO users (userID, firstName, middleName, lastName, username, password, email, role, company, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertUserQuery);
-        $stmt->bind_param('sssssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role, $company, $defaultProfilePic);
+        $stmt->bind_param('ssssssssss', $newUserID, $firstName, $middleName, $lastName, $username, $password, $email, $role, $company, $defaultProfilePic);
         $stmt->execute();
 
         // Get the last inserted userID

@@ -89,8 +89,8 @@ a {
 }
 
 .user-overview-box,
-.posts-chart, .graduationYearChart,
-.jobStatusChart {
+.posts-chart, .graduation-year-chart,
+.job-status-chart {
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -99,7 +99,8 @@ a {
   text-align: left;
   width: 200px; 
   flex-grow: 1; 
-  height: 350px; 
+  height: 400px; 
+  position: relative;
 }
 
 .month-navigation-container {

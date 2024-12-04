@@ -78,72 +78,30 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => {
       console.error("Error fetching user data:", error);
     });
+  
+  // Define the reusable month navigation function
+  function createMonthNavigation(prevMonthIconId, nextMonthIconId, currentMonthDisplayId, chartCtxId, fetchDataFunction) {
+  const prevMonthIcon = document.getElementById(prevMonthIconId);
+  const nextMonthIcon = document.getElementById(nextMonthIconId);
+  const currentMonthDisplay = document.getElementById(currentMonthDisplayId);
 
-  // Fetch posts stats and render chart
-  const postsChartCtx = document.getElementById("postsChart").getContext("2d");
-
-  const fetchPostsStats = (month, year) => {
-    fetch(`${baseUrl}/backend/get_posts.php?month=${month}&year=${year}`)
-      .then((response) => response.json())
-      .then((data) => {
-        const dates = getDatesForMonth(month, year);
-        const postData = data.monthly_posts;  // An array of post counts for each 5-day interval
-
-        new Chart(postsChartCtx, {
-          type: "bar",
-          data: {
-            labels: dates,
-            datasets: [
-              {
-                label: "Number of Posts",
-                data: postData,
-                backgroundColor: "#36A2EB",
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          },
-        });
-
-        // Display "Today", "Yesterday", "Average" below the chart
-        document.getElementById("today-stat").innerText = `Today: ${data.today}`;
-        document.getElementById("yesterday-stat").innerText = `Yesterday: ${data.yesterday}`;
-        document.getElementById("average-stat").innerText = `Average: ${data.monthly_average}`;
-      })
-      .catch((error) => {
-        console.error("Error fetching posts stats:", error);
-      });
-  };
-
-  // Month Navigation Logic inside the chart container
-  const prevMonthIcon = document.getElementById("prev-month");
-  const nextMonthIcon = document.getElementById("next-month");
-  const currentMonthDisplay = document.getElementById("current-month");
-
-  let currentMonth = new Date().getMonth(); 
+  let currentMonth = new Date().getMonth();
   let currentYear = new Date().getFullYear();
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June", 
+    "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
   const updateMonthDisplay = () => {
     currentMonthDisplay.textContent = `${monthNames[currentMonth]} ${currentYear}`;
-    fetchPostsStats(currentMonth + 1, currentYear); // Fetch posts stats for the selected month (1-indexed month)
+    fetchDataFunction(currentMonth + 1, currentYear); // Fetch the data for the selected month (1-indexed month)
   };
 
   // Navigate to previous month
   prevMonthIcon.addEventListener("click", () => {
     if (currentMonth === 0) {
-      currentMonth = 11; 
+      currentMonth = 11;
       currentYear--;
     } else {
       currentMonth--;
@@ -154,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Navigate to next month
   nextMonthIcon.addEventListener("click", () => {
     if (currentMonth === 11) {
-      currentMonth = 0; 
+      currentMonth = 0;
       currentYear++;
     } else {
       currentMonth++;
@@ -164,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial month display
   updateMonthDisplay();
+  }
 
   // Helper function to get all dates of the current month 
   function getDatesForMonth(month, year) {
@@ -184,53 +143,98 @@ document.addEventListener("DOMContentLoaded", () => {
     return dates;
   }
 
-  // Function to fetch graduation year data
-  async function fetchGraduationYearData() {
-    const response = await fetch('backend/get_graduationyear.php');
-    const data = await response.json();
-    return data;
-}
+  // Fetch posts stats and render chart
+  const postsChartCtx = document.getElementById("postsChart").getContext("2d");
 
-  // Function to render the graduation year doughnut chart
-  async function renderGraduationYearChart() {
-    const data = await fetchGraduationYearData();
+  const fetchPostsStats = (month, year) => {
+  fetch(`${baseUrl}/backend/get_posts.php?month=${month}&year=${year}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const dates = getDatesForMonth(month, year);
+      const postData = data.monthly_posts; 
 
-    const labels = data.map(item => item.year);
-    const values = data.map(item => item.total);
-
-    const ctx = document.getElementById('graduationYearChart').getContext('2d');
-
-    new Chart(ctx, {
-        type: 'doughnut',
+      new Chart(postsChartCtx, {
+        type: "bar",
         data: {
-            labels: labels, 
-            datasets: [{
-                label: 'Graduation Year Distribution',
-                data: values, 
-                backgroundColor: ['#FF5733', '#FF8D1A', '#FFB300', '#1C7430', '#0064FF'], // Customize colors
-                hoverOffset: 4
-            }]
+          labels: dates,
+          datasets: [
+            {
+              label: "Number of Posts",
+              data: postData,
+              backgroundColor: "#36A2EB",
+              borderWidth: 1,
+            },
+          ],
         },
         options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw + ' Alumni';
-                        }
-                    }
-                }
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      // Display "Today", "Yesterday", "Average" below the chart
+      document.getElementById("today-stat").innerText = `Today: ${data.today}`;
+      document.getElementById("yesterday-stat").innerText = `Yesterday: ${data.yesterday}`;
+      document.getElementById("average-stat").innerText = `Average: ${data.monthly_average}`;
+    })
+    .catch((error) => {
+      console.error("Error fetching posts stats:", error);
+    });
+  };
+
+  // Use the reusable month navigation function for posts chart
+  createMonthNavigation("prev-month", "next-month", "current-month", "postsChart", fetchPostsStats);
+
+  // Function to fetch graduation year data
+  async function fetchGraduationYearData(month, year) {
+  const response = await fetch('backend/get_graduation_year.php');
+  const data = await response.json();
+  return data;
+  }
+
+  // Function to render the graduation year doughnut chart
+  async function renderGraduationYearChart(month, year) {
+  const data = await fetchGraduationYearData(month, year);
+
+  const labels = data.map(item => item.year);
+  const values = data.map(item => item.total);
+
+  const ctx = document.getElementById('graduationYearChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: labels, 
+      datasets: [{
+        label: 'Graduation Year',
+        data: values, 
+        backgroundColor: ['#FF5733', '#FF8D1A', '#FFB300', '#1C7430', '#0064FF'], 
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return tooltipItem.label + ': ' + tooltipItem.raw + ' Alumni';
+              }
             }
+          }
         }
+      }
     });
   }
 
-  // Call the function to render the chart on page load
-  renderGraduationYearChart();
+  createMonthNavigation("prev-month", "next-month", "current-month", "graduationYearChart", renderGraduationYearChart);
 
   // Fetch job status data and render chart
   const fetchJobStatusData = () => {

@@ -1,6 +1,19 @@
 <?php
 include '../backend/session_check.php';
 include('../components/loader.php');
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+$userRole = $_SESSION['role'] ?? '';
+
+if ($userRole === 'Manager') {
+  header('Location: ../index.php');
+  exit();
+}
+
+
 $projectRoot = basename(dirname(__DIR__));
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 ?>
@@ -139,35 +152,35 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       </div>
       <div id="nameFields">
         <label for="firstname">First Name</label>
-        <input class="inputFields" 
-          type="text" 
-          name="firstname" 
-          id="firstname" 
-          required 
-          minlength="1" 
+        <input class="inputFields"
+          type="text"
+          name="firstname"
+          id="firstname"
+          required
+          minlength="1"
           maxlength="15"
           pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
           title="Name must start with a letter and contain only letters, hyphens and apostrophes"
           size="15" />
         <label for="middlename">Middle Name</label>
-        <input class="inputFields" 
-          type="text" 
-          name="middlename" 
-          id="middlename" 
-          required 
-          minlength="1" 
+        <input class="inputFields"
+          type="text"
+          name="middlename"
+          id="middlename"
+          required
+          minlength="1"
           maxlength="15"
           pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
           title="Name must start with a letter and contain only letters, hyphens and apostrophes"
           size="15" />
         <input type="checkbox" id="noMiddleName" />
         <label for="lastname">Last Name</label>
-        <input class="inputFields" 
-          type="text" 
-          name="lastname" 
-          id="lastname" 
-          required 
-          minlength="1" 
+        <input class="inputFields"
+          type="text"
+          name="lastname"
+          id="lastname"
+          required
+          minlength="1"
           maxlength="15"
           pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
           title="Name must start with a letter and contain only letters, hyphens and apostrophes"
@@ -176,11 +189,11 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       <div id="username-roleField">
         <label for="username">Username</label>
         <input class="inputFields"
-          type="text" 
-          name="username" 
-          id="username" 
-          required 
-          minlength="1" 
+          type="text"
+          name="username"
+          id="username"
+          required
+          minlength="1"
           maxlength="15"
           pattern="^[a-zA-Z0-9_-]+$"
           title="Username can only contain letters, numbers, underscores and hyphens"
@@ -193,23 +206,23 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       </div>
       <div id="email-passwordField">
         <label for="email">Email</label>
-        <input class="inputFields" 
-          type="email" 
-          name="emailaddress" 
-          id="email" 
-          required 
-          minlength="1" 
+        <input class="inputFields"
+          type="email"
+          name="emailaddress"
+          id="email"
+          required
+          minlength="1"
           maxlength="100"
           pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           title="Please enter a valid email address"
           size="100" />
         <label for="password">Password</label>
-        <input class="inputFields" 
-          type="password" 
-          name="password" 
-          id="password" 
-          required 
-          minlength="8" 
+        <input class="inputFields"
+          type="password"
+          name="password"
+          id="password"
+          required
+          minlength="8"
           maxlength="50"
           pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9!@#$%^&*]{8,}$"
           title="Password must contain at least 8 characters, one uppercase letter, one number, and one special character"
@@ -218,8 +231,8 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
       </div>
       <div id="graduationFields">
         <label for="graduation">Graduation Year:</label>
-        <input class="inputFields" type="number" 
-          name="graduation" 
+        <input class="inputFields" type="number"
+          name="graduation"
           id="graduation"
           min="1973"
           placeholder="YYYY"

@@ -1,7 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
 $projectRoot = basename(dirname(__DIR__));
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
+$userRole = $_SESSION['role'] ?? '';
 ?>
 
 <div class="sidebar-logo">
@@ -26,16 +30,20 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 
 <script>
   const baseUrl = "<?php echo $base_url; ?>/";
+  const userRole = "<?php echo $userRole; ?>"; // Pass the user role to JavaScript
 
   const routes = {
     [`${baseUrl}index.php`]: {
       label: "Dashboard",
       icon: `${baseUrl}/assets/dashboard.svg`,
     },
-    [`${baseUrl}pages/accounts.php`]: {
-      label: "Accounts",
-      icon: `${baseUrl}/assets/user-accounts.svg`,
-    },
+    // Conditionally add the Accounts route based on userRole
+    ...(userRole === 'Admin' ? {
+      [`${baseUrl}pages/accounts.php`]: {
+        label: "Accounts",
+        icon: `${baseUrl}/assets/user-accounts.svg`,
+      }
+    } : {}),
     [`${baseUrl}pages/logs.php`]: {
       label: "System Logs",
       icon: `${baseUrl}/assets/clock.svg`,

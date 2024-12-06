@@ -16,23 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Validate credentials
-    $query = "SELECT userID, username FROM users WHERE username = ? AND password = ?";
+    $query = "SELECT userID, username, role FROM users WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ss', $username, $password);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($userID, $username);
+    $stmt->bind_result($userID, $username, $role);
 
     if ($stmt->num_rows > 0) {
         $stmt->fetch();
         // Set session variables
         $_SESSION['userID'] = $userID;
         $_SESSION['username'] = $username;
+        $_SESSION['role'] = $role;
         $_SESSION['loggedIn'] = true;
         $_SESSION['failed_attempts'] = 0; // Reset failed attempts
 
-        // Return success response
-        echo json_encode(['success' => true, 'successMessage' => 'Login successful']);
+        echo json_encode(['success' => true, 'successMessage' => 'Login successful', 'redirect' => $base_url . '/index.php']);
     } else {
         $_SESSION['failed_attempts'] += 1;
         // Return error response

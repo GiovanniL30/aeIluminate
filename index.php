@@ -58,7 +58,7 @@ include('./backend/session_check.php');
                             </div>
                         </div> 
                         <!-- Graduation Year Doughnut Chart -->
-                        <div class="graduation-year-chart" style="position: relative; height:400px; width:200px">
+                        <div class="graduation-year-chart" style="position: relative; height:auto; width:200px">
                             <h4>Graduation Year</h4>
                             <div class="month-navigation-container">
                                 <div class="month-navigation">

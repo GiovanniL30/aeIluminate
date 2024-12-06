@@ -86,6 +86,7 @@ a {
   justify-content: space-between; 
   gap: 20px; 
   flex-wrap: wrap; 
+  z-index: 1;
 }
 
 .user-overview-box,
@@ -99,8 +100,12 @@ a {
   text-align: left;
   width: 200px; 
   flex-grow: 1; 
-  height: 400px; 
   position: relative;
+  z-index: -1;
+}
+
+.graduation-year-chart {
+  height: 500px;
 }
 
 .month-navigation-container {

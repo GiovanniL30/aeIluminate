@@ -37,17 +37,19 @@ $userRole = $_SESSION['role'] ?? '';
       label: "Dashboard",
       icon: `${baseUrl}/assets/dashboard.svg`,
     },
-    // Conditionally add the Accounts route based on userRole
     ...(userRole === 'Admin' ? {
       [`${baseUrl}pages/accounts.php`]: {
         label: "Accounts",
         icon: `${baseUrl}/assets/user-accounts.svg`,
       }
     } : {}),
-    [`${baseUrl}pages/logs.php`]: {
-      label: "System Logs",
-      icon: `${baseUrl}/assets/clock.svg`,
-    },
+    ...(userRole === 'Admin' ? {
+      [`${baseUrl}pages/logs.php`]: {
+        label: "System Logs",
+        icon: `${baseUrl}/assets/clock.svg`,
+      }
+    } : {}),
+
   };
 
   const navLinks = document.querySelector("ul.nav-links");

@@ -30,7 +30,7 @@ $userRole = $_SESSION['role'] ?? '';
 
 <script>
   const baseUrl = "<?php echo $base_url; ?>/";
-  const userRole = "<?php echo $userRole; ?>"; // Pass the user role to JavaScript
+  const userRole = "<?php echo $userRole; ?>";
 
   const routes = {
     [`${baseUrl}index.php`]: {

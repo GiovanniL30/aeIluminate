@@ -49,7 +49,11 @@
 
 .nav-links .link.active-route {
   background-color: var(--primary);
+}
+
+.nav-links .link.active-route a {
   color: var(--white);
+  font-weight: 500;
 }
 
 .sidebar-img {

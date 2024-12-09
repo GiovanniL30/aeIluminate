@@ -44,10 +44,10 @@ $conn->close();
 
 <body>
   <div class="app">
-    <aside class="sidebar">
+    <aside class="sidebar" style="z-index: 10;">
       <?php include '../components/sidebar.php' ?>
     </aside>
-    <section>
+    <section style="z-index: 0;">
       <div class="container">
         <header>
           <?php include '../components/header.php' ?>
@@ -152,7 +152,12 @@ $conn->close();
       },
       xAxis: {
         type: 'category',
-        data: mostFrequentActions.map(item => item.action)
+        data: mostFrequentActions.map(item => item.action),
+        axisLabel: {
+          formatter: function(value) {
+            return value.length > 10 ? value.slice(0, 10) + '...' : value;
+          }
+        }
       },
       yAxis: {
         type: 'value'
@@ -175,7 +180,12 @@ $conn->close();
       },
       xAxis: {
         type: 'category',
-        data: topBrowsers.map(item => item.browserInfo)
+        data: topBrowsers.map(item => item.browserInfo),
+        axisLabel: {
+          formatter: function(value) {
+            return value.length > 10 ? value.slice(0, 10) + '...' : value;
+          }
+        }
       },
       yAxis: {
         type: 'value'

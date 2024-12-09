@@ -1,5 +1,18 @@
 <?php
+include('log_action.php');
+
 session_start();
+$userID = $_SESSION['userID'];
+$ipAddress = $_SERVER['REMOTE_ADDR'];
+$deviceInfo = $_SERVER['HTTP_USER_AGENT'];
+$osInfo = php_uname('s') . ' ' . php_uname('r');
+$browserInfo = $_SERVER['HTTP_USER_AGENT'];
+$actionDetails = 'User logged out';
+
+logAction($userID, 'Logout', $ipAddress, $deviceInfo, $osInfo, $browserInfo, $actionDetails);
+
+
+
 session_unset();
 session_destroy();
 

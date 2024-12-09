@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../backend/database.php');
+include('../backend/log_action.php');
 
 header('Content-Type: application/json');
 
@@ -32,6 +33,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['loggedIn'] = true;
         $_SESSION['firstName'] = $firstName;
         $_SESSION['failed_attempts'] = 0; // Reset failed attempts
+
+        // Log login action
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+        $deviceInfo = $_SERVER['HTTP_USER_AGENT'];
+        $osInfo = php_uname('s') . ' ' . php_uname('r');
+        $browserInfo = $_SERVER['HTTP_USER_AGENT'];
+        $actionDetails = "";
+
+        // determine who is the logged in user based on the role
+        if ($role === 'Admin') {
+            $actionDetails = $role . ', ' . $username . ' has logged in';
+        } else {
+            $actionDetails = $role . ', ' . $firstName . ' has logged in';
+        }
+
+        logAction($userID, 'Login', $ipAddress, $deviceInfo, $osInfo, $browserInfo, $actionDetails);
+
 
         echo json_encode(['success' => true, 'successMessage' => 'Login successful', 'redirect' => $base_url . '/index.php']);
     } else {

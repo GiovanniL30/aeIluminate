@@ -3,6 +3,7 @@
 @import url(accounts.css);
 @import url(accountDetails.css);
 @import url(login.css);
+@import url(logs.css);
 
 :root {
   --grey: rgb(222, 222, 222);
@@ -82,15 +83,16 @@ a {
 
 /* STATISTICS */
 .dashboard-charts {
-  display: flex; 
-  justify-content: space-between; 
-  gap: 20px; 
-  flex-wrap: wrap; 
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
   z-index: 1;
 }
 
 .user-overview-box,
-.posts-chart, .graduation-year-chart,
+.posts-chart,
+.graduation-year-chart,
 .job-status-chart {
   background-color: white;
   border: 1px solid #ccc;
@@ -98,8 +100,8 @@ a {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
-  width: 200px; 
-  flex-grow: 1; 
+  width: 200px;
+  flex-grow: 1;
   position: relative;
   z-index: -1;
 }
@@ -124,8 +126,8 @@ a {
 
 .month-navigation img {
   cursor: pointer;
-  width: 15px; 
-  height: 15px; 
+  width: 15px;
+  height: 15px;
   margin: 0 10px;
 }
 
@@ -135,18 +137,18 @@ a {
 }
 
 .stats-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .stats-container span {
-    padding: 10px;
-    border-bottom: 1px solid #ccc; 
-    font-size: 12px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
 }
 
 .stats-container span:last-child {
-    border-bottom: none; 
+  border-bottom: none;
 }
 
 hr {
@@ -259,6 +261,6 @@ hr {
 
 @media (max-width: 768px) {
   .dashboard-charts {
-    flex-direction: column; 
+    flex-direction: column;
   }
 }

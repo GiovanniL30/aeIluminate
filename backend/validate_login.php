@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param('ss', $username, $password);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($userID, $username, $role, $firstName, $lastName);
+    $stmt->bind_result($userID, $username, $role, $firstName);
 
     if ($stmt->num_rows > 0) {
         $stmt->fetch();

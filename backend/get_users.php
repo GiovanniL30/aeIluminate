@@ -5,13 +5,13 @@ $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'userID';
 $sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'asc';
 $filterField = isset($_GET['filterField']) ? $_GET['filterField'] : '';
 
-$query = "SELECT firstName, 
+$query = "SELECT userID,
+                 firstName, 
                  middleName, 
                  lastName, 
                  DATE_FORMAT(dateCreated, '%M %d, %Y') AS fdateCreated,
                  username, 
                  email, 
-                 userID,
                  role 
           FROM users 
           WHERE role != 'Admin'";

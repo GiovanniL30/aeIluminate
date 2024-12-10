@@ -95,8 +95,20 @@ const resetForm = (event, formId) => {
  * =======================
  */
 
-document.getElementById("cancelDetails").addEventListener("click", (e) => resetForm(e, "details-form"));
+document.addEventListener('DOMContentLoaded', () => {
+  const cancelDetailsBtn = document.getElementById("cancelDetails");
+  const deleteBtn = document.querySelector(".delete-btn");
+  const saveDetailsBtn = document.getElementById("saveDetails");
 
-document.querySelector(".delete-btn").addEventListener("click", deleteUser);
+  if (cancelDetailsBtn) {
+    cancelDetailsBtn.addEventListener("click", (e) => resetForm(e, "details-form"));
+  }
 
-document.getElementById("saveDetails").addEventListener("click", editUser);
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", deleteUser);
+  }
+
+  if (saveDetailsBtn) {
+    saveDetailsBtn.addEventListener("click", editUser);
+  }
+});

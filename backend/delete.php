@@ -5,24 +5,32 @@ header('Content-Type: application/json');
 
 if (isset($_GET['userID'])) {
     $userIdToDelete = $_GET['userID'];
+    $checkQuery = "SELECT userID, role FROM users WHERE userID = ? AND role != 'Admin'";
+    $stmt = $conn->prepare($checkQuery);
+    $stmt->bind_param("s", $userIdToDelete);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $deleteQuery = "DELETE FROM users WHERE userID = ?";
-    $stmt = $conn->prepare($deleteQuery);
-    $stmt->bind_param("i", $userIdToDelete);
-
-
-    if ($stmt->execute()) {
-        http_response_code(200);
-        echo json_encode(['message' => 'User deleted successfully']);
-    } else {
-        http_response_code(500);
-        echo json_encode(['message' => 'Error. Failed to delete user']);
+    if ($result->num_rows === 0) {
+        http_response_code(400);
+        echo json_encode(['message' => 'User not found or cannot be deleted']);
+        exit();
     }
 
-    exit();
-} else {
+    $deleteQuery = "DELETE FROM users WHERE userID = ? AND role != 'Admin'";
+    $stmt = $conn->prepare($deleteQuery);
+    $stmt->bind_param("s", $userIdToDelete);
 
-    http_response_code(400);
-    echo json_encode(['message' => 'No user ID provided']);
-    exit();
+    if ($stmt->execute()) {
+        if ($stmt->affected_rows === 1) {
+            http_response_code(200);
+            echo json_encode(['message' => 'User deleted successfully']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['message' => 'No users were deleted']);
+        }
+    } else {
+        http_response_code(500);
+        echo json_encode(['message' => 'Error: ' . $conn->error]);
+    }
 }

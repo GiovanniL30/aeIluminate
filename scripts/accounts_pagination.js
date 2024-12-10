@@ -46,7 +46,7 @@ const renderAccounts = (page) => {
                 <div class="action-list">
                     <a href="${baseUrl}/pages/account_detail.php?userId=${account.userID}&role=${account.role}"><img src='../assets/edit.png'/></a>
                     <img src='../assets/check.png'/>
-                    <img src='../assets/delete_account.png' class="delete-icon" data-userid="${account.userID}" alt="Delete Account"/>
+                    <img src='../assets/delete_account.png' class="delete-icon" data-user-id="${account.userID}" alt="Delete Account"/>
                 </div>
             </td>
         `;
@@ -171,7 +171,7 @@ const handleFilterChange = (event) => {
 
 const deleteUser = async (e) => {
   if (e.target.classList.contains("delete-icon")) {
-    const userToDelete = e.target.dataset.userid;
+    const userToDelete = e.target.getAttribute("data-user-id");
 
     const confirmed = window.confirm("Are you sure you want to delete this account?");
 
@@ -189,7 +189,6 @@ const deleteUser = async (e) => {
           }, 500); // Simulate a delay of 500ms
           return;
         }
-
         setTimeout(() => {
           hideLoader();
           fetchUsers();

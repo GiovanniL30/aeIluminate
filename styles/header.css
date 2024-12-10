@@ -70,6 +70,7 @@ header {
   margin-top: 30px;
   justify-content: space-between;
   align-items: center;
+  z-index: -1;
 }
 
 .search {

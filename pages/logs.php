@@ -54,17 +54,19 @@ $conn->close();
           <?php include '../components/header.php' ?>
         </header>
         <h1>System Logs</h1>
-        <!-- Unique Users by Date Chart -->
-        <div id="uniqueUsersByDateChart" class="chart"></div>
+        <div class="charts-container">
+          <!-- Unique Users by Date Chart -->
+          <div id="uniqueUsersByDateChart" class="chart"></div>
 
-        <!-- Most Frequent Actions Chart -->
-        <div id="mostFrequentActionsChart" class="chart"></div>
+          <!-- Most Frequent Actions Chart -->
+          <div id="mostFrequentActionsChart" class="chart"></div>
 
-        <!-- Top Browsers Chart -->
-        <div id="topBrowsersChart" class="chart"></div>
+          <!-- Top Browsers Chart -->
+          <div id="topBrowsersChart" class="chart"></div>
 
-        <!-- Actions Over Time Chart -->
-        <div id="actionsOverTimeChart" class="chart"></div>
+          <!-- Actions Over Time Chart -->
+          <div id="actionsOverTimeChart" class="chart"></div>
+        </div>
 
         <table id="logsTable" class="display">
           <thead>

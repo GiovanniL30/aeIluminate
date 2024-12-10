@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $actionDetails = $role . ', ' . $firstName . ' has logged in';
         }
 
-        logAction($userID, 'Login', $ipAddress, $osInfo, $browserInfo, $actionDetails);
+        logAction($userID, 'Login', $ipAddress, $osInfo, $browserInfo, $actionDetails, date('Y-m-d H:i:s'));
 
 
         echo json_encode(['success' => true, 'successMessage' => 'Login successful', 'redirect' => $base_url . '/index.php']);

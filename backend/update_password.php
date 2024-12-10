@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            logAction($userID, 'Update Password', $ipAddress, $osInfo, $browserInfo, $actionDetails);
+            logAction($userID, 'Update Password', $ipAddress, $osInfo, $browserInfo, $actionDetails, date('Y-m-d H:i:s'));
             session_unset();
             session_destroy();
             echo json_encode(['success' => true, 'message' => 'Password updated successfully']);

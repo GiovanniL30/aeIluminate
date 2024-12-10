@@ -27,7 +27,7 @@ $eventData = [];
 while ($row = $result->fetch_assoc()) {
     $eventData[] = [
         'event_type' => $row['eventType'],
-        'total_attendees' => $row['total_attendees']
+        'total_interested_users' => $row['total_interested_users']  // Corrected here
     ];
 }
 

@@ -10,7 +10,7 @@ if ($conn->connect_error) {
 }
 
 // Query to get the count of users by job status
-$query = "SELECT job_status, COUNT(*) as total FROM alumni GROUP BY job_status ORDER BY job_status ASC";
+$query = "SELECT isEmployed, COUNT(*) as total FROM alumni GROUP BY isEmployed ORDER BY isEmployed ASC";
 
 $result = $conn->query($query);
 
@@ -22,8 +22,9 @@ if (!$result) {
 
 $jobStatusData = [];
 while ($row = $result->fetch_assoc()) {
+    $status = $row['isEmployed'] == 1 ? 'Employed' : 'Unemployed';
     $jobStatusData[] = [
-        'status' => $row['job_status'],
+        'status' => $status,
         'total' => $row['total']
     ];
 }
@@ -31,4 +32,3 @@ while ($row = $result->fetch_assoc()) {
 echo json_encode($jobStatusData);
 
 $conn->close();
-?>

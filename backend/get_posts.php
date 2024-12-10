@@ -1,6 +1,10 @@
 <?php
 include('../backend/database.php');
 
+// Get month and year from GET parameters
+$month = $_GET['month'];
+$year = $_GET['year'];
+
 // Get today's and yesterday's dates
 $today = date('Y-m-d');
 $yesterday = date('Y-m-d', strtotime('-1 day'));
@@ -20,18 +24,18 @@ $query_monthly_avg = "SELECT AVG(posts_per_day) as avg_posts
 FROM (
     SELECT COUNT(*) as posts_per_day 
     FROM posts 
-    WHERE MONTH(createdAt) = MONTH(CURDATE()) 
+    WHERE MONTH(createdAt) = '$month' AND YEAR(createdAt) = '$year'
     GROUP BY DATE(createdAt)
 ) as daily_counts";
 $result_monthly_avg = mysqli_query($conn, $query_monthly_avg);
 $avg_posts = round(mysqli_fetch_assoc($result_monthly_avg)['avg_posts'] ?? 0, 2);
 
-// Query for posts by 5-day intervals in the current month
+// Query for posts by 5-day intervals in the specified month and year
 $query_monthly_posts = "
     SELECT DATE_FORMAT(createdAt, '%Y-%m-%d') as post_date, COUNT(*) as post_count
     FROM posts
-    WHERE MONTH(createdAt) = MONTH(CURDATE())
-    GROUP BY DATE(createdAt)
+    WHERE MONTH(createdAt) = '$month' AND YEAR(createdAt) = '$year'
+    GROUP BY post_date
     ORDER BY post_date ASC
 ";
 $result_monthly_posts = mysqli_query($conn, $query_monthly_posts);
@@ -46,7 +50,7 @@ $current_date = '';
 while ($row = mysqli_fetch_assoc($result_monthly_posts)) {
     $date = new DateTime($row['post_date']);
     $day = $date->format('d');
-    
+
     if ($interval_start === null) {
         $interval_start = $day;
         $interval_end = $interval_start + 4;
@@ -77,4 +81,3 @@ echo json_encode([
 ]);
 
 mysqli_close($conn);
-?>

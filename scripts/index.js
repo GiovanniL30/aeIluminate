@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((data) => {
       const ctx = document.getElementById("userOverviewChart").getContext("2d");
       const totalUsers = document.getElementById("total-users");
-      totalUsers.innerText = `Aelluminate Total Users: ${data.total_users}`;
+      totalUsers.innerText = `ælluminate Total Users: ${data.total_users}`;
       new Chart(ctx, {
         type: "doughnut",
         data: {

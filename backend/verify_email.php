@@ -16,55 +16,19 @@ function verifyEmail($email) {
         return false;
     }
 
-    // Check MX records
+    // Check if domain has valid MX records
     if (!checkdnsrr($domain, 'MX')) {
-        return false;
+        return [
+            'valid' => false,
+            'message' => 'Invalid email domain'
+        ];
     }
 
-    // Get MX records
-    if (!getmxrr($domain, $mxhosts)) {
-        return false;
-    }
-
-    // Try SMTP connection
-    try {
-        $socket = @fsockopen($mxhosts[0], 25, $errno, $errstr, 5);
-        if (!$socket) {
-            return false;
-        }
-
-        $response = fgets($socket);
-        if (substr($response, 0, 3) !== '220') {
-            return false;
-        }
-
-        // Say HELLO
-        fputs($socket, "HELLO " . $domain . "\r\n");
-        $response = fgets($socket);
-        if (substr($response, 0, 3) !== '250') {
-            return false;
-        }
-
-        // Send MAIL FROM
-        fputs($socket, "MAIL FROM: <verify@" . $domain . ">\r\n");
-        $response = fgets($socket);
-        if (substr($response, 0, 3) !== '250') {
-            return false;
-        }
-
-        // Send RCPT TO
-        fputs($socket, "RCPT TO: <" . $email . ">\r\n");
-        $response = fgets($socket);
-        $validEmail = (substr($response, 0, 3) === '250');
-
-        // Say QUIT
-        fputs($socket, "QUIT\r\n");
-        fclose($socket);
-
-        return $validEmail;
-    } catch (Exception $e) {
-        return false;
-    }
+    // Email format and domain are valid
+    return [
+        'valid' => true,
+        'message' => 'Email format is valid. Verification email will be sent.'
+    ];
 }
 
 $email = $_GET['email'] ?? '';

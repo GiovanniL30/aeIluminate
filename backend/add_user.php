@@ -1,6 +1,7 @@
 <?php
 include('../backend/database.php');
 include('../backend/log_action.php');
+include('../backend/session_check.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = $_POST['firstname'];

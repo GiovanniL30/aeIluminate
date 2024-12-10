@@ -364,15 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         emailInput.setAttribute("title", "Verifying email...");
 
-        // Check if email exists in database
-        const existsResult = await checkUserExists('', email);
-        if (existsResult.includes("Email already exists")) {
-          return {
-            valid: false,
-            message: "Email already exists"
-          };
-        }
-        
         // Check domain and email validity
         if (!emailRegex.test(email)) {
           return {
@@ -381,16 +372,26 @@ document.addEventListener("DOMContentLoaded", () => {
           };
         }
 
+        // Check if email exists in database
+        const existsResult = await checkUserExists('', email);
+        if (existsResult.includes("Email already exists")) {
+          return {
+            valid: false,
+            message: "Email already exists"
+          };
+        }
+
         const response = await fetch(`../backend/verify_email.php?email=${encodeURIComponent(email)}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+
         if (!data.valid) {
-          return {
+            return {
               valid: false,
               message: "Email address does not exist"
-          };
+            };
         }
         return {
           valid: true,
@@ -447,7 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
           emailInput.classList.remove("input-error");
           emailInput.classList.add("input-valid");
         }
-      }, 500);
+      }, 1000);
     });
   }
   validateEmail();

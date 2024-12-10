@@ -1,6 +1,7 @@
 <?php
 include('../backend/database.php');
 include('../backend/log_action.php');
+include('../backend/check_session.php');
 
 header('Content-Type: application/json');
 

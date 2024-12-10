@@ -240,13 +240,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   validateNames();
 
+  function checkUserExists(username, email) {
+    const formData = new FormData();
+    if (username) formData.append('username', username);
+    if (email) formData.append('emailaddress', email);
+    
+    return fetch(`../backend/add_user.php`, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .catch(error => {
+      console.error('Error checking user:', error);
+      return 'Error checking user existence';
+    });
+  }
+
   function validateUsername() {
     const usernameInput = document.getElementById("username");
-    const usernameRegex = /^[a-zA-Z0-9_-]+$/;
+    const usernameRegex = /^[a-zA-Z0-9_\-\.]+$/;
+    let timeout = null;
 
-    usernameInput.addEventListener("input", (e) => {
+    usernameInput.addEventListener("input", async (e) => {
       const value = e.target.value.trim();
       usernameInput.value = value.replace(/\s/g, "");
+      clearTimeout(timeout);
 
       if (!value) {
         usernameInput.setAttribute("title", "Username is required");
@@ -260,9 +278,22 @@ document.addEventListener("DOMContentLoaded", () => {
         usernameInput.classList.add("input-error");
         usernameInput.classList.remove("input-valid");
       } else {
-        usernameInput.setAttribute("title", "");
-        usernameInput.classList.remove("input-error");
-        usernameInput.classList.add("input-valid");
+        usernameInput.classList.add("input-validating");
+
+        timeout = setTimeout(async () => {
+          const result = await checkUserExists(value, '');
+          usernameInput.classList.remove("input-validating");
+          
+          if (result.includes("Username already exists")) {
+            usernameInput.setAttribute("title", "Username already exists");
+            usernameInput.classList.add("input-error");
+            usernameInput.classList.remove("input-valid");
+          } else {
+            usernameInput.setAttribute("title", "");
+            usernameInput.classList.remove("input-error");
+            usernameInput.classList.add("input-valid");
+          }
+        }, 500); // Wait 500ms after user stops typing
       }
     });
 
@@ -326,20 +357,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function validateEmail() {
     const emailInput = document.getElementById("email");
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|slu\.edu\.ph)$/i;
     let timeout = null;
 
     const checkEmail = async (email) => {
       try {
         emailInput.setAttribute("title", "Verifying email...");
+
+        // Check if email exists in database
+        const existsResult = await checkUserExists('', email);
+        if (existsResult.includes("Email already exists")) {
+          return {
+            valid: false,
+            message: "Email already exists"
+          };
+        }
+        
+        // Check domain and email validity
+        if (!emailRegex.test(email)) {
+          return {
+            valid: false,
+            message: "Only @gmail.com and @slu.edu.ph email addresses are allowed"
+          };
+        }
+
         const response = await fetch(`../backend/verify_email.php?email=${encodeURIComponent(email)}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        if (!data.valid) {
+          return {
+              valid: false,
+              message: "Email address does not exist"
+          };
+        }
         return {
-          valid: data.valid,
-          message: data.message,
+          valid: true,
+          message: "Email is valid"
         };
       } catch (error) {
         console.error("Email verification failed:", error);
@@ -377,26 +432,22 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (!emailRegex.test(value)) {
-        emailInput.setAttribute("title", "Please enter a valid email format");
-        emailInput.classList.add("input-error");
-        return;
-      }
-
       emailInput.classList.add("input-validating");
 
       timeout = setTimeout(async () => {
-        const isValid = await checkEmail(value);
+        const result = await checkEmail(value);
         emailInput.classList.remove("input-validating");
 
-        if (!isValid) {
-          emailInput.setAttribute("title", "This email address appears to be invalid or unreachable");
+        if (!result.valid) {
+          emailInput.setAttribute("title", result.message);
           emailInput.classList.add("input-error");
+          emailInput.classList.remove("input-valid");
         } else {
           emailInput.setAttribute("title", "Email is valid");
+          emailInput.classList.remove("input-error");
           emailInput.classList.add("input-valid");
         }
-      }, 1000);
+      }, 500);
     });
   }
   validateEmail();
@@ -548,12 +599,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (closeAddUserButton) {
     closeAddUserButton.addEventListener("click", (event) => {
-      event.preventDefault(); // prevent the form from submitting
+      event.preventDefault();
       console.log("Cancel button clicked");
-      addUserForm.parentElement.style.display = "none";
-      mainContent.classList.remove("blur");
-      mainContent.style.pointerEvents = "auto";
-      addUserForm.reset(); // reset the fields
+        addUserForm.reset();
+        
+        const formInputs = addUserForm.querySelectorAll('input, select');
+        formInputs.forEach(input => {
+            input.classList.remove('input-error', 'input-valid', 'input-validating');
+            input.setAttribute('title', '');
+        });
+        
+        const middleNameInput = document.getElementById("middlename");
+        const noMiddleNameCheckbox = document.getElementById("noMiddleName");
+        if (middleNameInput && noMiddleNameCheckbox) {
+            middleNameInput.disabled = false;
+            middleNameInput.value = "";
+            noMiddleNameCheckbox.checked = false;
+        }
+        
+        addUserForm.parentElement.style.display = "none";
+        mainContent.classList.remove("blur");
+        mainContent.style.pointerEvents = "auto";
     });
   } else {
     console.error("Cancel button not found");
@@ -599,7 +665,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.reload();
       } else {
         const errorText = await response.text();
-          onsole.error("Error adding user:", errorText);
+        console.error("Error adding user:", errorText);
         alert("Error adding user: " + errorText);
       }
     } catch (error) {

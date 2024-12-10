@@ -20,13 +20,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $defaultProfilePic = "https://cloud.appwrite.io/v1/storage/buckets/674c025e00102761c23f/files/674ebc5c00240f4ca9f2/view?project=674c022d00339c9cad92&project=674c022d00339c9cad92&mode=admin";
 
     // Check if the user already exists
-    $checkUserQuery = "SELECT 1 FROM users WHERE username = ?";
+    $checkUserQuery = "SELECT username, email FROM users WHERE email = ? or username = ?";
     $stmt = $conn->prepare($checkUserQuery);
-    $stmt->bind_param('s', $username);
+    $stmt->bind_param('ss', $email, $username);
     $stmt->execute();
-    $stmt->store_result();
+    $result = $stmt->get_result();
 
-    if ($stmt->num_rows == 0) {
+    if ($result->num_rows > 0) {
+        // Check which field caused the duplicate
+        $existingUser = $result->fetch_assoc();
+        $errors = [];
+    
+        if ($existingUser['username'] === $username) {
+            $errors[] = "Username already exists";
+        }
+        if ($existingUser['email'] === $email) {
+            $errors[] = "Email already exists";
+        }
+        
+        if (!empty($errors)) {
+            http_response_code(400);
+            echo implode(" and ", $errors);
+            exit;
+        }
+    } else {
         // Generate UUID v4
         $newUserID = sprintf(
             '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',

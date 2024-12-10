@@ -9,6 +9,12 @@ function verifyEmail($email) {
 
     // Extract domain
     $domain = substr(strrchr($email, "@"), 1);
+    
+    // Only allow gmail.com and slu.edu.ph domains
+    $allowedDomains = ['gmail.com', 'slu.edu.ph'];
+    if (!in_array(strtolower($domain), $allowedDomains)) {
+        return false;
+    }
 
     // Check MX records
     if (!checkdnsrr($domain, 'MX')) {
@@ -32,8 +38,8 @@ function verifyEmail($email) {
             return false;
         }
 
-        // Say HELO
-        fputs($socket, "HELO " . $domain . "\r\n");
+        // Say HELLO
+        fputs($socket, "HELLO " . $domain . "\r\n");
         $response = fgets($socket);
         if (substr($response, 0, 3) !== '250') {
             return false;
@@ -66,6 +72,6 @@ $isValid = verifyEmail($email);
 
 echo json_encode([
     'valid' => $isValid,
-    'message' => $isValid ? 'Email is valid' : 'Email address does not exist'
+    'message' => $isValid ? 'Email is valid' : 'Only @gmail.com and @slu.edu.ph email addresses are allowed'
 ]);
 ?>

@@ -196,7 +196,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           required
           minlength="1"
           maxlength="15"
-          pattern="^[a-zA-Z0-9_-]+$"
+          pattern="^[a-zA-Z0-9_\-\.]+$"
           title="Username can only contain letters, numbers, underscores and hyphens"
           size="15" />
         <label for="role">Role Type:</label>

@@ -18,7 +18,7 @@ function fetchQueryResults($conn, $query)
 }
 
 // Fetch all required data using the reusable function
-$logs = fetchQueryResults($conn, "SELECT * FROM activity_log");
+$logs = fetchQueryResults($conn, "SELECT activity_log.*, users.username FROM activity_log JOIN users USING(userID) ORDER BY activity_log.createdAt DESC");
 $uniqueUsersByDate = fetchQueryResults($conn, "SELECT DATE(createdAt) as actionDate, COUNT(DISTINCT userID) as userCount FROM activity_log GROUP BY actionDate ORDER BY actionDate DESC");
 $mostFrequentActions = fetchQueryResults($conn, "SELECT action, COUNT(*) as actionCount FROM activity_log GROUP BY action ORDER BY actionCount DESC LIMIT 10");
 $topBrowsers = fetchQueryResults($conn, "SELECT browserInfo, COUNT(*) as actionCount FROM activity_log GROUP BY browserInfo ORDER BY actionCount DESC LIMIT 10");
@@ -26,9 +26,6 @@ $actionsOverTime = fetchQueryResults($conn, "SELECT DATE(createdAt) as actionDat
 
 $conn->close();
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +35,7 @@ $conn->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/index.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.css">
   <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
   <link rel="icon" href="assets/website icon.png" type="image/png" />
   <title>System Logs</title>
@@ -54,6 +52,36 @@ $conn->close();
           <?php include '../components/header.php' ?>
         </header>
         <h1>System Logs</h1>
+        <div class="table-container">
+          <table id="logsTable" class="display">
+            <thead>
+              <tr>
+                <th>Created At</th>
+                <th>Log ID</th>
+                <th>Username</th>
+                <th>Action</th>
+                <th>IP Address</th>
+                <th>OS Info</th>
+                <th>Browser Info</th>
+                <th>Action Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($logs as $log): ?>
+                <tr>
+                  <td><?php echo htmlspecialchars($log['createdAt']); ?></td>
+                  <td><?php echo htmlspecialchars($log['logID']); ?></td>
+                  <td><?php echo htmlspecialchars($log['username']); ?></td>
+                  <td><?php echo htmlspecialchars($log['action']); ?></td>
+                  <td><?php echo htmlspecialchars($log['ipAddress']); ?></td>
+                  <td><?php echo htmlspecialchars($log['osInfo']); ?></td>
+                  <td><?php echo htmlspecialchars($log['browserInfo']); ?></td>
+                  <td><?php echo htmlspecialchars($log['actionDetails']); ?></td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
         <div class="charts-container">
           <!-- Unique Users by Date Chart -->
           <div id="uniqueUsersByDateChart" class="chart"></div>
@@ -67,35 +95,6 @@ $conn->close();
           <!-- Actions Over Time Chart -->
           <div id="actionsOverTimeChart" class="chart"></div>
         </div>
-
-        <table id="logsTable" class="display">
-          <thead>
-            <tr>
-              <th>Log ID</th>
-              <th>User ID</th>
-              <th>Action</th>
-              <th>IP Address</th>
-              <th>OS Info</th>
-              <th>Browser Info</th>
-              <th>Action Details</th>
-              <th>Created At</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($logs as $log): ?>
-              <tr>
-                <td><?php echo htmlspecialchars($log['logID']); ?></td>
-                <td><?php echo htmlspecialchars($log['userID']); ?></td>
-                <td><?php echo htmlspecialchars($log['action']); ?></td>
-                <td><?php echo htmlspecialchars($log['ipAddress']); ?></td>
-                <td><?php echo htmlspecialchars($log['osInfo']); ?></td>
-                <td><?php echo htmlspecialchars($log['browserInfo']); ?></td>
-                <td><?php echo htmlspecialchars($log['actionDetails']); ?></td>
-                <td><?php echo htmlspecialchars($log['createdAt']); ?></td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
       </div>
 
     </section>
@@ -104,7 +103,11 @@ $conn->close();
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('#logsTable').DataTable();
+      $('#logsTable').DataTable({
+        "order": [
+          [0, "desc"]
+        ]
+      });
     });
 
     const uniqueUsersByDate = <?php echo json_encode($uniqueUsersByDate); ?>;
@@ -121,7 +124,9 @@ $conn->close();
     // Unique Users by Date
     createChart('uniqueUsersByDateChart', {
       title: {
-        text: 'Unique Users by Date'
+        text: 'Unique Users by Date',
+        left: 'center',
+        top: 10
       },
       tooltip: {
         trigger: 'axis',
@@ -145,7 +150,9 @@ $conn->close();
     // Most Frequent Actions
     createChart('mostFrequentActionsChart', {
       title: {
-        text: 'Most Frequent Actions'
+        text: 'Most Frequent Actions',
+        left: 'center',
+        top: 10
       },
       tooltip: {
         trigger: 'axis',
@@ -173,7 +180,9 @@ $conn->close();
     // Top Browsers
     createChart('topBrowsersChart', {
       title: {
-        text: 'Top Browsers'
+        text: 'Top Browsers',
+        left: 'center',
+        top: 10
       },
       tooltip: {
         trigger: 'axis',
@@ -201,7 +210,9 @@ $conn->close();
     // Actions Over Time
     createChart('actionsOverTimeChart', {
       title: {
-        text: 'Actions Over Time'
+        text: 'Actions Over Time',
+        left: 'center',
+        top: 10
       },
       tooltip: {
         trigger: 'axis',

@@ -392,27 +392,28 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchJobStatusData();
 
   // Fetch and render popular events chart
+  let popularEventsChart = null;
   const fetchPopularEvents = (month, year) => {
     fetch(`${baseUrl}/backend/get_popular_events.php?month=${month}&year=${year}`)
       .then((response) => response.json())
       .then((data) => {
-        const eventNames = data.map((event) => event.name);
-        const attendeeCounts = data.map((event) => event.attendees);
+        const eventNames = data.map((event) => event.event_type);
+        const attendeeCounts = data.map((event) => event.total_interested_users);
 
         const ctx = document.getElementById("popularEventsChart").getContext("2d");
 
         // Destroy existing chart if it exists
-        if (window.popularEventsChart) {
-          window.popularEventsChart.destroy();
+        if (popularEventsChart) {
+          popularEventsChart.destroy();
         }
 
-        window.popularEventsChart = new Chart(ctx, {
+        popularEventsChart = new Chart(ctx, {
           type: "doughnut",
           data: {
             labels: eventNames,
             datasets: [
               {
-                label: "Attendee Count",
+                label: "Interested Users",
                 data: attendeeCounts,
                 backgroundColor: [
                   "#FF6384",
@@ -434,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
               tooltip: {
                 callbacks: {
                   label: (tooltipItem) => {
-                    return `${tooltipItem.label}: ${tooltipItem.raw} attendees`;
+                    return `${tooltipItem.label}: ${tooltipItem.raw} interested users`;
                   },
                 },
               },
@@ -450,6 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "prev-month-events",
     "next-month-events",
     "current-month-events",
+    "popularEventsChart",
     fetchPopularEvents
   );
 });

@@ -4,10 +4,8 @@ ini_set('display_errors', 1);
 include('../backend/database.php');
 header('Content-Type: application/json');
 
-// Log the received parameters
 error_log("Received GET parameters: " . print_r($_GET, true));
 
-// Change from school_name to school to match JS
 $school = $_GET['school'] ?? '';
 
 if (empty($school)) {

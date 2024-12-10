@@ -40,9 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if ($stmt2->execute()) {
                 http_response_code(200); 
                 echo json_encode(['success' => true]);
+
+                $ipAddress = $_SERVER['REMOTE_ADDR'];
+                $osInfo = php_uname('s') . ' ' . php_uname('r');
+                $browserInfo = $_SERVER['HTTP_USER_AGENT'];
+                $actionDetails = "Admin has edited the details a user account";
+                $userID = $_SESSION['userID'];
+            
+                logAction($userID, 'Edit User Details', $ipAddress, $osInfo, $browserInfo, $actionDetails);
+
             } else {
                 http_response_code(500); 
-                echo json_encode(['success' => false, 'error' => 'Failed to update alumni details']);
+                echo json_encode(['success' => false, 'error' => 'Failed to edit alumni details']);
             }
             $stmt2->close();
         } else {
@@ -51,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     } else {
         http_response_code(500);
-        echo json_encode(['success' => false, 'error' => 'Failed to update user details']);
+        echo json_encode(['success' => false, 'error' => 'Failed to edit user details']);
     }
 
     $stmt->close();

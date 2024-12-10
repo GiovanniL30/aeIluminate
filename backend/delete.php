@@ -25,6 +25,12 @@ if (isset($_GET['userID'])) {
         if ($stmt->affected_rows === 1) {
             http_response_code(200);
             echo json_encode(['message' => 'User deleted successfully']);
+            $ipAddress = $_SERVER['REMOTE_ADDR'];
+            $osInfo = php_uname('s') . ' ' . php_uname('r');
+            $browserInfo = $_SERVER['HTTP_USER_AGENT'];
+            $actionDetails = "Admin has deleted a user account";
+            $userID = $_SESSION['userID'];
+            logAction($userID, 'Delete User', $ipAddress, $osInfo, $browserInfo, $actionDetails);
         } else {
             http_response_code(500);
             echo json_encode(['message' => 'No users were deleted']);

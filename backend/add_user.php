@@ -61,6 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param('isii', $newUserID, $graduationYear, $programID, $isEmployed);
             $stmt->execute();
         }
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+        $osInfo = php_uname('s') . ' ' . php_uname('r');
+        $browserInfo = $_SERVER['HTTP_USER_AGENT'];
+        $actionDetails = "Admin has added a new user account";
+        $userID = $_SESSION['userID'];
+
+        logAction($userID, 'Add User Account', $ipAddress, $osInfo, $browserInfo, $actionDetails);
     }
     $stmt->close();
     $conn->close();

@@ -60,7 +60,6 @@ include('./backend/session_check.php');
                         <!-- Graduation Year Doughnut Chart -->
                         <div class="graduation-year-chart">
                             <h4>Graduation Year</h4>
-                            <canvas id="graduationYearChart"></canvas>
                             <div class="month-navigation-container">
                                 <div class="month-navigation">
                                     <img id="prev-month" src="assets/previous" alt="Previous Month" />
@@ -68,7 +67,7 @@ include('./backend/session_check.php');
                                     <img id="next-month" src="assets/next" alt="Next Month" />
                                 </div>
                             </div>
-
+                            <canvas id="graduationYearChart"></canvas>
                         </div> <!-- END OF GRADUATION YEAR CHART -->
                         <!--Employment Doughnut Chart -->
                         <div class="job-status-chart">

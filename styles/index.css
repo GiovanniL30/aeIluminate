@@ -135,28 +135,27 @@ a {
 
 /* STATISTICS */
 .dashboard-charts {
-  display: grid;
-  /* 2x2 grid */
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: space-between;
+  margin-top: 10%;
+  display: flex;
   gap: 20px;
-  flex-wrap: wrap;
+  overflow: auto;
+  width: 100%;
 }
 
 .user-overview-box,
 .posts-chart,
 .graduation-year-chart,
 .job-status-chart {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  width: 100%;
-  flex-grow: 1;
-  width: 100%;
+  text-align: center;
+  width: 50%;
 }
 
 .graduation-year-chart {

@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Log login action
         $ipAddress = $_SERVER['REMOTE_ADDR'];
-        $deviceInfo = $_SERVER['HTTP_USER_AGENT'];
         $osInfo = php_uname('s') . ' ' . php_uname('r');
         $browserInfo = $_SERVER['HTTP_USER_AGENT'];
         $actionDetails = "";
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $actionDetails = $role . ', ' . $firstName . ' has logged in';
         }
 
-        logAction($userID, 'Login', $ipAddress, $deviceInfo, $osInfo, $browserInfo, $actionDetails);
+        logAction($userID, 'Login', $ipAddress, $osInfo, $browserInfo, $actionDetails);
 
 
         echo json_encode(['success' => true, 'successMessage' => 'Login successful', 'redirect' => $base_url . '/index.php']);

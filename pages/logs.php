@@ -72,7 +72,6 @@ $conn->close();
               <th>User ID</th>
               <th>Action</th>
               <th>IP Address</th>
-              <th>Device Info</th>
               <th>OS Info</th>
               <th>Browser Info</th>
               <th>Action Details</th>
@@ -86,7 +85,6 @@ $conn->close();
                 <td><?php echo htmlspecialchars($log['userID']); ?></td>
                 <td><?php echo htmlspecialchars($log['action']); ?></td>
                 <td><?php echo htmlspecialchars($log['ipAddress']); ?></td>
-                <td><?php echo htmlspecialchars($log['deviceInfo']); ?></td>
                 <td><?php echo htmlspecialchars($log['osInfo']); ?></td>
                 <td><?php echo htmlspecialchars($log['browserInfo']); ?></td>
                 <td><?php echo htmlspecialchars($log['actionDetails']); ?></td>

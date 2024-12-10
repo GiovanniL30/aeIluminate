@@ -1,42 +1,37 @@
 <?php
 include('../backend/database.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $month = $_GET['month']; 
-    $year = $_GET['year'];   
+$response = [];
 
-    $stmt = $conn->prepare("
-        SELECT e.eventID, e.title, COUNT(a.attendeeID) as attendee_count 
-        FROM events e
-        LEFT JOIN attendees a ON e.eventID = a.eventID
-        WHERE MONTH(e.eventDateTime) = ? AND YEAR(e.eventDateTime) = ?
-        GROUP BY e.eventID
-        ORDER BY attendee_count DESC
-        LIMIT 5
-    ");
-    $stmt->bind_param("ii", $month, $year);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $events = [];
-    $totalEvents = 0;
-
-    while ($row = $result->fetch_assoc()) {
-        $events[] = [
-            'event_name' => $row['title'],
-            'attendee_count' => $row['attendee_count']
-        ];
-        $totalEvents++;
-    }
-
-    $response = [
-        'total_events' => $totalEvents,
-        'events' => $events
-    ];
-
-    header('Content-Type: application/json');
+if ($conn->connect_error) {
+    $response['error'] = 'Database connection failed: ' . $conn->connect_error;
     echo json_encode($response);
-
     exit;
 }
+
+$query = "SELECT e.eventType, COUNT(DISTINCT iu.userid) AS total_interested_users
+    FROM events e
+    LEFT JOIN interested_users iu ON e.eventID = iu.eventid
+    GROUP BY e.eventType
+    ORDER BY total_interested_users DESC";
+
+$result = $conn->query($query);
+
+if (!$result) {
+    $response['error'] = 'Error executing query: ' . $conn->error;
+    echo json_encode($response);
+    exit;
+}
+
+$eventData = [];
+while ($row = $result->fetch_assoc()) {
+    $eventData[] = [
+        'event_type' => $row['eventType'],
+        'total_attendees' => $row['total_attendees']
+    ];
+}
+
+echo json_encode($eventData);
+
+$conn->close();
 ?>

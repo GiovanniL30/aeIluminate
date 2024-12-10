@@ -390,4 +390,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Call the function to render the chart on page load
   fetchJobStatusData();
+
+  // Fetch and render popular events chart
+  const fetchPopularEvents = (month, year) => {
+    fetch(`${baseUrl}/backend/get_popular_events.php?month=${month}&year=${year}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const eventNames = data.map((event) => event.name);
+        const attendeeCounts = data.map((event) => event.attendees);
+
+        const ctx = document.getElementById("popularEventsChart").getContext("2d");
+
+        // Destroy existing chart if it exists
+        if (window.popularEventsChart) {
+          window.popularEventsChart.destroy();
+        }
+
+        window.popularEventsChart = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: eventNames,
+            datasets: [
+              {
+                label: "Attendee Count",
+                data: attendeeCounts,
+                backgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56",
+                  "#4BC0C0",
+                  "#9966FF",
+                ],
+                hoverOffset: 4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+              },
+              tooltip: {
+                callbacks: {
+                  label: (tooltipItem) => {
+                    return `${tooltipItem.label}: ${tooltipItem.raw} attendees`;
+                  },
+                },
+              },
+            },
+          },
+        });
+      })
+      .catch((error) => console.error("Error fetching popular events:", error));
+  };
+
+  // Initialize the month navigation for the popular events chart
+  createMonthNavigation(
+    "prev-month-events",
+    "next-month-events",
+    "current-month-events",
+    fetchPopularEvents
+  );
 });

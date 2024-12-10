@@ -142,10 +142,11 @@ a {
   width: 100%;
 }
 
-.user-overview-box,
+.user-overview-box, 
 .posts-chart,
 .graduation-year-chart,
-.job-status-chart {
+.job-status-chart,
+.popular-events-chart { 
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -155,8 +156,9 @@ a {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 50%;
+  width: calc(50% - 20px); 
 }
+
 
 .graduation-year-chart {
   height: auto;

@@ -1,5 +1,6 @@
 <?php
 include('../backend/database.php');
+include('../backend/log_action.php');
 
 header('Content-Type: application/json');
 
@@ -11,15 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit();
     }
 
-   
+
     $firstName = $_GET['firstName'];
-    $middleName = $_GET['middleName'] ;
+    $middleName = $_GET['middleName'];
     $lastName = $_GET['lastName'];
     $username = $_GET['username'];
     $email = $_GET['email'];
     $company = $_GET['company'];
-    $role = $_GET['role']; 
-    $userId = $_GET['userId']; 
+    $role = $_GET['role'];
+    $userId = $_GET['userId'];
 
     $query = "UPDATE users 
               SET firstName = ?, middleName = ?, lastName = ?, username = ?, email = ?, company = ?
@@ -31,14 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($stmt->execute()) {
         if ($role === 'Alumni') {
             $degree = $_GET['degree'];
-            $isEmployed = $_GET['isEmployed'] ;
+            $isEmployed = $_GET['isEmployed'];
 
             $query2 = "UPDATE alumni SET degree = ?, isEmployed = ? WHERE userID = ?";
             $stmt2 = $conn->prepare($query2);
             $stmt2->bind_param("sii", $degree, $isEmployed, $userId);
-            
+
             if ($stmt2->execute()) {
-                http_response_code(200); 
+                http_response_code(200);
                 echo json_encode(['success' => true]);
 
                 $ipAddress = $_SERVER['REMOTE_ADDR'];
@@ -46,16 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $browserInfo = $_SERVER['HTTP_USER_AGENT'];
                 $actionDetails = "Admin has edited the details a user account";
                 $userID = $_SESSION['userID'];
-            
-                logAction($userID, 'Edit User Details', $ipAddress, $osInfo, $browserInfo, $actionDetails);
 
+                logAction($userID, 'Edit User Details', $ipAddress, $osInfo, $browserInfo, $actionDetails);
             } else {
-                http_response_code(500); 
+                http_response_code(500);
                 echo json_encode(['success' => false, 'error' => 'Failed to edit alumni details']);
             }
             $stmt2->close();
         } else {
-            http_response_code(200); 
+            http_response_code(200);
             echo json_encode(['success' => true]);
         }
     } else {

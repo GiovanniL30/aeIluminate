@@ -1,5 +1,6 @@
 <?php
 include('../backend/database.php');
+include('../backend/log_action.php');
 
 header('Content-Type: application/json');
 

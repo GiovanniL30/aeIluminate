@@ -8,9 +8,7 @@ $osInfo = php_uname('s') . ' ' . php_uname('r');
 $browserInfo = $_SERVER['HTTP_USER_AGENT'];
 $actionDetails = 'User logged out';
 
-logAction($userID, 'Logout', $ipAddress, $osInfo, $browserInfo, $actionDetails, date('Y-m-d H:i:s'));
-
-
+logAction($userID, 'Logout', $ipAddress, $osInfo, $browserInfo, $actionDetails);
 
 session_unset();
 session_destroy();

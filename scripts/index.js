@@ -164,6 +164,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let postsChartInstance = null;
 
   const fetchPostsStats = (month, year) => {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const monthName = monthNames[month - 1];
     fetch(`${baseUrl}/backend/get_posts.php?month=${month}&year=${year}`)
       .then((response) => response.json())
       .then((data) => {
@@ -189,9 +204,41 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           options: {
             responsive: true,
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+              tooltip: {
+                callbacks: {
+                  label: (tooltipItem) => {
+                    const month = monthName;
+                    const date = tooltipItem.label;
+                    const posts = tooltipItem.raw;
+                    return `${month} ${date}: ${posts} post${
+                      posts > 1 ? "s" : ""
+                    }`;
+                  },
+                },
+              },
+            },
             scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Dates",
+                },
+              },
               y: {
+                ticks: {
+                  display: false,
+                },
+                stepSize: 1,
+                precision: 0,
                 beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Number of Posts",
+                },
               },
             },
           },
@@ -223,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   // Function to fetch graduation year data
-  async function fetchGraduationYearData(month, year) {
+  async function fetchGraduationYearData() {
     const response = await fetch("backend/get_graduation_year.php");
     const data = await response.json();
     return data;
@@ -237,8 +284,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const values = data.map((item) => item.total);
 
     const ctx = document.getElementById("graduationYearChart").getContext("2d");
+    let graduationYearChartInstance = null;
 
-    new Chart(ctx, {
+    if (graduationYearChartInstance) {
+      graduationYearChartInstance.destroy();
+    }
+
+    graduationYearChartInstance = new Chart(ctx, {
       type: "doughnut",
       data: {
         labels: labels,

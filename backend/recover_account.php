@@ -27,11 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            // Store email and username in session
+            // Bind the result to a variable
+            $stmt->bind_result($userID);
+            $stmt->fetch();
+            
             $_SESSION['email'] = $email;
             $_SESSION['username'] = $username;
+            $_SESSION['userID'] = $userID;
 
-            echo json_encode(['success' => true, 'message' => 'User verified. Please update your password.']);
+            echo json_encode(['success' => true, 'message' => 'User  verified. Please update your password.']);
         } else {
             echo json_encode(['success' => false, 'error' => 'Email or username not found']);
         }

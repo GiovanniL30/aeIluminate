@@ -37,7 +37,7 @@ $conn->close();
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.css">
   <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-  <link rel="icon" href="assets/website icon.png" type="image/png" />
+  <link rel="icon" href="../assets/website icon.png" type="image/png" />
   <title>System Logs</title>
 </head>
 

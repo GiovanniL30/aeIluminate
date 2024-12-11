@@ -76,8 +76,6 @@ header {
   display: flex;
   width: 400px;
   height: 40px;
-  position: relative;
-  z-index: 1001;
 }
 
 .search input {

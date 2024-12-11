@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       },
     });
-  }
+  };
 
   createMonthNavigation(
     "prev-month",
@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   "#FFB300",
                   "#1C7430",
                   "#0064FF",
-                ], // Customize colors
+                ],
                 hoverOffset: 4,
               },
             ],
@@ -388,11 +388,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   };
 
+  createMonthNavigation(
+    "prev-month-events",
+    "next-month-events",
+    "current-month-events",
+    "jobStatusChart",
+    fetchJobStatusData
+  );
+
   // Call the function to render the chart on page load
   fetchJobStatusData();
 
   // Fetch and render popular events chart
-  let popularEventsChart = null;
   const fetchPopularEvents = (month, year) => {
     fetch(`${baseUrl}/backend/get_popular_events.php?month=${month}&year=${year}`)
       .then((response) => response.json())
@@ -401,11 +408,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const attendeeCounts = data.map((event) => event.total_interested_users);
 
         const ctx = document.getElementById("popularEventsChart").getContext("2d");
-
-        // Destroy existing chart if it exists
-        if (popularEventsChart) {
-          popularEventsChart.destroy();
-        }
 
         popularEventsChart = new Chart(ctx, {
           type: "doughnut",
@@ -454,4 +456,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "popularEventsChart",
     fetchPopularEvents
   );
+
+  fetchPopularEvents();
 });

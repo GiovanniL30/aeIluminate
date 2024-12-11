@@ -49,6 +49,10 @@ $userRole = $_SESSION['role'] ?? '';
         icon: `${baseUrl}/assets/clock.svg`,
       }
     } : {}),
+    [`${baseUrl}pages/applications.php`]: {
+      label: "Applications",
+      icon: `${baseUrl}/assets/application.svg`,
+    },
 
   };
 

@@ -73,11 +73,37 @@ include('../components/loader.php');
                         </div>
                     </div>
                 </header>
+
+                <div class="search-action">
+                    <a href="<?php echo $base_url; ?>/pages/accounts.php">
+                        <img src="../assets/back.png" alt="back" />
+                    </a>
+                    <p>as</p>
+                </div>
+
+                <div class="account-contents">
+                <div class="application-count">
+                    <div class="total-applications">
+                        <p>Total Applications</p>
+                        <h1 class="total-applications"></h1>
+                    </div>
+                </div>
+                <table class="application-list" id="applications-table">
+                    <tr class="table-header">
+                        <th>Name</th>
+                        <th>Graduation Year</th>
+                        <th>Email</th>
+                        <th>Application Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </table>
+                <div class="pages"></div>
+                </div>
             </div>
         </section>
-
     </div>
-    <script src="../scripts/accounts_pagination.js" type="module"></script>
+    <script src="../scripts/applications_pagination.js" type="module"></script>
 
 </body>
 </html>

@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function getDatesForMonth(month, year) {
     const dates = [];
     const currentDay = new Date().getDate(); // Get today's day
-    const daysInMonth = new Date(year , month, 0).getDate(); // Get the total number of days in the month
+    const daysInMonth = new Date(year, month, 0).getDate(); // Get the total number of days in the month
 
     // Calculate the start date for the group
     let startDay = Math.floor((currentDay - 1) / 5) * 5 + 1; // Calculate the closest starting day in 5-day intervals
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
             label: "Graduation Year",
             data: values,
             backgroundColor: [
-              "# FF5733",
+              "#FF5733",
               "#FF8D1A",
               "#FFB300",
               "#1C7430",
@@ -325,6 +325,8 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
   }
+
+  renderGraduationYearChart();
 
   let jobStatusChart = null;
   // Fetch job status data and render chart
@@ -449,57 +451,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchPopularEvent();
 
- let eventAttendeesChart = null; 
+  let eventAttendeesChart = null;
 
   function fetchEventAttendeesChart() {
-  const ctx = document.getElementById("eventAttendeesChart").getContext("2d");
+    const ctx = document.getElementById("eventAttendeesChart").getContext("2d");
 
-  fetch(`${baseUrl}/backend/get_event_attendees.php`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (!data.events || data.events.length === 0) {
-        console.error('No events found in the response');
-        return; 
-      }
+    fetch(`${baseUrl}/backend/get_event_attendees.php`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (!data.events || data.events.length === 0) {
+          console.error("No events found in the response");
+          return;
+        }
 
-      const eventTypes = data.events.map((item) => item.event_type);
-      const totalAttendees = data.events.map((item) => item.total_interested_users);
+        const eventTypes = data.events.map((item) => item.event_type);
+        const totalAttendees = data.events.map(
+          (item) => item.total_interested_users
+        );
 
-      if (eventAttendeesChart) {
-        eventAttendeesChart.destroy();
-      }
+        if (eventAttendeesChart) {
+          eventAttendeesChart.destroy();
+        }
 
-      eventAttendeesChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: eventTypes,
-          datasets: [{
-            label: "Number of Attendees", 
-            data: totalAttendees, 
-            backgroundColor: "#4e73df", 
-            borderColor: "#4e73df",
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: {
-              beginAtZero: true,
+        eventAttendeesChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: eventTypes,
+            datasets: [
+              {
+                label: "Number of Attendees",
+                data: totalAttendees,
+                backgroundColor: "#4e73df",
+                borderColor: "#4e73df",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                beginAtZero: true,
+              },
             },
           },
-        },
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
-}
+  }
   fetchEventAttendeesChart();
 });

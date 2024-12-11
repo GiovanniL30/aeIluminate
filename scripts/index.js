@@ -269,6 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchPostsStats
   );
 
+  let graduationYearChartInstance = null;
   // Function to fetch graduation year data
   async function fetchGraduationYearData() {
     const response = await fetch("backend/get_graduation_year.php");
@@ -284,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const values = data.map((item) => item.total);
 
     const ctx = document.getElementById("graduationYearChart").getContext("2d");
-    let graduationYearChartInstance = null;
 
     if (graduationYearChartInstance) {
       graduationYearChartInstance.destroy();

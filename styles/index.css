@@ -166,9 +166,14 @@ a {
   height: auto;
 }
 
+.event-attendees-chart,
+.popular-events-chart {
+  height: 400px; 
+}
+
 .total-users {
   text-align: center;
-  padding-bottom: 5%;
+  padding-bottom: 2%;
 }
 
 .month-navigation-container {

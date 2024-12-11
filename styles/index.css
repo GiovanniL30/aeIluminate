@@ -148,7 +148,8 @@ a {
 .posts-chart,
 .graduation-year-chart,
 .job-status-chart,
-.popular-events-chart { 
+.popular-events-chart,
+.event-attendees-chart { 
   display: flex;
   flex-direction: column;
   flex-grow: 1;

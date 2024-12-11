@@ -72,11 +72,12 @@ include('./backend/session_check.php');
                             <h4>Popular Events</h4>
                             <canvas id="popularEventsChart"></canvas>
                         </div>
-                    </div>
-                    <!-- <div class="event-attendees-chart">
+                         <div class="event-attendees-chart">
                             <h4>Alumnus Attending Events</h4>
                             <canvas id="eventAttendeesChart"></canvas> 
-                        </div> -->
+                        </div>
+                    </div>
+                   
                 </div> <!-- END OF DASHBOARD -->
             </div> <!-- END OF CONTAINER -->
         </section>

@@ -166,6 +166,11 @@ a {
   height: auto;
 }
 
+.total-users {
+  text-align: center;
+  padding-bottom: 5%;
+}
+
 .month-navigation-container {
   margin-top: 20px;
   display: flex;

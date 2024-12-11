@@ -35,7 +35,7 @@ include('./backend/session_check.php');
                     <div class="dashboard-charts">
                         <!-- User Overview -->
                         <div class="user-overview-box">
-                            <h4 id="total-users" style="text-align: left;"></h4>
+                            <h4 id="total-users"></h4>
                             <canvas id="userOverviewChart"></canvas>
                         </div>
                         <!-- Posts Chart -->

@@ -26,17 +26,23 @@ if (!$result) {
     exit;
 }
 
-if ($row = $result->fetch_assoc()) {
-    $response = [
+$events = [];
+
+while ($row = $result->fetch_assoc()) {
+    $events[] = [
         'event_type' => $row['eventType'],
         'total_interested_users' => $row['total_interested_users']
     ];
-} else {
-    $response = [
+}
+
+if (empty($events)) {
+    $events[] = [
         'event_type' => 'No Events Available',
         'total_interested_users' => 0
     ];
 }
+
+$response['events'] = $events; 
 
 echo json_encode($response, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 

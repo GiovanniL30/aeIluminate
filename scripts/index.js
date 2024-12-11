@@ -237,7 +237,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 beginAtZero: true,
                 title: {
                   display: true,
-                  text: "Number of Posts",
                 },
               },
             },
@@ -450,24 +449,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchPopularEvent();
 
-  const fetchEventAttendeesChart = document
-    .getElementById("eventAttendeesChart")
-    .getContext("2d");
+ let eventAttendeesChart = null; 
 
-  // Function to fetch data from the backend
+  function fetchEventAttendeesChart() {
+  const ctx = document.getElementById("eventAttendeesChart").getContext("2d");
+
   fetch(`${baseUrl}/backend/get_event_attendees.php`)
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then((data) => {
-      const eventTypes = data.map((item) => item.event_type);
-      const totalAttendees = data.map((item) => item.total_interested_users);
+      if (!data.events || data.events.length === 0) {
+        console.error('No events found in the response');
+        return; 
+      }
 
-      const ctx = document.getElementById("eventAttendeesChart").getContext("2d");
-      const eventAttendeesChart = new Chart(ctx, {
+      const eventTypes = data.events.map((item) => item.event_type);
+      const totalAttendees = data.events.map((item) => item.total_interested_users);
+
+      if (eventAttendeesChart) {
+        eventAttendeesChart.destroy();
+      }
+
+      eventAttendeesChart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: eventTypes,
           datasets: [{
-            label: "Number of Attendees ", 
+            label: "Number of Attendees", 
             data: totalAttendees, 
             backgroundColor: "#4e73df", 
             borderColor: "#4e73df",
@@ -488,6 +500,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(error => {
       console.error('Error fetching data:', error);
     });
-  
+}
   fetchEventAttendeesChart();
 });

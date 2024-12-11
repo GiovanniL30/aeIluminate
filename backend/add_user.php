@@ -10,8 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['emailaddress'];
     $role = $_POST['role'];
-    //$password = password_hash($_POST['password'], PASSWORD_DEFAULT); this is how to hash the password
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $graduationYear = $_POST['graduation'] ?? null;
     $isEmployed = isset($_POST['isEmployed']) && $_POST['isEmployed'] === 'Employed' ? 1 : 0;
     $school = $_POST['school'] ?? null;

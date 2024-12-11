@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Then insert into alumni table with the found programID
             $insertAlumniQuery = "INSERT INTO alumni (userID, year_graduated, programID, isEmployed) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($insertAlumniQuery);
-            $stmt->bind_param('isii', $newUserID, $graduationYear, $programID, $isEmployed);
+            $stmt->bind_param('sssi', $newUserID, $graduationYear, $programID, $isEmployed);
             $stmt->execute();
         }
         $ipAddress = $_SERVER['REMOTE_ADDR'];

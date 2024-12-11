@@ -160,7 +160,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           required
           minlength="1"
           maxlength="15"
-          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
           title="Name must start with a letter and contain only letters, hyphens and apostrophes"
           size="15" />
         <label for="middlename">Middle Name</label>
@@ -171,7 +170,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           required
           minlength="1"
           maxlength="15"
-          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
           title="Name must start with a letter and contain only letters, hyphens and apostrophes"
           size="15" />
         <input type="checkbox" id="noMiddleName" /> <span> Click the checkbox if no middle name </span>
@@ -183,7 +181,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           required
           minlength="1"
           maxlength="15"
-          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
           title="Name must start with a letter and contain only letters, hyphens and apostrophes"
           size="15" />
       </div>
@@ -196,7 +193,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           required
           minlength="1"
           maxlength="15"
-          pattern="^[a-zA-Z0-9_\-\.]+$"
           title="Username can only contain letters, numbers, underscores and hyphens"
           size="15" />
         <label for="role">Role Type:</label>
@@ -214,7 +210,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           required
           minlength="1"
           maxlength="100"
-          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           title="Please enter a valid email address"
           size="100" />
         <label for="password">Password</label>
@@ -225,7 +220,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           required
           minlength="8"
           maxlength="50"
-          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9!@#$%^&*]{8,}$"
           title="Password must contain at least 8 characters, one uppercase letter, one number, and one special character"
           size="50" />
         <div id="showPassword"> </div>

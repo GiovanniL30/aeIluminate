@@ -101,6 +101,75 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPrograms(school);
   });
 
+  function updateProgramSelect(programs) {
+    programSelect.innerHTML = '<option value="">Select Program</option>';
+    programs.forEach((program) => {
+        const option = document.createElement("option");
+        option.value = program;
+        option.textContent = program;
+        programSelect.appendChild(option);
+    });
+
+    // Add "Others" option
+    const othersOption = document.createElement("option");
+    othersOption.value = "others";
+    othersOption.textContent = "Others";
+    programSelect.appendChild(othersOption);
+  }
+
+  // Add event listener for program selection
+  programSelect.addEventListener("change", (e) => {
+    if (e.target.value === "others") {
+      // Create input field
+      const inputProgram = document.createElement("input");
+      inputProgram.type = "text";
+      inputProgram.id = "custom-program";
+      inputProgram.className = "inputFields";
+      inputProgram.required = true;
+      inputProgram.placeholder = "Enter program name";
+      inputProgram.size = 20;
+            
+      // Apply company name validation rules
+      const programRegex = /^[A-Za-z0-9][A-Za-z0-9\s\-&.,']*$/;
+            
+      inputProgram.addEventListener("input", (e) => {
+        let value = e.target.value;
+                
+          if (value.startsWith(" ")) {
+              value = value.trimStart();
+              inputProgram.value = value;
+          }
+
+          if (value.length === 0) {
+              inputProgram.setAttribute("title", "Program name is required");
+              inputProgram.classList.add("input-error");
+              inputProgram.classList.remove("input-valid");
+              return;
+          }
+
+          if (!programRegex.test(value)) {
+              inputProgram.setAttribute("title", "Program name must start with a letter or number and can contain letters, numbers, spaces, hyphens, ampersands, periods, and commas");
+              inputProgram.classList.add("input-error");
+              inputProgram.classList.remove("input-valid");
+          } else {
+              inputProgram.setAttribute("title", "");
+              inputProgram.classList.remove("input-error");
+              inputProgram.classList.add("input-valid");
+          }
+      });
+
+      inputProgram.addEventListener("keypress", (e) => {
+        if (inputProgram.value.length === 0 && e.key === " ") {
+            e.preventDefault();
+        }
+      });
+
+      // Replace select with input
+      programSelect.style.display = "none";
+      programSelect.parentNode.insertBefore(inputProgram, programSelect.nextSibling);
+    }
+  });
+
   function validateGraduationYear() {
     const graduationInput = document.getElementById("graduation");
     const currentYear = new Date().getFullYear();
@@ -590,7 +659,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (showPasswordButton) {
     showPasswordButton.classList.add("show");
   }
-  
+
   showPasswordButton.addEventListener("click", showPassword);
 
   // Debugging: Check if the form is selected correctly
@@ -625,7 +694,20 @@ document.addEventListener("DOMContentLoaded", () => {
             middleNameInput.value = "";
             noMiddleNameCheckbox.checked = false;
         }
+
+        const schoolSelect = document.getElementById("school");
+        const programSelect = document.getElementById("program");
+        const customProgram = document.getElementById("custom-program");
         
+        if (customProgram) {
+            customProgram.remove();
+        }
+        
+        schoolSelect.value = "";
+        
+        programSelect.style.display = "";
+        programSelect.innerHTML = '<option value="">Select Program</option>';
+
         addUserForm.parentElement.style.display = "none";
         mainContent.classList.remove("blur");
         mainContent.style.pointerEvents = "auto";
@@ -656,30 +738,55 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("jobstatus").addEventListener("change", toggleFieldsEmp);
 
   addUserForm.addEventListener("submit", async (event) => {
-  event.preventDefault(); // prevent the default form submission
-    
+    event.preventDefault();
+      
     try {
       const formData = new FormData(addUserForm);
-      const response = await fetch(addUserForm.action, {
+      const customProgram = document.getElementById("custom-program");
+        
+      if (customProgram && customProgram.value) {
+        const school = document.getElementById("school").value;
+        const programResponse = await fetch("../backend/add_program.php", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            school_name: school,
+            program_name: customProgram.value
+          })
+        });
+    
+        const programResult = await programResponse.json();
+        
+        if (!programResult.success) {
+          throw new Error(programResult.error || "Failed to add program");
+        }
+        
+        formData.set("program", customProgram.value);
+      }
+      
+      // Add user
+      const userResponse = await fetch(addUserForm.action, {
         method: "POST",
-        body: formData,
+        body: formData
       });
-
-      if (response.ok) {
+  
+      // Since data is added successfully but response might not be JSON
+      if (userResponse.ok) {
         alert("User added successfully.");
         addUserForm.parentElement.style.display = "none";
         mainContent.classList.remove("blur");
         mainContent.style.pointerEvents = "auto";
-        addUserForm.reset(); // reset the fields
+        addUserForm.reset();
         window.location.reload();
       } else {
-        const errorText = await response.text();
-        console.error("Error adding user:", errorText);
-        alert("Error adding user: " + errorText);
+        throw new Error("Failed to add user");
       }
+  
     } catch (error) {
-      console.error("Error adding user:", error);
-      alert("Error adding user: " + error.message);
+      console.error("Error:", error);
+      alert(error.message);
     }
   });
 });

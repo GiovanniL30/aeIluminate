@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.getElementById("logout-button");
 
   if (adminAction && modal && closeModal && logoutButton) {
-    adminAction.onclick = function() {
+    adminAction.onclick = function () {
       modal.style.display = "block";
     };
 

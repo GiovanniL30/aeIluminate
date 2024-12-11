@@ -101,6 +101,13 @@ tr {
   align-self: center;
   margin: 0 10px;
 }
+
+.search {
+  width: 400px;
+  height: 40px;
+  position: relative;
+}
+
 .search > form {
   display: block;
   width: 100%;
@@ -115,6 +122,26 @@ tr {
 .search > form > button > img {
   width: 20px;
   height: 20px;
+}
+
+.search input {
+  width: 100%;
+  border-radius: 20px;
+  padding-left: 40px;
+  background-color: var(--drop);
+  border: 1px solid var(--grey);
+}
+
+.search input:focus {
+  outline-color: var(--primary) !important;
+}
+
+.search img {
+  position: absolute;
+  top: 25%;
+  left: 20px;
+  width: 15px;
+  translate: (-50%, -50%);
 }
 
 .floating-add-user-form {
@@ -189,7 +216,7 @@ tr {
   position: relative;
 }
 
-.floating-add-user-form div#graduationFields input[type="number"]{
+.floating-add-user-form div#graduationFields input[type="number"] {
   width: 13%;
 }
 

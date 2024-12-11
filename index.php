@@ -51,7 +51,7 @@ include('./backend/session_check.php');
                             </div>
                             <canvas id="postsChart"></canvas>
                             <!-- Statistics for Today, Yesterday, and Average -->
-                            <div class="stats-container" style="text-aligh: left;">
+                            <div class="stats-container">
                                 <span id="today-stat">Today: 0</span>
                                 <span id="yesterday-stat">Yesterday: 0</span>
                                 <span id="average-stat">Average: 0</span>

@@ -400,62 +400,92 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchJobStatusData();
 
   // Fetch and render popular events chart
-  const fetchPopularEvents = (month, year) => {
-    fetch(`${baseUrl}/backend/get_popular_events.php?month=${month}&year=${year}`)
-      .then((response) => response.json())
-      .then((data) => {
-        const eventNames = data.map((event) => event.event_type);
-        const attendeeCounts = data.map((event) => event.total_interested_users);
+const popularEventsChartCtx = document.getElementById("popularEventsChart").getContext("2d");
+let popularEventsChartInstance = null;
 
-        const ctx = document.getElementById("popularEventsChart").getContext("2d");
+const fetchPopularEventsStats = (month, year) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const monthName = monthNames[month - 1];
 
-        popularEventsChart = new Chart(ctx, {
-          type: "doughnut",
-          data: {
-            labels: eventNames,
-            datasets: [
-              {
-                label: "Interested Users",
-                data: attendeeCounts,
-                backgroundColor: [
-                  "#FF6384",
-                  "#36A2EB",
-                  "#FFCE56",
-                  "#4BC0C0",
-                  "#9966FF",
-                ],
-                hoverOffset: 4,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top",
-              },
-              tooltip: {
-                callbacks: {
-                  label: (tooltipItem) => {
-                    return `${tooltipItem.label}: ${tooltipItem.raw} interested users`;
-                  },
+  fetch(`${baseUrl}/backend/get_events.php?month=${month}&year=${year}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const eventNames = data.map((event) => event.event_type);
+      const attendeeCounts = data.map((event) => event.total_interested_users);
+
+      if (popularEventsChartInstance) {
+        popularEventsChartInstance.destroy();
+      }
+
+      popularEventsChartInstance = new Chart(popularEventsChartCtx, {
+        type: "doughnut",
+        data: {
+          labels: eventNames,
+          datasets: [
+            {
+              label: "Interested Users",
+              data: attendeeCounts,
+              backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56",
+                "#4BC0C0",
+                "#9966FF",
+              ],
+              hoverOffset: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            tooltip: {
+              callbacks: {
+                label: (tooltipItem) => {
+                  const label = tooltipItem.chart.data.labels[tooltipItem.dataIndex];
+                  const value = tooltipItem.raw;
+                  return `${label}: ${value} interested users`;
                 },
               },
             },
           },
-        });
-      })
-      .catch((error) => console.error("Error fetching popular events:", error));
-  };
+        },
+      });
 
-  // Initialize the month navigation for the popular events chart
-  createMonthNavigation(
-    "prev-month-events",
-    "next-month-events",
-    "current-month-events",
-    "popularEventsChart",
-    fetchPopularEvents
-  );
+      // Display "Today", "Yesterday", "Average" below the chart
+      document.getElementById("today-stat").innerText = `Today: ${data.today}`;
+      document.getElementById("yesterday-stat").innerText = `Yesterday: ${data.yesterday}`;
+      document.getElementById("average-stat").innerText = `Average: ${data.monthly_average}`;
+    })
+    .catch((error) => {
+      console.error("Error fetching popular events stats:", error);
+    });
+};
 
-  fetchPopularEvents();
+// Initialize the month navigation for the popular events chart
+createMonthNavigation(
+  "prev-month-events",
+  "next-month-events",
+  "current-month-events",
+  "popularEventsChart",
+  fetchPopularEventsStats
+);
+
+fetchPopularEventsStats();
 });

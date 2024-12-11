@@ -236,7 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-    middleNameInput.setAttribute('placeholder', 'Click the Checkbox if you have no Middle Name');
   }
   validateNames();
 
@@ -568,11 +567,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showPassword() {
-    var password = document.getElementById("password");
+    const password = document.getElementById("password");
+    const toggleBtn = document.getElementById("showPassword");
     if (password.type === "password") {
       password.type = "text";
+      toggleBtn.classList.remove("show");
+      toggleBtn.classList.add("hide");
     } else {
       password.type = "password";
+      toggleBtn.classList.remove("hide");
+      toggleBtn.classList.add("show");
     }
   }
 
@@ -583,6 +587,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const formInputs = document.querySelectorAll(".floating-add-user-form input");
   const showPasswordButton = document.getElementById("showPassword");
 
+  if (showPasswordButton) {
+    showPasswordButton.classList.add("show");
+  }
+  
   showPasswordButton.addEventListener("click", showPassword);
 
   // Debugging: Check if the form is selected correctly

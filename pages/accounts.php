@@ -174,7 +174,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           pattern="^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s\-']*$"
           title="Name must start with a letter and contain only letters, hyphens and apostrophes"
           size="15" />
-        <input type="checkbox" id="noMiddleName" />
+        <input type="checkbox" id="noMiddleName" /> <span> Click the checkbox if no middle name </span>
         <label for="lastname">Last Name</label>
         <input class="inputFields"
           type="text"
@@ -228,7 +228,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
           pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9!@#$%^&*]{8,}$"
           title="Password must contain at least 8 characters, one uppercase letter, one number, and one special character"
           size="50" />
-        <input type="checkbox" id="showPassword" /> Show Password
+        <div id="showPassword"> </div>
       </div>
       <div id="graduationFields">
         <label for="graduation">Graduation Year:</label>

@@ -175,13 +175,13 @@ tr {
 
 .floating-add-user-form div#username-roleField {
   position: fixed;
-  top: 155px;
+  top: 160px;
   width: 100%;
 }
 
 .floating-add-user-form div#email-passwordField {
   position: fixed;
-  top: 240px;
+  top: 245px;
   width: 100%;
 }
 
@@ -233,6 +233,53 @@ tr {
   font-weight: 500;
 }
 
+/* Position checkbox inside the input */
+.floating-add-user-form #noMiddleName  {
+  position: absolute;
+  right: 765px; /* Adjust right padding */
+  top: 106%; /* Center vertically */
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+.floating-add-user-form #noMiddleName + span {
+  position: absolute;
+  right: 432px; /* Adjust right padding */
+  top: 110%; /* Center vertically */
+  transform: translateY(-50%);
+  font-size: 10px;
+  width: 330px;
+  height: 15px;
+}
+
+
+/* Style the toggle icon for show/hide password */
+.floating-add-user-form #showPassword {
+  position: absolute;
+  right: 450px;
+  top: 65%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: all 0.3s ease;
+}
+
+/* Show password icon state */
+.floating-add-user-form #showPassword.show {
+  background-image: url('../assets/show_password.png');
+}
+
+/* Hide password icon state */
+.floating-add-user-form #showPassword.hide {
+  background-image: url('../assets/hide_password.png');
+}
+
 /* .floating-add-user-form div#nameFields input[type="text"] {
   width: 20%;
 } */
@@ -243,9 +290,9 @@ tr {
 .floating-add-user-form form input[type="number"],
 .floating-add-user-form form textarea {
   width: 30%;
-  padding: 12px 20px;
+  padding: 12px 14px;
   font-size: 14px;
-  border: 1px solid var(--grey);
+  border: 1px solid #979797;
   border-radius: 5px;
   color: black;
   margin: 25px 5px 5px 5px;
@@ -260,7 +307,7 @@ tr {
   margin: 25px 5px 5px 5px;
   height: 45px;
   border-radius: 5px;
-  border: 1px solid var(--grey);
+  border: 1px solid #979797;
   padding-inline: 10px;
 }
 
@@ -282,6 +329,7 @@ tr {
   padding: 12px 32px;
   font-size: 16px;
   border-radius: 5px;
+  border: 1px solid #979797;
   color: black;
   margin: 5px 5px 5px 5px;
   cursor: pointer;

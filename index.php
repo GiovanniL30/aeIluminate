@@ -46,7 +46,7 @@ include('./backend/session_check.php');
                                 <div class="month-navigation">
                                     <img id="prev-month" src="assets/previous.png" alt="Previous Month" />
                                     <span id="current-month">December</span>
-                                    <img id="next.png-month" src="assets/next.png" alt="Next Month" />
+                                    <img id="next-month" src="assets/next.png" alt="Next Month" />
                                 </div>
                             </div>
                             <canvas id="postsChart"></canvas>
@@ -64,7 +64,7 @@ include('./backend/session_check.php');
                                 <div class="month-navigation">
                                     <img id="prev-month" src="assets/previous.png" alt="Previous Month" />
                                     <span id="current-month">December</span>
-                                    <img id="next.png-month" src="assets/next.png" alt="Next Month" />
+                                    <img id="next-month" src="assets/next.png" alt="Next Month" />
                                 </div>
                             </div>
                             <canvas id="graduationYearChart"></canvas>
@@ -81,7 +81,7 @@ include('./backend/session_check.php');
                                 <div class="month-navigation">
                                     <img id="prev-month-events" src="assets/previous.png" alt="Previous Month" />
                                     <span id="current-month-events">December</span>
-                                    <img id="next.png-month-events" src="assets/next.png" alt="Next Month" />
+                                    <img id="next-month-events" src="assets/next.png" alt="Next Month" />
                                 </div>
                             </div>
                             <canvas id="popularEventsChart"></canvas>

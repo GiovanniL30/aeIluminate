@@ -44,9 +44,9 @@ include('./backend/session_check.php');
                             <!-- Month Navigation -->
                             <div class="month-navigation-container">
                                 <div class="month-navigation">
-                                    <img id="prev-month" src="assets/previous" alt="Previous Month" />
+                                    <img id="prev-month" src="assets/previous.png" alt="Previous Month" />
                                     <span id="current-month">December</span>
-                                    <img id="next-month" src="assets/next" alt="Next Month" />
+                                    <img id="next.png-month" src="assets/next.png" alt="Next Month" />
                                 </div>
                             </div>
                             <canvas id="postsChart"></canvas>
@@ -62,9 +62,9 @@ include('./backend/session_check.php');
                             <h4>Graduation Year</h4>
                             <div class="month-navigation-container">
                                 <div class="month-navigation">
-                                    <img id="prev-month" src="assets/previous" alt="Previous Month" />
+                                    <img id="prev-month" src="assets/previous.png" alt="Previous Month" />
                                     <span id="current-month">December</span>
-                                    <img id="next-month" src="assets/next" alt="Next Month" />
+                                    <img id="next.png-month" src="assets/next.png" alt="Next Month" />
                                 </div>
                             </div>
                             <canvas id="graduationYearChart"></canvas>
@@ -79,9 +79,9 @@ include('./backend/session_check.php');
                             <h4>Popular Events</h4>
                             <div class="month-navigation-container">
                                 <div class="month-navigation">
-                                    <img id="prev-month-events" src="assets/previous" alt="Previous Month" />
+                                    <img id="prev-month-events" src="assets/previous.png" alt="Previous Month" />
                                     <span id="current-month-events">December</span>
-                                    <img id="next-month-events" src="assets/next" alt="Next Month" />
+                                    <img id="next.png-month-events" src="assets/next.png" alt="Next Month" />
                                 </div>
                             </div>
                             <canvas id="popularEventsChart"></canvas>

@@ -1,4 +1,4 @@
-import { baseUrl } from "./utils";
+import { baseUrl } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const adminAction = document.getElementById("admin-account");

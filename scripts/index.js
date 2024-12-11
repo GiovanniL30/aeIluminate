@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       },
     });
-  };
+  }
 
   createMonthNavigation(
     "prev-month",
@@ -335,6 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderGraduationYearChart
   );
 
+  let jobStatusChart = null;
   // Fetch job status data and render chart
   const fetchJobStatusData = () => {
     fetch(`${baseUrl}/backend/get_job_status.php`)
@@ -345,7 +346,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const labels = data.map((item) => item.status);
         const values = data.map((item) => item.total);
 
-        new Chart(ctx, {
+        if (jobStatusChart) {
+          jobStatusChart.destroy();
+        }
+
+        jobStatusChart = new Chart(ctx, {
           type: "doughnut",
           data: {
             labels: labels,
@@ -399,15 +404,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Call the function to render the chart on page load
   fetchJobStatusData();
 
+  let popularEventsChart = null;
   // Fetch and render popular events chart
   const fetchPopularEvents = (month, year) => {
-    fetch(`${baseUrl}/backend/get_popular_events.php?month=${month}&year=${year}`)
+    fetch(
+      `${baseUrl}/backend/get_popular_events.php?month=${month}&year=${year}`
+    )
       .then((response) => response.json())
       .then((data) => {
         const eventNames = data.map((event) => event.event_type);
-        const attendeeCounts = data.map((event) => event.total_interested_users);
+        const attendeeCounts = data.map(
+          (event) => event.total_interested_users
+        );
 
-        const ctx = document.getElementById("popularEventsChart").getContext("2d");
+        const ctx = document
+          .getElementById("popularEventsChart")
+          .getContext("2d");
+
+        if (popularEventsChart) {
+          popularEventsChart.destroy();
+        }
 
         popularEventsChart = new Chart(ctx, {
           type: "doughnut",

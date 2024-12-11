@@ -60,11 +60,11 @@ include('./backend/session_check.php');
                         <!-- Graduation Year Doughnut Chart -->
                         <div class="graduation-year-chart">
                             <h4>Graduation Year</h4>
-                            <div class="month-navigation-container">
+                             <div class="month-navigation-container">
                                 <div class="month-navigation">
-                                    <img id="prev-month" src="assets/previous.png" alt="Previous Month" />
-                                    <span id="current-month">December</span>
-                                    <img id="next-month" src="assets/next.png" alt="Next Month" />
+                                    <img id="prev-month-events" src="assets/previous.png" alt="Previous Month" />
+                                    <span id="current-month-events">December</span>
+                                    <img id="next-month-events" src="assets/next.png" alt="Next Month" />
                                 </div>
                             </div>
                             <canvas id="graduationYearChart"></canvas>
@@ -72,6 +72,13 @@ include('./backend/session_check.php');
                         <!--Employment Doughnut Chart -->
                         <div class="job-status-chart">
                             <h4>Job Status</h4>
+                            <div class="month-navigation-container">
+                                <div class="month-navigation">
+                                    <img id="prev-month-events" src="assets/previous.png" alt="Previous Month" />
+                                    <span id="current-month-events">December</span>
+                                    <img id="next-month-events" src="assets/next.png" alt="Next Month" />
+                                </div>
+                            </div>
                             <canvas id="jobStatusChart"></canvas>
                         </div>
                         <!-- Popular Events Doughnut Chart -->
@@ -86,6 +93,7 @@ include('./backend/session_check.php');
                             </div>
                             <canvas id="popularEventsChart"></canvas>
                         </div>
+
                     </div>
                 </div> <!-- END OF DASHBOARD -->
             </div> <!-- END OF CONTAINER -->

@@ -404,42 +404,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // Call the function to render the chart on page load
   fetchJobStatusData();
 
-  let popularEventsChart = null;
-  // Fetch and render popular events chart
-  const fetchPopularEvents = (month, year) => {
-    fetch(
-      `${baseUrl}/backend/get_popular_events.php?month=${month}&year=${year}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const eventNames = data.map((event) => event.event_type);
-        const attendeeCounts = data.map(
-          (event) => event.total_interested_users
-        );
+  // Fetch and render popular event doughnut chart
+  const fetchPopularEventsChart = document
+  .getElementById("popularEventsChart")
+  .getContext("2d");
 
-        const ctx = document
-          .getElementById("popularEventsChart")
-          .getContext("2d");
+const fetchPopularEvent = () => {
+  fetch(`${baseUrl}/backend/get_popular_events.php`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error) {
+        console.error("Error fetching popular event:", data.error);
+        return;
+      }
 
-        if (popularEventsChart) {
-          popularEventsChart.destroy();
-        }
+      const eventName = data.event_type || "No event data";
+      const attendeeCount = data.total_interested_users || 0;
 
-      popularEventsChartInstance = new Chart(popularEventsChartCtx, {
+      if (window.popularEventsChartInstance) {
+        window.popularEventsChartInstance.destroy();
+      }
+
+      // Render the doughnut chart
+      window.popularEventsChartInstance = new Chart(fetchPopularEventsChart, {
         type: "doughnut",
         data: {
-          labels: eventNames,
+          labels: [eventName],
           datasets: [
             {
               label: "Interested Users",
-              data: attendeeCounts,
-              backgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#4BC0C0",
-                "#9966FF",
-              ],
+              data: [attendeeCount],
+              backgroundColor: ["#FF6384"],
               hoverOffset: 4,
             },
           ],
@@ -453,7 +448,8 @@ document.addEventListener("DOMContentLoaded", () => {
             tooltip: {
               callbacks: {
                 label: (tooltipItem) => {
-                  const label = tooltipItem.chart.data.labels[tooltipItem.dataIndex];
+                  const label =
+                    tooltipItem.chart.data.labels[tooltipItem.dataIndex];
                   const value = tooltipItem.raw;
                   return `${label}: ${value} interested users`;
                 },
@@ -462,25 +458,54 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         },
       });
-
-      // Display "Today", "Yesterday", "Average" below the chart
-      document.getElementById("today-stat").innerText = `Today: ${data.today}`;
-      document.getElementById("yesterday-stat").innerText = `Yesterday: ${data.yesterday}`;
-      document.getElementById("average-stat").innerText = `Average: ${data.monthly_average}`;
     })
-    .catch((error) => {
-      console.error("Error fetching popular events stats:", error);
-    });
+    .catch((error) =>
+      console.error("Error fetching popular event data:", error)
+    );
 };
 
-// Initialize the month navigation for the popular events chart
-createMonthNavigation(
-  "prev-month-events",
-  "next-month-events",
-  "current-month-events",
-  "popularEventsChart",
-  fetchPopularEventsStats
-);
+  fetchPopularEvent();
+  
+  const fetchEventAttendeesChart = document
+  .getElementById("eventAttendeesChart")
+    .getContext("2d");
+  
+  // Function to fetch data from the backend
+  fetch(`${baseUrl}/backend/get_popular_events.php`)
+  .then(response => response.json()) // Parse the response as JSON
+  .then(data => {
+    // Prepare data for the bar chart
+    const eventTypes = data.map(item => item.event_type);
+    const totalAttendees = data.map(item => item.total_interested_users);
 
-fetchPopularEventsStats();
+    // Create a bar chart using Chart.js
+    const ctx = document.getElementById('eventAttendeesChart').getContext('2d'); 
+    const eventAttendeesChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: eventTypes, 
+        datasets: [{
+          label: 'Number of Attendees', 
+          data: totalAttendees, 
+          backgroundColor: '#4e73df', 
+          borderColor: '#4e73df',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+
+  fetchEventAttendeesChart();
 });

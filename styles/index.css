@@ -135,11 +135,12 @@ a {
 
 /* STATISTICS */
 .dashboard-charts {
-  margin-top: 10%;
+  margin-top: 2%;
   display: flex;
-  gap: 20px;
-  overflow: auto;
+  flex-wrap: wrap; 
+  gap: 20px; 
   width: 100%;
+  justify-content: space-between; 
 }
 
 .user-overview-box, 
@@ -156,9 +157,8 @@ a {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: calc(50% - 20px); 
+  width: calc(25% - 15px); 
 }
-
 
 .graduation-year-chart {
   height: auto;
@@ -261,8 +261,26 @@ hr {
   }
 }
 
+@media (max-width: 1024px) {
+  .user-overview-box, 
+  .posts-chart,
+  .graduation-year-chart,
+  .job-status-chart,
+  .popular-events-chart {
+    width: calc(50% - 15px); 
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-charts {
-    flex-direction: column;
+    flex-direction: column; 
+  }
+
+  .user-overview-box, 
+  .posts-chart,
+  .graduation-year-chart,
+  .job-status-chart,
+  .popular-events-chart {
+    width: 100%; 
   }
 }

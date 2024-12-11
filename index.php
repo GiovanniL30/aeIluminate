@@ -60,41 +60,23 @@ include('./backend/session_check.php');
                         <!-- Graduation Year Doughnut Chart -->
                         <div class="graduation-year-chart">
                             <h4>Graduation Year</h4>
-                             <div class="month-navigation-container">
-                                <div class="month-navigation">
-                                    <img id="prev-month-events" src="assets/previous.png" alt="Previous Month" />
-                                    <span id="current-month-events">December</span>
-                                    <img id="next-month-events" src="assets/next.png" alt="Next Month" />
-                                </div>
-                            </div>
                             <canvas id="graduationYearChart"></canvas>
-                        </div> <!-- END OF GRADUATION YEAR CHART -->
+                        </div>
                         <!--Employment Doughnut Chart -->
                         <div class="job-status-chart">
                             <h4>Job Status</h4>
-                            <div class="month-navigation-container">
-                                <div class="month-navigation">
-                                    <img id="prev-month-events" src="assets/previous.png" alt="Previous Month" />
-                                    <span id="current-month-events">December</span>
-                                    <img id="next-month-events" src="assets/next.png" alt="Next Month" />
-                                </div>
-                            </div>
                             <canvas id="jobStatusChart"></canvas>
                         </div>
                         <!-- Popular Events Doughnut Chart -->
                         <div class="popular-events-chart">
                             <h4>Popular Events</h4>
-                            <div class="month-navigation-container">
-                                <div class="month-navigation">
-                                    <img id="prev-month-events" src="assets/previous.png" alt="Previous Month" />
-                                    <span id="current-month-events">December</span>
-                                    <img id="next-month-events" src="assets/next.png" alt="Next Month" />
-                                </div>
-                            </div>
                             <canvas id="popularEventsChart"></canvas>
                         </div>
-
                     </div>
+                    <!-- <div class="event-attendees-chart">
+                            <h4>Alumnus Attending Events</h4>
+                            <canvas id="eventAttendeesChart"></canvas> 
+                        </div> -->
                 </div> <!-- END OF DASHBOARD -->
             </div> <!-- END OF CONTAINER -->
         </section>

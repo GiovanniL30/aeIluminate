@@ -431,9 +431,13 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        const eventName = data.event_type || "No event data";
-        const attendeeCount = data.total_interested_users || 0;
-        const colors = generateColors(5);
+        const eventNames = data.map(
+          (event) => event.event_type || "No event data"
+        );
+        const attendeeCounts = data.map(
+          (event) => event.total_interested_users || 0
+        );
+        const colors = generateColors(eventNames.length);
 
         if (window.popularEventsChartInstance) {
           window.popularEventsChartInstance.destroy();
@@ -443,11 +447,11 @@ document.addEventListener("DOMContentLoaded", () => {
         window.popularEventsChartInstance = new Chart(fetchPopularEventsChart, {
           type: "doughnut",
           data: {
-            labels: [eventName],
+            labels: eventNames,
             datasets: [
               {
                 label: "Interested Users",
-                data: [attendeeCount],
+                data: attendeeCounts,
                 backgroundColor: colors,
                 borderColor: colors,
                 borderWidth: 1,

@@ -15,6 +15,10 @@ header('Content-Type: application/json');
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 if (isset($_GET['userID'])) {
     $userID = $_GET['userID'];
     $applicationId = $_GET['applicationId'];
@@ -72,7 +76,8 @@ if (isset($_GET['userID'])) {
             $osInfo = php_uname('s') . ' ' . php_uname('r');
             $browserInfo = $_SERVER['HTTP_USER_AGENT'];
             $actionDetails = "Accepted application for user ID: $userID";
-            logAction($userID, 'Accept Application', $ipAddress, $osInfo, $browserInfo, $actionDetails);
+            $adminID = $_SESSION['userID'];
+            logAction($adminID, 'Accept Application', $ipAddress, $osInfo, $browserInfo, $actionDetails);
 
 
             echo json_encode(['message' => 'Application accepted and email sent']);

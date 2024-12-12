@@ -13,6 +13,10 @@ header('Content-Type: application/json');
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 if (isset($_GET['userID'])) {
     $userID = $_GET['userID'];
 
@@ -24,6 +28,7 @@ if (isset($_GET['userID'])) {
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
+    $stmt->close();
 
     if ($user && !empty($user['email'])) {
         // Delete the user
@@ -63,6 +68,14 @@ if (isset($_GET['userID'])) {
                     </div>';
 
                 $mail->send();
+
+                // Log action
+                $ipAddress = $_SERVER['REMOTE_ADDR'];
+                $osInfo = php_uname('s') . ' ' . php_uname('r');
+                $browserInfo = $_SERVER['HTTP_USER_AGENT'];
+                $actionDetails = "Rejected application";
+                $adminID = $_SESSION['userID'];
+                logAction($adminID, 'Reject Application', $ipAddress, $osInfo, $browserInfo, $actionDetails);
 
 
                 echo json_encode(['message' => 'Application rejected and email sent']);

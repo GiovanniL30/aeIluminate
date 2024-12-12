@@ -48,7 +48,7 @@ const renderApplications = (page) => {
                 </div>
             </td>
         `;
-    accountTable.appendChild(row);
+    applicationsTable.appendChild(row);
   });
 
   updatePageNumber(currentPage);

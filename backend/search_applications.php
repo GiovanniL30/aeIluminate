@@ -17,7 +17,7 @@ if (!in_array($sortOrder, $allowedSortOrder)) {
 
 $query = "%{$query}%";
 
-$sql = "SELECT u.userID as userID
+$sql = "SELECT u.userID as userID,
                 u.firstName as firstName,
                 u.middleName as middleName,
                 u.lastName as lastName,
@@ -27,7 +27,7 @@ $sql = "SELECT u.userID as userID
          FROM users u 
          JOIN application app ON u.userID = app.userID 
          JOIN alumni a ON u.userID = a.userID 
-         ORDER BY $sortBy $sortOrder;"
+         ORDER BY $sortBy $sortOrder";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('ssss', $query, $query, $query, $query);

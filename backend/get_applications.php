@@ -4,7 +4,7 @@ include('../backend/database.php');
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'userID';
 $sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : 'asc';
 
-$query = "SELECT u.userID as userID
+$query = "SELECT u.userID as userID,
                  u.firstName as firstName,
                  u.middleName as middleName,
                  u.lastName as lastName,

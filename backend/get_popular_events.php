@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Donna Liza Luis
+ * 
+ * This file is used to get the popular events.
+ */
 include('../backend/database.php');
 
 $response = [];

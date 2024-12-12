@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Donna Liza Luis
+ * 
+ * This file is used to get the graduation years of the alumnus.
+ */
 include('../backend/database.php');
 
 // Query to get the count of users by graduation year

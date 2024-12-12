@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Donna Liza Luis
+ * 
+ * This file is used to get the number of attendees for the top events.
+ */
+
 include('../backend/database.php');
 
 $response = [];

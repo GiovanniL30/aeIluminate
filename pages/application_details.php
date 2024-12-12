@@ -123,6 +123,7 @@ if (isset ($_GET['userId'])) {
     </div>
 
     <script src="../scripts/applications_pagination.js" type="module"></script>
+    <script src="../scripts/view_application_details.js" type="module"></script>
 
 </body>
 </html>

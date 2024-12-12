@@ -30,9 +30,9 @@ function sendVerificationEmail($email, $firstName) {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Welcome to AeIluminate - Verify Your Email';
+        $mail->Subject = 'Welcome to aeIluminate - Verify Your Email';
         $mail->Body = "
-            <h2>Welcome to AeIlluminate, {$firstName}!</h2>
+            <h2>Welcome to aeIlluminate, {$firstName}!</h2>
             <p>Thank you for registering. Please verify your email address by clicking the link below:</p>
             <p><a href='{$verificationLink}' style='padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;'>Verify Email Address</a></p>
             <p>If you cannot click the button, copy and paste this link in your browser:</p>
@@ -40,7 +40,7 @@ function sendVerificationEmail($email, $firstName) {
             <p>If you didn't request for an account, please ignore this email.</p>
             <br>
             <p>Best regards,</p>
-            <p>AeIlluminate Team</p>
+            <p>aeIlluminate Team</p>
         ";
 
         $mail->send();

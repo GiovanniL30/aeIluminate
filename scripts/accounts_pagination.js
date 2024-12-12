@@ -45,7 +45,6 @@ const renderAccounts = (page) => {
             <td>
                 <div class="action-list">
                     <a href="${baseUrl}/pages/account_detail.php?userId=${account.userID}&role=${account.role}"><img src='../assets/edit.png'/></a>
-                    <img src='../assets/check.png'/>
                     <img src='../assets/delete_account.png' class="delete-icon" data-user-id="${account.userID}" alt="Delete Account"/>
                 </div>
             </td>

@@ -44,7 +44,6 @@ const renderApplications = (page) => {
             <td>
                 <div class="action-list">
                     <a href="${baseUrl}/pages/application_details.php?userId=${application.userID}"><img src='../assets/edit.png'/></a>
-                    <img src='../assets/check.png'/>
                 </div>
             </td>
         `;

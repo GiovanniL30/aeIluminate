@@ -1,4 +1,4 @@
-import { baseUrl } from "./utils";
+import { baseUrl } from "./utils.js";
 
 const resultsPerPage = 9;
 let currentPage = 1;

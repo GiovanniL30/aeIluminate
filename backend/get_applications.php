@@ -13,7 +13,7 @@ $query = "SELECT u.userID as userID
                  DATE_FORMAT(app.createdAt, '%M %d, %Y') AS date_applied 
           FROM users u 
           JOIN application app ON u.userID = app.userID 
-          JOIN alumni a ON u.userID = a.userID;"
+          JOIN alumni a ON u.userID = a.userID";
 
 $query .= " ORDER BY $sortBy $sortOrder";
 $result = $conn->query($query);

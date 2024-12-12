@@ -100,7 +100,7 @@ const updatePageNumber = (i) => {
   document.querySelector(".page-number").innerHTML = `Page ${i} of ${totalPages} `;
 };
 
-const fetchUsers = () => {
+const fetchApplications = () => {
   const url = searchQuery
     ? `../backend/search_applications.php?searchQuery=${searchQuery}&sortBy=${sortField}&sortOrder=${sortOrder}`
     : `../backend/get_applications.php?sortBy=${sortField}&sortOrder=${sortOrder}`;
@@ -132,6 +132,8 @@ const fetchUsers = () => {
     .catch((error) => {
       setTimeout(() => {
         hideLoader();
+        console.log(response);
+
         console.error("Error fetching application data:", error);
       }, 500); // Simulate a delay of 500ms
     });
@@ -142,11 +144,6 @@ const toggleSortOptions = () => {
   sortOptions.style.display = sortOptions.style.display === "none" ? "block" : "none";
 };
 
-const toggleFilterOptions = () => {
-  const filterOptions = document.getElementById("filter-options");
-  filterOptions.style.display = filterOptions.style.display === "none" ? "block" : "none";
-};
-
 const handleSortChange = (event) => {
   const { name, value } = event.target;
   if (name === "sortField") {
@@ -155,47 +152,10 @@ const handleSortChange = (event) => {
     sortOrder = value;
   }
   if (sortField && sortOrder) {
-    fetchUsers();
+    fetchApplications();
   }
 };
 
-
-
-const deleteUser = async (e) => {
-  if (e.target.classList.contains("delete-icon")) {
-    const userToDelete = e.target.getAttribute("data-user-id");
-
-    const confirmed = window.confirm("Are you sure you want to delete this account?");
-
-    if (confirmed) {
-      try {
-        showLoader();
-        const response = await fetch(`../backend/delete.php?userID=${userToDelete}`, {
-          method: "GET",
-        });
-
-        if (!response.ok) {
-          setTimeout(() => {
-            hideLoader();
-            alert("Failed to delete the user");
-          }, 500); // Simulate a delay of 500ms
-          return;
-        }
-        setTimeout(() => {
-          hideLoader();
-          fetchUsers();
-        }, 500); // Simulate a delay of 500ms
-      } catch (error) {
-        setTimeout(() => {
-          hideLoader();
-          alert(error.message);
-        }, 500); // Simulate a delay of 500ms
-      }
-    } else {
-      console.log("Deletion cancelled");
-    }
-  }
-};
 
 /**
  * =======================
@@ -209,7 +169,7 @@ document.querySelector(".search form").addEventListener("submit", (event) => {
   event.preventDefault();
   searchQuery = document.querySelector(".search input").value;
   console.log(searchQuery);
-  fetchUsers(searchQuery);
+  fetchApplications(searchQuery);
 });
 
 document.getElementById("sort-button").addEventListener("click", (event) => {
@@ -226,12 +186,5 @@ document.addEventListener("click", (event) => {
   }
 });
 
-document.addEventListener("click", (event) => {
-  const filterOptions = document.getElementById("filter-options");
-  if (filterOptions.style.display === "block" && !filterOptions.contains(event.target) && event.target.id !== "filter-button") {
-    filterOptions.style.display = "none";
-  }
-});
-
 addControls();
-fetchUsers();
+fetchApplications();

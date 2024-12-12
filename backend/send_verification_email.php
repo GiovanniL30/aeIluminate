@@ -1,4 +1,8 @@
 <?php
+/*
+    @author: Judrey M. Padsuyan
+    This file is used to send a verification email to the user upon registration.
+*/
 header('Content-Type: application/json');
 require __DIR__ . '/../vendor/autoload.php';
 

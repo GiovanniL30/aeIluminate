@@ -1,5 +1,8 @@
 <?php
-
+/*
+    @author: Judrey M. Padsuyan
+    This file is used to get the list of schools from the database.
+*/
 header('Content-Type: application/json'); 
 try {
     require_once('../backend/database.php');

@@ -1,4 +1,8 @@
 <?php
+/*
+    @author: Judrey M. Padsuyan
+    This file is used to get the list of academic programs for a specific school.
+*/
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('../backend/database.php');

@@ -782,7 +782,29 @@ document.addEventListener("DOMContentLoaded", () => {
   
       // Since data is added successfully but response might not be JSON
       if (userResponse.ok) {
-        alert("User added successfully.");
+        // Get the email and firstName from the form
+          const email = formData.get('emailaddress');
+          const firstName = formData.get('firstname');
+
+          // Send verification email
+          const verificationResponse = await fetch('../backend/send_verification_email.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  email: email,
+                  firstName: firstName
+              })
+          });
+
+          const verificationResult = await verificationResponse.json();
+
+          if (verificationResult.success) {
+              alert("User added successfully. Verification email has been sent.");
+          } else {
+              alert("User added but failed to send verification email: " + verificationResult.message);
+        }
         addUserForm.parentElement.style.display = "none";
         mainContent.classList.remove("blur");
         mainContent.style.pointerEvents = "auto";

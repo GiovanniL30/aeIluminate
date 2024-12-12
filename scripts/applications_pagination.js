@@ -103,7 +103,8 @@ const fetchApplications = () => {
   const url = searchQuery
     ? `../backend/search_applications.php?searchQuery=${searchQuery}&sortBy=${sortField}&sortOrder=${sortOrder}`
     : `../backend/get_applications.php?sortBy=${sortField}&sortOrder=${sortOrder}`;
-
+  
+    console.log(searchQuery);
   showLoader();
   fetch(url)
     .then((response) => {
@@ -131,7 +132,6 @@ const fetchApplications = () => {
     .catch((error) => {
       setTimeout(() => {
         hideLoader();
-        console.log(response);
 
         console.error("Error fetching application data:", error);
       }, 500); // Simulate a delay of 500ms

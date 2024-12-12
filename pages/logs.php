@@ -2,6 +2,16 @@
 include('../backend/session_check.php');
 include('../backend/database.php');
 
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+$userRole = $_SESSION['role'] ?? '';
+
+if ($userRole === 'Manager') {
+  header('Location: ../index.php');
+  exit();
+}
 
 function fetchQueryResults($conn, $query)
 {
@@ -102,7 +112,7 @@ $conn->close();
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('#logsTable').DataTable({
         "order": [
           [0, "desc"]
@@ -162,7 +172,7 @@ $conn->close();
         type: 'category',
         data: mostFrequentActions.map(item => item.action),
         axisLabel: {
-          formatter: function(value) {
+          formatter: function (value) {
             return value.length > 10 ? value.slice(0, 10) + '...' : value;
           }
         }
@@ -192,7 +202,7 @@ $conn->close();
         type: 'category',
         data: topBrowsers.map(item => item.browserInfo),
         axisLabel: {
-          formatter: function(value) {
+          formatter: function (value) {
             return value.length > 10 ? value.slice(0, 10) + '...' : value;
           }
         }

@@ -5,6 +5,7 @@ include('../backend/log_action.php');
 
 header('Content-Type: application/json');
 
+// Get the project root directory
 $projectRoot = basename(dirname(__DIR__));
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . $projectRoot;
 
@@ -16,16 +17,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['failed_attempts'] = 0;
     }
 
-    // Validate credentials
-    $query = "SELECT userID, username, role, firstName FROM users WHERE username = ? AND password = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param('ss', $username, $password);
+    // Query to get user details including hashed password and role
+    $getPasswordQuery = 'SELECT userID, username, password, role, firstName FROM users WHERE username = ?';
+    $stmt = $conn->prepare($getPasswordQuery);
+    $stmt->bind_param('s', $username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($userID, $username, $role, $firstName);
+    $stmt->bind_result($userID, $username, $hashedPassword, $role, $firstName);
 
     if ($stmt->num_rows > 0) {
         $stmt->fetch();
+
+        // If role is Admin, check if the entered password matches the stored password (whether hashed or not)
+        if ($role === 'Admin') {
+            // Here you can compare plain text password for Admin if it's stored in plain text (e.g., for legacy purposes)
+            if ($password !== $hashedPassword) {
+                $_SESSION['failed_attempts'] += 1;
+                echo json_encode(['success' => false, 'error' => 'Invalid username or password', 'failed_attempts' => $_SESSION['failed_attempts']]);
+                $stmt->close();
+                $conn->close();
+                exit;
+            }
+        } else {
+            // For non-admin users, use password_verify() for hashed password
+            if (!password_verify($password, $hashedPassword)) {
+                $_SESSION['failed_attempts'] += 1;
+                echo json_encode(['success' => false, 'error' => 'Invalid username or password', 'failed_attempts' => $_SESSION['failed_attempts']]);
+                $stmt->close();
+                $conn->close();
+                exit;
+            }
+        }
+
         // Set session variables
         $_SESSION['userID'] = $userID;
         $_SESSION['username'] = $username;
@@ -40,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $browserInfo = $_SERVER['HTTP_USER_AGENT'];
         $actionDetails = "";
 
-        // determine who is the logged in user based on the role
+        // Determine who is the logged-in user based on the role
         if ($role === 'Admin') {
             $actionDetails = $role . ', ' . $username . ' has logged in';
         } else {
@@ -48,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         logAction($userID, 'Login', $ipAddress, $osInfo, $browserInfo, $actionDetails);
-
 
         echo json_encode(['success' => true, 'successMessage' => 'Login successful', 'redirect' => $base_url . '/index.php']);
     } else {

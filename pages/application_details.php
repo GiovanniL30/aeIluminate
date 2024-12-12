@@ -2,10 +2,11 @@
 include('../backend/database.php');
 include('../backend/session_check.php');
 
-if (isset ($_GET['userId'])) {
+if (isset($_GET['userId'])) {
     $userId = $_GET['userId'];
 
-    $query = "SELECT u.firstName as firstName,
+    $query = "SELECT u.userID as userID, 
+                    u.firstName as firstName,
                      u.middleName as middleName,
                      u.lastName as lastName,
                      u.email as email,
@@ -36,6 +37,7 @@ if (isset ($_GET['userId'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,15 +45,16 @@ if (isset ($_GET['userId'])) {
     <link rel="stylesheet" href="../styles/index.css">
     <title>Document</title>
 </head>
+
 <body>
     <div class="app">
         <aside class="sidebar">
-            <?php include '../components/sidebar.php'?>
+            <?php include '../components/sidebar.php' ?>
         </aside>
         <section>
             <div class="container">
                 <header>
-                    <?php include '../components/header.php'?>
+                    <?php include '../components/header.php' ?>
                 </header>
 
                 <div class="application-first-row">
@@ -91,30 +94,30 @@ if (isset ($_GET['userId'])) {
                     </div>
 
                     <div class="details-third-row">
-                    <div class="input-field">
-                        <p>Program</p>
-                        <input type="text" disabled name="program_name" value="<?php echo $application['program_name']; ?>" />
-                    </div>
+                        <div class="input-field">
+                            <p>Program</p>
+                            <input type="text" disabled name="program_name" value="<?php echo $application['program_name']; ?>" />
+                        </div>
 
-                    <div class="input-field">
-                        <p>Job Status</p>
-                        <input type="text" disabled name="isEmployed" value="<?php echo $application['isEmployed'] === '0' ? 'Unemployed' : 'Employed'; ?>" />
-                    </div>
+                        <div class="input-field">
+                            <p>Job Status</p>
+                            <input type="text" disabled name="isEmployed" value="<?php echo $application['isEmployed'] === '0' ? 'Unemployed' : 'Employed'; ?>" />
+                        </div>
                     </div>
 
                     <div class="button-row">
                         <div>
-                            <a href="<?php echo $application['diplomaURL']?>" target="_blank">
+                            <a href="<?php echo $application['diplomaURL'] ?>" target="_blank">
                                 <button class="file-upload">View Uploaded Diploma</button>
                             </a>
-                            <a href="<?php echo $application['schoolIdURL']?>" target="_blank">
+                            <a href="<?php echo $application['schoolIdURL'] ?>" target="_blank">
                                 <button class="file-upload">View Uploaded School ID</button>
                             </a>
                         </div>
 
                         <div>
-                            <button class="accept-button">Accept</button>
-                            <button class="reject-button">Reject</button>
+                            <button class="accept-button" id="accept-button" data-user-id="<?php echo $application['userID']; ?>">Accept</button>
+                            <button class="reject-button" id="reject-button" data-user-id="<?php echo $application['userID']; ?>">Reject</button>
                         </div>
                     </div>
                 </div>
@@ -125,5 +128,41 @@ if (isset ($_GET['userId'])) {
     <script src="../scripts/applications_pagination.js" type="module"></script>
     <script src="../scripts/view_application_details.js" type="module"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const acceptButton = document.getElementById('accept-button');
+            const rejectButton = document.getElementById('reject-button');
+
+            acceptButton.addEventListener('click', () => {
+                const userID = acceptButton.getAttribute('data-user-id');
+                handleApplication(userID, 'accept');
+            });
+
+            rejectButton.addEventListener('click', () => {
+                const userID = rejectButton.getAttribute('data-user-id');
+                handleApplication(userID, 'reject');
+            });
+        });
+
+        function handleApplication(userID, action) {
+            const url = action === 'accept' ? `../backend/accept_application.php?userID=${userID}` : `../backend/reject_application.php?userID=${userID}`;
+
+            fetch(url)
+                .then(response => {
+                    console.log('Response received:', response);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data received:', data);
+                    alert(data.message);
+                    window.location.href = '../pages/applications.php';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
 </body>
+
 </html>

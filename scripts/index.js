@@ -268,6 +268,17 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchPostsStats
   );
 
+  function generateColors(count) {
+    const colors = Array.from({ length: count }, (_, i) => {
+      const h = (i * 137.5) % 360; // Apply golden angle
+      const r = Math.floor(Math.sin((h * Math.PI) / 180) * 128 + 128);
+      const g = Math.floor(Math.sin(((h + 120) * Math.PI) / 180) * 128 + 128);
+      const b = Math.floor(Math.sin(((h + 240) * Math.PI) / 180) * 128 + 128);
+      return `rgb(${r}, ${g}, ${b})`;
+    });
+    return colors;
+  }
+
   let graduationYearChartInstance = null;
   // Function to fetch graduation year data
   async function fetchGraduationYearData() {
@@ -284,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const values = data.map((item) => item.total);
 
     const ctx = document.getElementById("graduationYearChart").getContext("2d");
+    const colors = generateColors(labels.length);
 
     if (graduationYearChartInstance) {
       graduationYearChartInstance.destroy();
@@ -297,13 +309,9 @@ document.addEventListener("DOMContentLoaded", () => {
           {
             label: "Graduation Year",
             data: values,
-            backgroundColor: [
-              "#FF5733",
-              "#FF8D1A",
-              "#FFB300",
-              "#1C7430",
-              "#0064FF",
-            ],
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1,
             hoverOffset: 4,
           },
         ],
@@ -338,6 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const labels = data.map((item) => item.status);
         const values = data.map((item) => item.total);
+        const colors = generateColors(labels.length);
 
         if (jobStatusChart) {
           jobStatusChart.destroy();
@@ -351,13 +360,9 @@ document.addEventListener("DOMContentLoaded", () => {
               {
                 label: "Job Status Distribution",
                 data: values,
-                backgroundColor: [
-                  "#FF5733",
-                  "#FF8D1A",
-                  "#FFB300",
-                  "#1C7430",
-                  "#0064FF",
-                ],
+                backgroundColor: colors,
+                borderColor: colors,
+                borderWidth: 1,
                 hoverOffset: 4,
               },
             ],
@@ -405,6 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const eventName = data.event_type || "No event data";
         const attendeeCount = data.total_interested_users || 0;
+        const colors = generateColors(5);
 
         if (window.popularEventsChartInstance) {
           window.popularEventsChartInstance.destroy();
@@ -419,7 +425,9 @@ document.addEventListener("DOMContentLoaded", () => {
               {
                 label: "Interested Users",
                 data: [attendeeCount],
-                backgroundColor: ["#FF6384"],
+                backgroundColor: colors,
+                borderColor: colors,
+                borderWidth: 1,
                 hoverOffset: 4,
               },
             ],
@@ -473,6 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalAttendees = data.events.map(
           (item) => item.total_interested_users
         );
+        const colors = generateColors(eventTypes.length);
 
         if (eventAttendeesChart) {
           eventAttendeesChart.destroy();
@@ -486,8 +495,8 @@ document.addEventListener("DOMContentLoaded", () => {
               {
                 label: "Number of Attendees",
                 data: totalAttendees,
-                backgroundColor: "#4e73df",
-                borderColor: "#4e73df",
+                backgroundColor: colors,
+                borderColor: colors,
                 borderWidth: 1,
               },
             ],

@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is used to display the system logs and generate charts based on the logs data.
+ */
+
 include('../backend/session_check.php');
 include('../backend/database.php');
 
@@ -112,7 +119,7 @@ $conn->close();
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
       $('#logsTable').DataTable({
         "order": [
           [0, "desc"]
@@ -172,7 +179,7 @@ $conn->close();
         type: 'category',
         data: mostFrequentActions.map(item => item.action),
         axisLabel: {
-          formatter: function (value) {
+          formatter: function(value) {
             return value.length > 10 ? value.slice(0, 10) + '...' : value;
           }
         }
@@ -202,7 +209,7 @@ $conn->close();
         type: 'category',
         data: topBrowsers.map(item => item.browserInfo),
         axisLabel: {
-          formatter: function (value) {
+          formatter: function(value) {
             return value.length > 10 ? value.slice(0, 10) + '...' : value;
           }
         }

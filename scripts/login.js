@@ -1,3 +1,7 @@
+/**
+ * @author Arvy Aggabao
+ * @description This script handles the login, recovery, and update password functionality.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const recoveryBtn = document.getElementById("recovery-btn");

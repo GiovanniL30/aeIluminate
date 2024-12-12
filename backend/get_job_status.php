@@ -1,4 +1,8 @@
 <?php
+/**
+ *   @author Donna Lisa Luiz and Arvy T. Aggabao
+ *   This file is used to get the count of users by job status.
+ */
 include('../backend/database.php');
 
 $response = [];

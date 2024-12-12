@@ -687,38 +687,59 @@ document.addEventListener("DOMContentLoaded", () => {
     closeAddUserButton.addEventListener("click", (event) => {
       event.preventDefault();
       console.log("Cancel button clicked");
-        addUserForm.reset();
-        
-        const formInputs = addUserForm.querySelectorAll('input, select');
-        formInputs.forEach(input => {
-            input.classList.remove('input-error', 'input-valid', 'input-validating');
-            input.setAttribute('title', '');
-        });
-        
-        const middleNameInput = document.getElementById("middlename");
-        const noMiddleNameCheckbox = document.getElementById("noMiddleName");
-        if (middleNameInput && noMiddleNameCheckbox) {
-            middleNameInput.disabled = false;
-            middleNameInput.value = "";
-            noMiddleNameCheckbox.checked = false;
-        }
+      
+      // Reset the form and fields
+      addUserForm.reset();
+      
+      const formInputs = addUserForm.querySelectorAll('input, select');
+      formInputs.forEach(input => {
+          input.classList.remove('input-error', 'input-valid', 'input-validating');
+          input.setAttribute('title', '');
+      });
+      
+      // Reset middle name field
+      const middleNameInput = document.getElementById("middlename");
+      const noMiddleNameCheckbox = document.getElementById("noMiddleName");
+      if (middleNameInput && noMiddleNameCheckbox) {
+          middleNameInput.disabled = false;
+          middleNameInput.value = "";
+          noMiddleNameCheckbox.checked = false;
+      }
 
-        const schoolSelect = document.getElementById("school");
-        const programSelect = document.getElementById("program");
-        const customProgram = document.getElementById("custom-program");
-        
-        if (customProgram) {
-            customProgram.remove();
-        }
-        
-        schoolSelect.value = "";
-        
-        programSelect.style.display = "";
-        programSelect.innerHTML = '<option value="">Select Program</option>';
+      // Reset school and program fields
+      const schoolSelect = document.getElementById("school");
+      const programSelect = document.getElementById("program");
+      const customProgram = document.getElementById("custom-program");
+      
+      if (customProgram) {
+          customProgram.remove();
+      }
+      
+      schoolSelect.value = "";
+      programSelect.style.display = "";
+      programSelect.innerHTML = '<option value="">Select Program</option>';
 
-        addUserForm.parentElement.style.display = "none";
-        mainContent.classList.remove("blur");
-        mainContent.style.pointerEvents = "auto";
+      // Reset role and company fields
+      const graduationFields = document.getElementById("graduationFields");
+      const companyField = document.getElementById("companyField");
+      const workForField = document.getElementById("workForField");
+      const roleSelect = document.getElementById("role");
+      
+      // Set role back to Alumni (default)
+      roleSelect.value = "Alumni";
+      
+      // Reset field visibility
+      graduationFields.style.display = "block";
+      companyField.style.display = "block";
+      workForField.style.display = "none";
+
+      // Trigger toggleFields to ensure proper field visibility
+      toggleFields();
+
+      // Hide form and reset blur
+      addUserForm.parentElement.style.display = "none";
+      mainContent.classList.remove("blur");
+      mainContent.style.pointerEvents = "auto";
     });
   } else {
     console.error("Cancel button not found");

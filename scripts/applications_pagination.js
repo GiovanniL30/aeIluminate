@@ -1,4 +1,8 @@
 import { baseUrl } from "./utils.js";
+/**
+* @author: Alfred Christian Emmanuel Z. Ngaosi
+* This script is used to handle the pagination of the applications page.
+*/
 
 const resultsPerPage = 9;
 let currentPage = 1;

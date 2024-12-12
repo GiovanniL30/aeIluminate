@@ -1,8 +1,7 @@
 import { baseUrl } from "./utils";
-
 /**
+ * @author: Giovanni M. Leo, Eugene Kyle C. Patano
  * Edit user function handler
- *
  */
 const editUser = (event) => {
   event.preventDefault();

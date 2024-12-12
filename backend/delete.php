@@ -1,7 +1,7 @@
 <?php
-/*
-    @authors: Judrey M. Padsuyan, Jhea Jhana O. Prudencio
-    This file is used to delete a user account from the database.
+/**
+*   @author: Judrey M. Padsuyan, Jhea Jhana O. Prudencio
+*   This file is used to delete a user account from the database.
 */
 include('../backend/database.php');
 include('../backend/log_action.php');

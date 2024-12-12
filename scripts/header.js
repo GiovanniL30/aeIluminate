@@ -1,5 +1,8 @@
 import { baseUrl } from "./utils.js";
-
+/**
+ * @author: Giovanni M. Leo
+ * This script is used to handle the header functionalities.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const adminAction = document.getElementById("admin-account");
   const modal = document.getElementById("logout-modal");

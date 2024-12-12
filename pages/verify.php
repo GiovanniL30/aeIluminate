@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author: Judrey M. Padsuyan
+ * This file is used to show verify page if an email address is valid.
+ */
 header('Content-Type: text/html');
 ?>
 <!DOCTYPE html>

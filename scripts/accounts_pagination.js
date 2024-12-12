@@ -1,4 +1,8 @@
 import { baseUrl } from "./utils.js";
+/**
+* @author: Giovanni M. Leo
+* This script is used to handle the pagination of the accounts page.
+*/
 
 const resultsPerPage = 9;
 let currentPage = 1;

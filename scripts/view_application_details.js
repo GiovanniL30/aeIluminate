@@ -1,3 +1,7 @@
+/**
+ * @author: Giovanni M. Leo, Judrey M. Padsuyan
+ * This script is used to handle the accept and reject buttons on the application details page.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const acceptButton = document.getElementById("accept-button");
   const rejectButton = document.getElementById("reject-button");

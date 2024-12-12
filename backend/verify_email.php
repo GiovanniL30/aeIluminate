@@ -1,7 +1,7 @@
 <?php
-/*
-    @author: Judrey M. Padsuyan
-    This file is used to verify if an email address is valid.
+/**
+*   @author: Judrey M. Padsuyan
+*   This file is used to verify if an email address is valid.
 */
 header('Content-Type: application/json');
 

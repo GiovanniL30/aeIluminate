@@ -1,6 +1,6 @@
 import { baseUrl } from "./utils.js";
 /**
- * @author: Giovanni M. Leo
+ * @author Giovanni M. Leo
  * This script is used to handle the header functionalities.
  */
 document.addEventListener("DOMContentLoaded", () => {

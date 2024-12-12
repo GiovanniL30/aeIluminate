@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Judrey M. Padsuyan and Giovanni M. Leo 
+ * This file is used to display the accounts page.
+ */
 include '../backend/session_check.php';
 include('../components/loader.php');
 

@@ -1,3 +1,7 @@
+/**
+*   @author Alfred Christian Emmanuel Z. Ngaosi
+*   This file contains the styles for the applications page.
+*/
 .application-count {
     display: flex;
     gap: 20px;

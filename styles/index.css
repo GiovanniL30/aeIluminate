@@ -7,6 +7,10 @@
 @import url(logs.css);
 @import url(applications.css);
 
+/**
+*   @author Giovanni M. Leo, Arvy T. Aggabao
+*   This file contains the styles for the dashboard page and global styling.
+*/
 :root {
   --grey: rgb(222, 222, 222);
   --drop: rgb(245, 246, 250);

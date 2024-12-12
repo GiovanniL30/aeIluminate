@@ -1,6 +1,6 @@
 <?php
 /**
-*   @author: Judrey M. Padsuyan
+*   @author Judrey M. Padsuyan
 *   This file is used to send a verification email to the user upon registration.
 */
 header('Content-Type: application/json');

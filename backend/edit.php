@@ -1,6 +1,6 @@
 <?php
 /**
-*   @author: Judrey M. Padsuyan, Eugene Kyle C. Patano
+*   @author Judrey M. Padsuyan, Eugene Kyle C. Patano
 *   This file is used to edit the details of a user account.
 */
 

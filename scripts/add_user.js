@@ -1,5 +1,5 @@
 /**
-* @author: Judrey M. Padsuyan
+* @author Judrey M. Padsuyan
 * This script is used to add a new user to the database. It handles the form validation and submission.
 */
 document.addEventListener("DOMContentLoaded", () => {

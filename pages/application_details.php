@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Alfred Christian Emmanuel Z. Ngaosi
+ * This file is used to view the details of an application.
+ */
 include('../backend/database.php');
 include('../backend/session_check.php');
 

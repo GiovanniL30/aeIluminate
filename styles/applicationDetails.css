@@ -1,3 +1,7 @@
+/**
+*   @author Alfred Christian Emmanuel Z. Ngaosi
+*   This file contains the styles for the application details page.
+*/
 .application-second-row {
     display: flex;
     flex-direction: column;

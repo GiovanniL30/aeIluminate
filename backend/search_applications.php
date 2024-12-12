@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Alfred Christian Emmanuel Z. Ngaosi
+ * This file is used to search for applications from the database.
+ */
 include('../backend/database.php');
 
 $query = isset($_GET['searchQuery']) ? $_GET['searchQuery'] : '';

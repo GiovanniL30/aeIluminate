@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Judrey M. Padsuyan, Alfred Christian Emmanuel Z. Ngaosi, Arvy T. Aggabao, and Giovanni M. Leo
+ * This file is used to accept an application and send an email to the user.
+ */
 include('database.php');
 include('../backend/log_action.php');
 require '../vendor/autoload.php';

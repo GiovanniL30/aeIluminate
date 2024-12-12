@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Giovanni M. Leo
+ * This file is used to display the details of a user account.
+ */
 include('../backend/database.php');
 include('../backend/session_check.php');
 

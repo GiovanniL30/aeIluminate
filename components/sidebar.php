@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Giovanni M. Leo
+ * This file is used to create the sidebar of the application.
+ */
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }

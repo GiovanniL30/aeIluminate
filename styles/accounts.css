@@ -1,3 +1,7 @@
+/**
+* @author Giovanni M. Leo and Judrey M. Padsuyan
+* This file contains the styles for the accounts page and add form.
+*/
 .users-count {
   display: flex;
   gap: 20px;

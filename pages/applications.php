@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Alfred Christian Emmanuel Z. Ngaosi
+ * This file is used to view the list of applications.
+ */
 include('../backend/database.php');
 include('../components/loader.php');
 

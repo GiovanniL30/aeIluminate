@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author: Alfred Christian Emmanuel Z. Ngaosi
+ * This file is used to get the list of applications from the database.
+ */
 include('../backend/database.php');
 
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'userID';

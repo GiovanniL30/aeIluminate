@@ -1,3 +1,7 @@
+/**
+* @author Giovanni M. Leo
+* This file contains the styles for the account details page.
+*/
 .account-details {
   display: grid;
   grid-template-columns: 400px 1fr;

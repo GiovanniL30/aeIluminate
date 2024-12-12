@@ -1,4 +1,8 @@
 import { baseUrl } from "./utils.js";
+/**
+ * @author Donna Liza Luis and Arvy T. Aggabao
+ * This script is used to handle the dashboard functionalities.
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("intro-video");

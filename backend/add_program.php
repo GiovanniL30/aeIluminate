@@ -1,4 +1,10 @@
 <?php
+/*
+    @author: Judrey M. Padsuyan
+    This file is used to add a new academic program to the database.
+    The programID is generated using UUID v4.
+    The programID is returned to the client if the program is successfully added.
+*/
 include('../backend/database.php');
 header('Content-Type: application/json');
 

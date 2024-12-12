@@ -1,4 +1,9 @@
 <?php
+/*
+    @authors: Judrey M. Padsuyan, Eugene Kyle C. Patano
+    This file is used to edit the details of a user account.
+*/
+
 include('../backend/database.php');
 include('../backend/log_action.php');
 include('../backend/check_session.php');

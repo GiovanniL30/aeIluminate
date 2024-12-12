@@ -1,4 +1,8 @@
 <?php
+/*
+    @author: Judrey M. Padsuyan
+    This file is used to add a new user account to the database.
+*/
 include('../backend/database.php');
 include('../backend/log_action.php');
 include('../backend/session_check.php');

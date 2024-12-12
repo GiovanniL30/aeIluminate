@@ -1,0 +1,55 @@
+.application-second-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2%;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.application-second-row p {
+    font-size: 15px;
+}
+
+.details-first-row, .details-second-row, .details-third-row {
+    display: flex;
+    gap: 10px;
+
+}
+
+.button-row {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.accept-button {
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    color: white;
+    background-color: #4880FF;
+    border: none;
+}
+
+.reject-button {
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    color: white;
+    background-color: #ff4b48;
+    border: none;
+}
+
+.file-upload {
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    color: white;
+    background-color: #4880FF;
+    border: none;
+}
+.cloud {
+    width: 15px;
+    height: 15px;
+}

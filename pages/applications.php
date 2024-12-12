@@ -103,6 +103,51 @@ include('../components/loader.php');
             </div>
         </section>
     </div>
+
+    <div class="floating-application-details">
+        <div class="title">
+            <h1>Application Details</h1>
+        </div>
+        <div class="nameFields">
+            <label for="firstName">First Name</label>
+            <input type="text"
+                name="firstName"
+                id="firstName" />
+            <label for="middleName">Middle Name</label>
+            <input type="text"
+                name="middleName"
+                id="middleName" />
+            <label for="lastName">Last Name</label>
+            <input type="text"
+                name="lastName"
+                id="lastName" />
+        </div>
+        <div class="email-yearFields">
+            <label for="email">Email</label>
+            <input type="text"
+                name="email"
+                id="email" />
+            <label for="gradYear">Year Graduated</label>
+            <input type="text"
+                name="gradYear"
+                id="gradYear">
+        </div>
+        <div class="program-jobFields">
+            <label for="program">Program</label>
+            <input type="text"
+                name="program"
+                id="program">
+            <label for="jobStatus">Job Status</label>
+            <input type="text"
+                name="jobStatus"
+                id="jobStatus">
+        </div>
+        <div class="fileFields">
+            
+        </div>
+
+    </div>
+
     <script src="../scripts/applications_pagination.js" type="module"></script>
 
 </body>

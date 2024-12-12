@@ -43,7 +43,7 @@ const renderApplications = (page) => {
             <td>hehe</td>
             <td>
                 <div class="action-list">
-                    <a href="${baseUrl}/pages/application_details.php?userId=${application.userID}"><img src='../assets/view info.png'/></a>
+                    <a href="${baseUrl}/pages/application_details.php?userId=${application.userID}" id="view-details-button"><img src='../assets/view info.png'/></a>
                 </div>
             </td>
         `;

@@ -75,7 +75,7 @@ include('../components/loader.php');
                 </header>
 
                 <div class="search-action">
-                    <a href="<?php echo $base_url; ?>/pages/accounts.php">
+                    <a href="<?php echo $base_url; ?>/pages/applications.php">
                         <img src="../assets/back.png" alt="back" />
                     </a>
                     <p>as</p>

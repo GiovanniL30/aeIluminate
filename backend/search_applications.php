@@ -27,6 +27,10 @@ $sql = "SELECT u.userID as userID,
          FROM users u 
          JOIN application app ON u.userID = app.userID 
          JOIN alumni a ON u.userID = a.userID 
+         WHERE firstName LIKE ? 
+         OR lastName LIKE ? 
+         OR middleName LIKE ? 
+         OR year_graduated LIKE ? 
          ORDER BY $sortBy $sortOrder";
 
 $stmt = $conn->prepare($sql);

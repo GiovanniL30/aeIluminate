@@ -128,41 +128,6 @@ if (isset($_GET['userId'])) {
     <script src="../scripts/applications_pagination.js" type="module"></script>
     <script src="../scripts/view_application_details.js" type="module"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const acceptButton = document.getElementById('accept-button');
-            const rejectButton = document.getElementById('reject-button');
-
-            acceptButton.addEventListener('click', () => {
-                const userID = acceptButton.getAttribute('data-user-id');
-                handleApplication(userID, 'accept');
-            });
-
-            rejectButton.addEventListener('click', () => {
-                const userID = rejectButton.getAttribute('data-user-id');
-                handleApplication(userID, 'reject');
-            });
-        });
-
-        function handleApplication(userID, action) {
-            const url = action === 'accept' ? `../backend/accept_application.php?userID=${userID}` : `../backend/reject_application.php?userID=${userID}`;
-
-            fetch(url)
-                .then(response => {
-                    console.log('Response received:', response);
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Data received:', data);
-                    alert(data.message);
-                    window.location.href = '../pages/applications.php';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-    </script>
-
 </body>
 
 </html>

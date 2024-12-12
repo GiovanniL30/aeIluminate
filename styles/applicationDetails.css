@@ -30,6 +30,7 @@
     color: white;
     background-color: #4880FF;
     border: none;
+    cursor: pointer !important; 
 }
 
 .reject-button {
@@ -39,6 +40,7 @@
     color: white;
     background-color: #ff4b48;
     border: none;
+    cursor: pointer !important;
 }
 
 .file-upload {
@@ -48,6 +50,7 @@
     color: white;
     background-color: #4880FF;
     border: none;
+    cursor: pointer !important; 
 }
 .cloud {
     width: 15px;

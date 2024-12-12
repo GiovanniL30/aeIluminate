@@ -14,7 +14,8 @@ if (isset($_GET['userId'])) {
                      ap.program_name,
                      alu.isEmployed,
                      app.diplomaURL,
-                     app.schoolIdURL 
+                     app.schoolIdURL,
+                     app.appID 
               FROM users u 
               JOIN application app ON u.userID = app.userID 
               JOIN alumni alu ON u.userID = alu.userID 
@@ -70,15 +71,18 @@ if (isset($_GET['userId'])) {
                     <div class="details-first-row">
                         <div class="input-field">
                             <p>First Name</p>
-                            <input type="text" disabled name="firstName" value="<?php echo $application['firstName']; ?>" />
+                            <input type="text" disabled name="firstName"
+                                value="<?php echo $application['firstName']; ?>" />
                         </div>
                         <div class="input-field">
                             <p>Middle Name</p>
-                            <input type="text" disabled name="middleName" value="<?php echo $application['middleName'] === '' ? 'N/A' : $application['middleName']; ?>" />
+                            <input type="text" disabled name="middleName"
+                                value="<?php echo $application['middleName'] === '' ? 'N/A' : $application['middleName']; ?>" />
                         </div>
                         <div class="input-field">
                             <p>Last Name</p>
-                            <input type="text" disabled name="lastName" value="<?php echo $application['lastName']; ?>" />
+                            <input type="text" disabled name="lastName"
+                                value="<?php echo $application['lastName']; ?>" />
                         </div>
                     </div>
 
@@ -89,19 +93,22 @@ if (isset($_GET['userId'])) {
                         </div>
                         <div class="input-field">
                             <p>Graduation Year</p>
-                            <input type="text" disabled name="year_graduated" value="<?php echo $application['year_graduated']; ?>" />
+                            <input type="text" disabled name="year_graduated"
+                                value="<?php echo $application['year_graduated']; ?>" />
                         </div>
                     </div>
 
                     <div class="details-third-row">
                         <div class="input-field">
                             <p>Program</p>
-                            <input type="text" disabled name="program_name" value="<?php echo $application['program_name']; ?>" />
+                            <input type="text" disabled name="program_name"
+                                value="<?php echo $application['program_name']; ?>" />
                         </div>
 
                         <div class="input-field">
                             <p>Job Status</p>
-                            <input type="text" disabled name="isEmployed" value="<?php echo $application['isEmployed'] === '0' ? 'Unemployed' : 'Employed'; ?>" />
+                            <input type="text" disabled name="isEmployed"
+                                value="<?php echo $application['isEmployed'] === '0' ? 'Unemployed' : 'Employed'; ?>" />
                         </div>
                     </div>
 
@@ -116,8 +123,11 @@ if (isset($_GET['userId'])) {
                         </div>
 
                         <div>
-                            <button class="accept-button" id="accept-button" data-user-id="<?php echo $application['userID']; ?>">Accept</button>
-                            <button class="reject-button" id="reject-button" data-user-id="<?php echo $application['userID']; ?>">Reject</button>
+                            <button class="accept-button" id="accept-button"
+                                data-application-id="<?php echo $application['appID']; ?>"
+                                data-user-id="<?php echo $application['userID']; ?>">Accept</button>
+                            <button class="reject-button" id="reject-button"
+                                data-user-id="<?php echo $application['userID']; ?>">Reject</button>
                         </div>
                     </div>
                 </div>

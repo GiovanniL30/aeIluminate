@@ -40,7 +40,7 @@ const renderApplications = (page) => {
             <td>${application.year_graduated}</td>
             <td>${application.email}</td>
             <td>${application.date_applied}</td>
-            <td>hehe</td>
+            <td>pending</td>
             <td>
                 <div class="action-list">
                     <a href="${baseUrl}/pages/application_details.php?userId=${application.userID}" id="view-details-button"><img src='../assets/view info.png'/></a>
@@ -103,8 +103,8 @@ const fetchApplications = () => {
   const url = searchQuery
     ? `../backend/search_applications.php?searchQuery=${searchQuery}&sortBy=${sortField}&sortOrder=${sortOrder}`
     : `../backend/get_applications.php?sortBy=${sortField}&sortOrder=${sortOrder}`;
-  
-    console.log(searchQuery);
+
+  console.log(searchQuery);
   showLoader();
   fetch(url)
     .then((response) => {
@@ -155,7 +155,6 @@ const handleSortChange = (event) => {
   }
 };
 
-
 /**
  * =======================
  * Adding Event Listener
@@ -175,8 +174,6 @@ document.getElementById("sort-button").addEventListener("click", (event) => {
   event.stopPropagation();
   toggleSortOptions();
 });
-
-
 
 document.addEventListener("click", (event) => {
   const sortOptions = document.getElementById("sort-options");

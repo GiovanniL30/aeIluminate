@@ -1,9 +1,6 @@
-// accept application
-
 <?php
 include('database.php');
 include('../backend/log_action.php');
-include('check_session.php');
 require '../vendor/autoload.php';
 
 
@@ -20,6 +17,7 @@ $dotenv->load();
 
 if (isset($_GET['userID'])) {
     $userID = $_GET['userID'];
+    $applicationId = $_GET['applicationId'];
 
     // Delete the application
     $deleteQuery = "DELETE FROM application WHERE userID = ?";

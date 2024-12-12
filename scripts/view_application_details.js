@@ -1,40 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const acceptButton = document.getElementById('accept-button');
-    const rejectButton = document.getElementById('reject-button');
+document.addEventListener("DOMContentLoaded", () => {
+  const acceptButton = document.getElementById("accept-button");
+  const rejectButton = document.getElementById("reject-button");
 
-    acceptButton.addEventListener('click', () => {
-        const userID = acceptButton.getAttribute('data-user-id');
-        handleApplication(userID, 'accept');
-    });
+  acceptButton.addEventListener("click", () => {
+    const userID = acceptButton.getAttribute("data-user-id");
+    const applicationId = acceptButton.getAttribute("data-application-id");
+    handleApplication(userID, applicationId, "accept");
+  });
 
-    rejectButton.addEventListener('click', () => {
-        const userID = rejectButton.getAttribute('data-user-id');
-        handleApplication(userID, 'reject');
-    });
+  rejectButton.addEventListener("click", () => {
+    const userID = rejectButton.getAttribute("data-user-id");
+    handleApplication(userID, "reject");
+  });
 });
 
-function handleApplication(userID, action) {
-    const url = action === 'accept' ? `../backend/accept_application.php?userID=${userID}` : `../backend/reject_application.php?userID=${userID}`;
+async function handleApplication(userID, applicationId, action) {
+  const url =
+    action === "accept"
+      ? `../backend/accept_application.php?userID=${userID}&applicationId=${applicationId}`
+      : `../backend/reject_application.php?userID=${userID}`;
 
-    fetch(url)
-        .then(response => {
-            console.log('Response received:', response);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Data received:', data);
-            if (data && data.message) {
-                alert(data.message);
-                window.location.href = '../pages/applications.php';
-            } else {
-                throw new Error('Invalid response format');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while processing the application');
-        });
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const erorrMessage = await response.json();
+      throw new Error("Failed to accept application: " + erorrMessage.message);
+    }
+
+    const data = await response.json();
+    alert(data.message);
+    window.location.href = "../pages/applications.php";
+  } catch (error) {
+    console.error(error);
+    alert(error);
+  }
 }

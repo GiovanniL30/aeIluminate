@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for updating the password of the user.
+ */
+
 // Load vlucas/phpdotenv
 require __DIR__ . '/../vendor/autoload.php';
 

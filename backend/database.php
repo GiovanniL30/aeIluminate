@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for establishing the connection to the database.
+ */
+
+
 // Load vlucas/phpdotenv
 require __DIR__ . '/../vendor/autoload.php';
 

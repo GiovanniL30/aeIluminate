@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for checking if the user is logged in or not.
+ */
+
 session_start();
 header('Content-Type: application/json');
 

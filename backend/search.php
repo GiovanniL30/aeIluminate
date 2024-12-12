@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for searching users. 
+ */
+
 include('../backend/database.php');
 
 $query = isset($_GET['searchQuery']) ? $_GET['searchQuery'] : '';
@@ -65,5 +72,3 @@ echo json_encode($response);
 
 $stmt->close();
 $conn->close();
-
-?>

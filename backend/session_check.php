@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for checking if the user is logged in or not and redirecting to the login page if not.
+ */
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for recovering the account of the admin
+ * which includes verifying the email and username of the admin.
+ */
+
 // Load vlucas/phpdotenv
 require __DIR__ . '/../vendor/autoload.php';
 

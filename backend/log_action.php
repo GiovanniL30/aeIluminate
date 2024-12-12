@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for logging the actions of the admin.
+ */
+
 include('database.php');
 date_default_timezone_set('Asia/Manila');
 

@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for logging out the user.
+ */
+
 include('log_action.php');
 
 session_start();

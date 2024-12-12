@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is responsible for validating the user login.
+ */
 session_start();
 include('../backend/database.php');
 include('../backend/log_action.php');
@@ -28,9 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->num_rows > 0) {
         $stmt->fetch();
 
-        // If role is Admin, check if the entered password matches the stored password (whether hashed or not)
         if ($role === 'Admin') {
-            // Here you can compare plain text password for Admin if it's stored in plain text (e.g., for legacy purposes)
             if ($password !== $hashedPassword) {
                 $_SESSION['failed_attempts'] += 1;
                 echo json_encode(['success' => false, 'error' => 'Invalid username or password', 'failed_attempts' => $_SESSION['failed_attempts']]);
@@ -39,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
         } else {
-            // For non-admin users, use password_verify() for hashed password
             if (!password_verify($password, $hashedPassword)) {
                 $_SESSION['failed_attempts'] += 1;
                 echo json_encode(['success' => false, 'error' => 'Invalid username or password', 'failed_attempts' => $_SESSION['failed_attempts']]);

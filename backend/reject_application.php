@@ -63,6 +63,15 @@ if (isset($_GET['userID'])) {
                     </div>';
 
                 $mail->send();
+
+
+                // log action
+                $ipAddress = $_SERVER['REMOTE_ADDR'];
+                $osInfo = php_uname('s') . ' ' . php_uname('r');
+                $browserInfo = $_SERVER['HTTP_USER_AGENT'];
+                $actionDetails = "Rejected application for user ID: $userID";
+                logAction($userID, 'Reject Application', $ipAddress, $osInfo, $browserInfo, $actionDetails);
+
                 echo json_encode(['message' => 'Application rejected and email sent']);
             } catch (Exception $e) {
                 echo json_encode(['message' => 'Application rejected but email could not be sent. Mailer Error: ' . $mail->ErrorInfo]);

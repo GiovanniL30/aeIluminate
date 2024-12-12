@@ -69,12 +69,12 @@ if (isset($_GET['userID'])) {
 
             $mail->send();
 
-            // // Log action
-            // $ipAddress = $_SERVER['REMOTE_ADDR'];
-            // $osInfo = php_uname('s') . ' ' . php_uname('r');
-            // $browserInfo = $_SERVER['HTTP_USER_AGENT'];
-            // $actionDetails = "Accepted application for user ID: $userID";
-            // logAction($userID, 'Accept Application', $ipAddress, $osInfo, $browserInfo, $actionDetails);
+            // Log action
+            $ipAddress = $_SERVER['REMOTE_ADDR'];
+            $osInfo = php_uname('s') . ' ' . php_uname('r');
+            $browserInfo = $_SERVER['HTTP_USER_AGENT'];
+            $actionDetails = "Accepted application for user ID: $userID";
+            logAction($userID, 'Accept Application', $ipAddress, $osInfo, $browserInfo, $actionDetails);
 
 
             echo json_encode(['message' => 'Application accepted and email sent']);

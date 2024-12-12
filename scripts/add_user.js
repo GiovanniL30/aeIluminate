@@ -94,10 +94,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   schoolSelect.addEventListener("change", (event) => {
     const school = event.target.value;
+    const customProgram = document.getElementById("custom-program");
+    if (customProgram) {
+        customProgram.remove();
+        programSelect.style.display = ""; 
+    }
     programSelect.innerHTML = '<option value="">Select Program</option>';
+    programSelect.value = ""; 
+    
     if (!school) {
       return;
     }
+
     loadPrograms(school);
   });
 

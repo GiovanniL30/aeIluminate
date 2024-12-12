@@ -138,18 +138,22 @@ a {
 .dashboard-charts {
   margin-top: 2%;
   display: flex;
-  flex-wrap: wrap; 
-  gap: 20px; 
+  flex-wrap: wrap;
+  gap: 20px;
   width: 100%;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
-.user-overview-box, 
+.dashboard-charts h4 {
+  margin-bottom: 10px;
+}
+
+.user-overview-box,
 .posts-chart,
 .graduation-year-chart,
 .job-status-chart,
 .popular-events-chart,
-.event-attendees-chart { 
+.event-attendees-chart {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -159,7 +163,7 @@ a {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: calc(25% - 15px); 
+  width: calc(25% - 15px);
 }
 
 .graduation-year-chart {
@@ -168,7 +172,10 @@ a {
 
 .event-attendees-chart,
 .popular-events-chart {
-  height: 400px; 
+  height: 400px;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .total-users {
@@ -274,25 +281,25 @@ hr {
 }
 
 @media (max-width: 1024px) {
-  .user-overview-box, 
+  .user-overview-box,
   .posts-chart,
   .graduation-year-chart,
   .job-status-chart,
   .popular-events-chart {
-    width: calc(50% - 15px); 
+    width: calc(50% - 15px);
   }
 }
 
 @media (max-width: 768px) {
   .dashboard-charts {
-    flex-direction: column; 
+    flex-direction: column;
   }
 
-  .user-overview-box, 
+  .user-overview-box,
   .posts-chart,
   .graduation-year-chart,
   .job-status-chart,
   .popular-events-chart {
-    width: 100%; 
+    width: 100%;
   }
 }

@@ -10,49 +10,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const animationPlayed = sessionStorage.getItem("animationPlayed") === "true";
 
   function generateColors(count) {
+    const primaryColors = ["#0477BF", "#ADD1D9", "#F3C623"];
+
     const colors = Array.from({ length: count }, (_, i) => {
-      const hue = (i * 137.5) % 360; // golden angle to distribute hues evenly
-      const saturation = 0.7 + ((i * 0.1) % 0.3);
-      const lightness = 0.5 + ((i * 0.05) % 0.2);
+      const baseColorIndex = Math.floor(i / (count / primaryColors.length));
+      const baseColor = primaryColors[baseColorIndex];
+      const baseRgb = hexToRgb(baseColor);
 
-      // Convert HSL to RGB
-      const hslToRgb = (h, s, l) => {
-        const c = (1 - Math.abs(2 * l - 1)) * s;
-        const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-        const m = l - c / 2;
-        let r, g, b;
-        if (h < 60) {
-          r = c;
-          g = x;
-          b = 0;
-        } else if (h < 120) {
-          r = x;
-          g = c;
-          b = 0;
-        } else if (h < 180) {
-          r = 0;
-          g = c;
-          b = x;
-        } else if (h < 240) {
-          r = 0;
-          g = x;
-          b = c;
-        } else if (h < 300) {
-          r = x;
-          g = 0;
-          b = c;
-        } else {
-          r = c;
-          g = 0;
-          b = x;
-        }
-        return [r + m, g + m, b + m];
-      };
+      const shadeIndex =
+        (i % (count / primaryColors.length)) / (count / primaryColors.length);
+      const shade = 1 - shadeIndex;
 
-      const rgb = hslToRgb(hue, saturation, lightness);
-      return `rgb(${rgb[0] * 255}, ${rgb[1] * 255}, ${rgb[2] * 255})`;
+      const r = Math.floor(baseRgb.r * shade);
+      const g = Math.floor(baseRgb.g * shade);
+      const b = Math.floor(baseRgb.b * shade);
+
+      return `rgb(${r}, ${g}, ${b})`;
     });
+
     return colors;
+  }
+
+  function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : null;
   }
 
   const showMainContent = () => {
@@ -99,8 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
           datasets: [
             {
               data: [data.managers, data.alumni],
-              backgroundColor: ["#F3C623", "#10375C"],
-              hoverBackgroundColor: ["#F3C623", "#10375C"],
+              backgroundColor: ["#0477BF", "#F3C623"],
+              borderColor: ["#0477BF", "#F3C623"],
+              hoverBackgroundColor: ["#0477BF", "#F3C623"],
             },
           ],
         },
@@ -355,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
         responsive: true,
         plugins: {
           legend: {
-            position: "top",
+            position: "bottom",
           },
           tooltip: {
             callbacks: {
@@ -406,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
             responsive: true,
             plugins: {
               legend: {
-                position: "top",
+                position: "bottom",
               },
               tooltip: {
                 callbacks: {
@@ -471,7 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
             responsive: true,
             plugins: {
               legend: {
-                position: "top",
+                position: "bottom",
               },
               tooltip: {
                 callbacks: {

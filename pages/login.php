@@ -1,4 +1,12 @@
-<?php include('../components/loader.php'); ?>
+<?php include('../components/loader.php');
+
+/**
+ * @author Arvy Aggabao
+ * 
+ * This file is used to display the login page.
+ */
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
